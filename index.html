@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>bintunet.co.ke | Fast, Reliable Internet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet"/>
+  <title>BINTUNET.CO.KE | Fast, Reliable Internet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #333; line-height: 1.6; }
+    body { font-family: 'Inter', sans-serif; color: #333; line-height: 1.6; background: #fff; overflow-x: hidden; }
 
     header {
       background: linear-gradient(135deg, #e60000, #ff4d4d);
       color: white;
-      padding: 4rem 2rem;
+      padding: 4rem 2rem 2rem;
       text-align: center;
+      position: relative;
     }
+
     .brand {
-      font-family: 'Pacifico', cursive;
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
+      font-family: 'Runtoe', cursive;
+      font-size: 3rem;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
     }
-    header p { font-size: 1.2rem; margin-bottom: 2rem; }
+
+    header p { font-size: 1.2rem; margin-top: 1rem; }
 
     .btn {
       background: white;
@@ -33,29 +38,154 @@
       display: inline-block;
     }
 
-    section { padding: 3rem 2rem; max-width: 1200px; margin: auto; }
-    .section-title { text-align: center; font-size: 1.8rem; margin-bottom: 2rem; }
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #e60000;
+      color: white;
+      padding: 10px 14px;
+      font-size: 18px;
+      font-family: 'Runtoe', cursive;
+      border: none;
+      border-radius: 6px;
+      z-index: 1001;
+      cursor: pointer;
+    }
 
-    .steps, .plans, .testimonials {
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100vh;
+      background: transparent;
+      transition: left 0.3s ease;
+      padding-top: 5rem;
+      z-index: 1000;
+      font-family: 'Runtoe', cursive;
+    }
+
+    .side-menu a {
+      display: block;
+      padding: 1rem 2rem;
+      color: yellow;
+      text-decoration: none;
+      font-size: 1.3rem;
+    }
+
+    .side-menu a:hover {
+      background: rgba(255, 255, 0, 0.1);
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    .social-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icons a img {
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .plans {
       display: grid;
       gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      text-align: center;
     }
-    .steps { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); text-align: center; }
-    .plans { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); text-align: center; }
 
     .plan-card {
       border: 1px solid #ccc;
       border-radius: 12px;
       padding: 1.5rem;
     }
+
     .plan-card h3 { margin-bottom: 1rem; color: #e60000; }
     .plan-card p { margin: 0.5rem 0; }
 
-    .testimonials blockquote {
-      background: #f8f8f8;
-      padding: 1rem;
-      border-left: 4px solid #e60000;
-      font-style: italic;
+    .testimonials-carousel {
+      display: flex;
+      gap: 2rem;
+      animation: slide 30s linear infinite;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .testimonial-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      max-width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .testimonial-box img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #e60000;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .youtube-live {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .youtube-live iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .music-download {
+      text-align: center;
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .music-download a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #e60000;
+      color: white;
+      border-radius: 20px;
+      text-decoration: none;
     }
 
     .contact {
@@ -73,7 +203,6 @@
       font-size: 0.9rem;
     }
 
-    /* WhatsApp Button */
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
@@ -92,67 +221,60 @@
 </head>
 <body>
 
-  <header>
-    <h1 class="brand">bintunet.co.ke</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+  <div class="side-menu" id="sideMenu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#plans">Plans</a>
+    <a href="#speedtest">Speedtest</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <header id="home">
+    <div class="social-icons">
+      <a href="https://www.facebook.com/share/1BrUZmhqPk/?mibextid=qi2Omg" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+      <a href="https://x.com/BintuNet?s=09" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
+      <a href="https://www.instagram.com/bintu_net?igsh=aDJyOW1xMnRyNzcx" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@bintunet/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok"></a>
+      <a href="https://youtube.com/@bintunet?si=y9eW_aFGRwsGyPcA" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+    </div>
+    <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" style="max-width: 140px; margin-bottom: 1rem;">
+    <h1 class="brand">BINTUNET.CO.KE</h1>
     <p>Fast, Reliable & Affordable Internet</p>
     <a href="#plans" class="btn">Get Connected</a>
     <a href="#coverage" class="btn">Check Coverage</a>
   </header>
 
-  <section>
-    <h2 class="section-title">How It Works</h2>
-    <div class="steps">
-      <div>
-        <h3>📍 Check Coverage</h3>
-        <p>Enter your area code or town</p>
-      </div>
-      <div>
-        <h3>📦 Choose a Plan</h3>
-        <p>Daily, Weekly, or Monthly bundles</p>
-      </div>
-      <div>
-        <h3>⚡ Get Connected</h3>
-        <p>Instant access after payment</p>
-      </div>
-    </div>
-  </section>
-
   <section id="plans">
     <h2 class="section-title">Plans & Pricing</h2>
     <div class="plans">
-      <div class="plan-card">
-        <h3>Daily</h3>
-        <p>KSh 50</p>
-        <p>5 Mbps</p>
-        <p>24 hours</p>
-        <a class="btn" href="daily.html">Select</a>
-      </div>
-      <div class="plan-card">
-        <h3>Weekly</h3>
-        <p>KSh 300</p>
-        <p>10 Mbps</p>
-        <p>7 days</p>
-        <a class="btn" href="weekly.html">Select</a>
-      </div>
-      <div class="plan-card">
-        <h3>Monthly</h3>
-        <p>KSh 1,000</p>
-        <p>10 Mbps</p>
-        <p>30 days</p>
-        <a class="btn" href="monthly.html">Select</a>
-      </div>
+      <div class="plan-card"><h3>Daily</h3><p>KSh 50</p><p>5 Mbps</p><p>24 hours</p><a class="btn" href="daily.html">Select</a></div>
+      <div class="plan-card"><h3>Weekly</h3><p>KSh 300</p><p>10 Mbps</p><p>7 days</p><a class="btn" href="weekly.html">Select</a></div>
+      <div class="plan-card"><h3>Monthly</h3><p>KSh 1,000</p><p>10 Mbps</p><p>30 days</p><a class="btn" href="monthly.html">Select</a></div>
     </div>
   </section>
 
-  <section>
+  <section class="youtube-live">
+    <h2 class="section-title">Live on YouTube</h2>
+    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfUIm_Fwxafbq0q2cmhvHNg" allowfullscreen></iframe>
+  </section>
+
+  <section class="music-download">
+    <h2 class="section-title">Music Download</h2>
+    <p>Click below to download the latest music.</p>
+    <a href="#" download>⬇ Download Now</a>
+  </section>
+
+  <section class="testimonials" style="background:#f9f9f9; overflow:hidden;">
     <h2 class="section-title">What Our Customers Say</h2>
-    <div class="testimonials">
-      <blockquote>“Since I switched to bintunet.co.ke, I’ve never looked back!” — Mary, Eldoret</blockquote>
-      <blockquote>“Instant top-up. No buffering.” — James, Mombasa</blockquote>
+    <div class="testimonials-carousel">
+      <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg" alt="Nancy Kitter"><p style="font-style:italic;">“Since I switched to BINTUNET.CO.KE, I’ve never looked back!”</p><p style="margin-top:1rem;font-weight:bold;">— NANCY KITTER, NAIROBI</p></div>
+      <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg" alt="James"><p style="font-style:italic;">“Instant top-up. No buffering.”</p><p style="margin-top:1rem;font-weight:bold;">— THE TALES OF BINTU , Eldoret</p></div>
+      <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg" alt="Ali"><p style="font-style:italic;">“Great customer support and stable connection!”</p><p style="margin-top:1rem;font-weight:bold;">— Ali, Kisumu</p></div>
     </div>
   </section>
 
-  <section class="contact">
+  <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <p>Call: 0729 499 463 | WhatsApp: +254 729 499463</p>
     <p>Email: support@bintunet.co.ke</p>
@@ -161,11 +283,16 @@
   </section>
 
   <footer>
-    <p>© 2025 bintunet.co.ke | All Rights Reserved</p>
-    <p><a href="#" style="color: #fff; text-decoration: underline;">Privacy Policy</a> | <a href="#" style="color: #fff; text-decoration: underline;">Terms</a></p>
+    <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>
+    <p><a href="#" style="color:#fff;text-decoration:underline;">Privacy Policy</a> | <a href="#" style="color:#fff;text-decoration:underline;">Terms</a></p>
   </footer>
 
   <a href="https://wa.me/254729499463" class="whatsapp-float">💬 Chat</a>
 
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+    }
+  </script>
 </body>
 </html>

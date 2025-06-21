@@ -5,38 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Monthly Plan | bintunet.co.ke</title>
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      text-align: center;
-      padding: 2rem;
-    }
-    .logo {
-      max-width: 120px;
-      margin: 1rem auto;
-    }
-    .btn {
-      background: #25d366;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 1.5rem;
-    }
+    body { font-family: sans-serif; padding: 2rem; }
+    h1 { color: #e60000; }
   </style>
 </head>
 <body>
-
   <h1>Monthly Internet Plan</h1>
-  <p>Pay <strong>KSh 1,000</strong> for <strong>10 Mbps</strong> valid for <strong>30 days</strong></p>
+  <p>Please fill in your details to complete your order.</p>
 
-  <img src="https://i.ibb.co/0RyRVqG9/M-PESA-LOGO-01-svg.png" alt="M-Pesa Logo" class="logo" />
+  <form action="https://formsubmit.com/info.replybintunet@gmail.com" method="POST" style="max-width:400px; margin:auto;">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New Internet Order - Monthly Plan">
+    <input type="hidden" name="_next" value="https://replybintunet.github.io/thankyou.html">
 
-  <p>Pay via M-Pesa Till Number: <strong>123456</strong></p>
-  <p>Account: <strong>Your Phone Number</strong></p>
+    <input type="text" name="Name" placeholder="Full Name" required style="width:100%; padding:10px; margin-bottom:10px;"><br>
+    <input type="tel" name="Phone" placeholder="Phone Number" required style="width:100%; padding:10px; margin-bottom:10px;"><br>
+    <input type="text" name="Location" placeholder="Town / Estate" required style="width:100%; padding:10px; margin-bottom:10px;"><br>
+    <textarea name="Message" placeholder="Any message..." style="width:100%; padding:10px; margin-bottom:10px;"></textarea><br>
 
-  <a href="https://wa.me/254729499463" class="btn">💬 Chat on WhatsApp</a>
-
+    <button type="submit" style="background:#e60000; color:white; padding:10px 20px; border:none; border-radius:30px;">Submit</button>
+  </form>
 </body>
 </html>

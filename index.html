@@ -4,34 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>bintunet.co.ke | Fast, Reliable Internet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet"/>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; color: #333; line-height: 1.6; }
-    header { background: linear-gradient(135deg, #e60000, #ff4d4d); color: white; padding: 4rem 2rem; text-align: center; }
-    header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+
+    header {
+      background: linear-gradient(135deg, #e60000, #ff4d4d);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
     header p { font-size: 1.2rem; margin-bottom: 2rem; }
-    .btn { background: white; color: #e60000; padding: 0.75rem 1.5rem; border-radius: 30px; font-weight: 600; margin: 0 0.5rem; text-decoration: none; display: inline-block; }
+
+    .btn {
+      background: white;
+      color: #e60000;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-top: 1rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
     section { padding: 3rem 2rem; max-width: 1200px; margin: auto; }
     .section-title { text-align: center; font-size: 1.8rem; margin-bottom: 2rem; }
-    .steps, .plans, .testimonials { display: grid; gap: 1.5rem; }
+
+    .steps, .plans, .testimonials {
+      display: grid;
+      gap: 1.5rem;
+    }
     .steps { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); text-align: center; }
     .plans { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); text-align: center; }
-    .plan-card { border: 1px solid #ccc; border-radius: 12px; padding: 1.5rem; }
+
+    .plan-card {
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
     .plan-card h3 { margin-bottom: 1rem; color: #e60000; }
     .plan-card p { margin: 0.5rem 0; }
-    .testimonials blockquote { background: #f8f8f8; padding: 1rem; border-left: 4px solid #e60000; font-style: italic; }
-    .contact { text-align: center; background: #f0f0f0; padding: 2rem; border-radius: 8px; }
-    footer { text-align: center; padding: 1rem; background: #111; color: white; font-size: 0.9rem; }
+
+    .testimonials blockquote {
+      background: #f8f8f8;
+      padding: 1rem;
+      border-left: 4px solid #e60000;
+      font-style: italic;
+    }
+
+    .contact {
+      text-align: center;
+      background: #f0f0f0;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      padding: 14px 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Fast, Reliable & Affordable Internet</h1>
-    <p>Connect instantly with bintunet.co.ke — no contracts, no delays.</p>
+    <h1 class="brand">bintunet.co.ke</h1>
+    <p>Fast, Reliable & Affordable Internet</p>
     <a href="#plans" class="btn">Get Connected</a>
     <a href="#coverage" class="btn">Check Coverage</a>
   </header>
+
   <section>
     <h2 class="section-title">How It Works</h2>
     <div class="steps">
@@ -49,46 +116,34 @@
       </div>
     </div>
   </section>
+
   <section id="plans">
     <h2 class="section-title">Plans & Pricing</h2>
-    <section>
-  <h2 class="section-title">Our Services</h2>
-  <div class="steps">
-    <div>
-      <h3>🌐 Home Internet</h3>
-      <p>Fast Wi-Fi for homes — no contracts, no installation delays.</p>
-    </div>
-    <div>
-      <h3>📱 Mobile Hotspot</h3>
-      <p>Affordable data bundles to share with friends or family.</p>
-    </div>
-    <div>
-      <h3>🏢 Business Wi-Fi</h3>
-      <p>Stable and scalable internet for small businesses or offices.</p>
-    </div>
-  </div>
-    </section>
     <div class="plans">
       <div class="plan-card">
         <h3>Daily</h3>
         <p>KSh 50</p>
         <p>5 Mbps</p>
         <p>24 hours</p>
+        <a class="btn" href="daily.html">Select</a>
       </div>
       <div class="plan-card">
         <h3>Weekly</h3>
         <p>KSh 300</p>
         <p>10 Mbps</p>
         <p>7 days</p>
+        <a class="btn" href="weekly.html">Select</a>
       </div>
       <div class="plan-card">
         <h3>Monthly</h3>
         <p>KSh 1,000</p>
         <p>10 Mbps</p>
         <p>30 days</p>
+        <a class="btn" href="monthly.html">Select</a>
       </div>
     </div>
   </section>
+
   <section>
     <h2 class="section-title">What Our Customers Say</h2>
     <div class="testimonials">
@@ -96,31 +151,21 @@
       <blockquote>“Instant top-up. No buffering.” — James, Mombasa</blockquote>
     </div>
   </section>
+
   <section class="contact">
     <h2>Contact Us</h2>
-    <p>Call: 0700 123 456 | WhatsApp: +254 700 123456</p>
+    <p>Call: 0729 499 463 | WhatsApp: +254 729 499463</p>
     <p>Email: support@bintunet.co.ke</p>
     <p>Visit Us: Nairobi CBD</p>
     <p>USSD: *123#</p>
   </section>
+
   <footer>
     <p>© 2025 bintunet.co.ke | All Rights Reserved</p>
     <p><a href="#" style="color: #fff; text-decoration: underline;">Privacy Policy</a> | <a href="#" style="color: #fff; text-decoration: underline;">Terms</a></p>
   </footer>
-  <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/254729499463" target="_blank" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #25d366;
-  color: white;
-  padding: 12px 16px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  z-index: 999;">
-  💬 Chat on WhatsApp
-</a>
+
+  <a href="https://wa.me/254729499463" class="whatsapp-float">💬 Chat</a>
+
 </body>
-  </html>
+</html>

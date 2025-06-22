@@ -4,29 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Coverage Map | BINTUNET.CO.KE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #fff;
+      background: #fff;
       color: #333;
+      line-height: 1.6;
     }
     header {
-      background: #e60000;
+      background: linear-gradient(135deg, #e60000, #ff4d4d);
       color: white;
-      padding: 1.5rem;
+      padding: 2rem;
       text-align: center;
     }
-    iframe {
+    header h1 {
+      font-family: 'Runtoe', cursive;
+      text-transform: uppercase;
+      font-size: 2.5rem;
+    }
+    .map-container {
       width: 100%;
       height: 90vh;
+    }
+    iframe {
       border: none;
+      width: 100%;
+      height: 100%;
+    }
+    .back-btn {
+      display: inline-block;
+      margin: 1rem auto;
+      padding: 10px 20px;
+      background: #e60000;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: bold;
     }
     footer {
       text-align: center;
+      padding: 1rem;
       background: #111;
       color: white;
-      padding: 1rem;
       font-size: 0.9rem;
     }
   </style>
@@ -34,15 +57,17 @@
 <body>
 
   <header>
-    <h1>Our Network Coverage</h1>
-    <p>View areas where BINTUNET.CO.KE internet is available</p>
+    <h1>Coverage Map</h1>
+    <p>Explore our service areas below</p>
   </header>
 
-  <iframe 
-    src="https://www.google.com/maps/d/embed?mid=1Jwjzb8y1-NC6pMYMTpQzO9cRQg2ScmU" 
-    allowfullscreen
-    loading="lazy">
-  </iframe>
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Jwjzb8y1-NC6pMYMTpQzO9cRQg2ScmU" allowfullscreen></iframe>
+  </div>
+
+  <div style="text-align:center;">
+    <a class="back-btn" href="index.html">⬅ Back to Home</a>
+  </div>
 
   <footer>
     <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>

@@ -1,382 +1,425 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BINTUNET.CO.KE | Fast, Reliable Internet</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#e60000">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
-  <style>
-    /* All your previous CSS is kept unchanged */
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
-
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #e60000;
-      color: white;
-      padding: 10px 14px;
-      font-family: 'Runtoe', cursive;
-      font-size: 18px;
-      border: none;
-      border-radius: 6px;
-      z-index: 1001;
-      cursor: pointer;
-    }
-
-    .side-menu {
-      position: fixed;
-      top: 0; left: -250px;
-      width: 250px; height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      padding-top: 5rem;
-      transition: left 0.3s ease;
-      z-index: 1000;
-      font-family: 'Runtoe', cursive;
-    }
-
-    .side-menu a {
-      display: block;
-      padding: 1rem 2rem;
-      color: yellow;
-      text-decoration: none;
-      font-size: 1.3rem;
-    }
-
-    .side-menu a:hover { background: rgba(255, 255, 0, 0.1); }
-    .side-menu.active { left: 0; }
-
-    header {
-      position: relative;
-      height: 60vh;
-      min-height: 300px;
-      max-height: 500px;
-      color: white;
-      text-align: center;
-      padding-top: 6rem;
-      overflow: hidden;
-    }
-
-    .header-video-container {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .header-video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.5);
-    }
-
-    .social-icons {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-icons a img {
-      width: 26px;
-      height: 26px;
-      border-radius: 4px;
-    }
-
-    .brand {
-      font-family: 'Runtoe', cursive;
-      font-size: 3rem;
-      text-transform: uppercase;
-    }
-
-    .btn {
-      background: white;
-      color: #e60000;
-      padding: 0.6rem 1.2rem;
-      border-radius: 30px;
-      font-weight: 600;
-      margin: 0.5rem;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    #coverageMessage {
-      display: none;
-      background: white;
-      color: #e60000;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-top: 1rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    section {
-      padding: 3rem 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-    }
-
-    .plans {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      text-align: center;
-    }
-
-    .plan-card {
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      padding: 1.5rem;
-    }
-
-    .plan-card h3 { margin-bottom: 1rem; color: #e60000; }
-
-    .sponsored-ads {
-      background: rgba(255, 0, 0, 0.1);
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 1rem 0;
-      margin-bottom: 2rem;
-    }
-
-    .sponsored-track {
-      display: inline-block;
-      animation: scroll-left 30s linear infinite;
-    }
-
-    .sponsored-track span {
-      display: inline-block;
-      margin: 0 2rem;
-      color: #b30000;
-      font-weight: bold;
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    .testimonials-carousel {
-      display: flex;
-      gap: 2rem;
-      animation: slide 30s linear infinite;
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .testimonial-box {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      max-width: 300px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .testimonial-box img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 3px solid #e60000;
-      object-fit: cover;
-      margin-bottom: 1rem;
-    }
-
-    .youtube-live {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-
-    .youtube-live iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .music-download {
-      text-align: center;
-      background: #f9f9f9;
-      padding: 2rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-
-    .music-download a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #e60000;
-      color: white;
-      border-radius: 20px;
-      text-decoration: none;
-    }
-
-    .contact {
-      text-align: center;
-      background: #f0f0f0;
-      padding: 2rem;
-      border-radius: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #111;
-      color: white;
-      font-size: 0.9rem;
-    }
-
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-      color: white;
-      padding: 14px 16px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 999;
-    }
-  </style>
-</head>
-<body>
-
-  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
-  <div class="side-menu" id="sideMenu">
-    <a href="#home">Home</a>
-    <a href="#plans">Plans</a>
-    <a href="#contact">Contact</a>
-    <a href="download.html">Download Now</a>
-  </div>
-
-  <header id="home">
-    <div class="header-video-container">
-      <video autoplay muted playsinline loop>
-        <source src="background.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="social-icons">
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok"></a>
-    </div>
-
-    <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" style="max-width: 140px; margin-bottom: 1rem;">
-    <h1 class="brand">BINTUNET.CO.KE</h1>
-    <p>Fast, Reliable & Affordable Internet</p>
-    <a href="#plans" class="btn">Get Connected</a>
-    <a href="javascript:void(0);" class="btn" onclick="showCoverage()">Check Coverage</a>
-    <div id="coverageMessage">
-      <strong>Coverage Areas:</strong><br>
-      Nairobi, Eldoret, Kisumu, and surrounding areas. Contact us via WhatsApp for confirmation.
-    </div>
-  </header>
-
-  <div class="sponsored-ads">
-    <div class="sponsored-track">
-      <span>🔥 Sponsored Ad: Your Ad Here</span>
-      <span>🌍 Starlink Kenya</span>
-      <span>🎧 Buy Airtime Online at Bintunet</span>
-      <span>🛰 High-Speed Satellite Internet</span>
-    </div>
-  </div>
-
-  <section id="plans">
-    <h2 class="section-title">Plans & Pricing</h2>
-    <div class="plans">
-      <div class="plan-card"><h3>Daily</h3><p>KSh 50</p><p>5 Mbps</p><p>24 hours</p><a class="btn" href="daily.html">Select</a></div>
-      <div class="plan-card"><h3>Weekly</h3><p>KSh 300</p><p>10 Mbps</p><p>7 days</p><a class="btn" href="weekly.html">Select</a></div>
-      <div class="plan-card"><h3>Monthly</h3><p>KSh 1,000</p><p>10 Mbps</p><p>30 days</p><a class="btn" href="monthly.html">Select</a></div>
-    </div>
-  </section>
-
-  <section class="youtube-live">
-    <h2 class="section-title">Live on YouTube</h2>
-    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfUIm_Fwxafbq0q2cmhvHNg" allowfullscreen></iframe>
-  </section>
-
-  <section class="music-download">
-    <h2 class="section-title">Download Unlimited VPN Files</h2>
-    <p>Click below to access country-based configuration files.</p>
-    <a href="download.html">⬇ Download Now</a>
-  </section>
-
-  <section class="testimonials" style="background:#f9f9f9; overflow:hidden;">
-    <h2 class="section-title">What Our Customers Say</h2>
-    <div class="testimonials-carousel">
-      <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg"><p>“Since I switched to BINTUNET, I’ve never looked back!”</p><strong>— Nancy, Nairobi</strong></div>
-      <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg"><p>“Instant top-up. No buffering.”</p><strong>— Bintu, Eldoret</strong></div>
-      <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>
-    </div>
-  </section>
-
-  <section class="partnership" style="background: #f0f8ff; text-align: center;">
-    <h2 class="section-title">In Partnership With</h2>
-    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin-bottom: 1rem;">
-    <p style="max-width: 700px; margin: auto; font-size: 1.1rem;">
-      We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.
-    </p>
-  </section>
-
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <p>Call: <a href="tel:0729499463">0729 499 463</a> | WhatsApp: <a href="https://wa.me/254729499463">+254 729 499463</a></p>
-    <p>Email: support@bintunet.co.ke</p>
-    <p>Visit Us: Nairobi CBD</p>
-    <p>USSD: *123#</p>
-  </section>
-
-  <footer>
-    <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>
-  </footer>
-
-  <a href="https://wa.me/254729499463" class="whatsapp-float">💬 Chat</a>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById('sideMenu').classList.toggle('active');
-    }
-
-    function showCoverage() {
-      const coverage = document.getElementById('coverageMessage');
-      coverage.style.display = coverage.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // PWA registration
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('✅ Service Worker registered'))
-        .catch(err => console.error('❌ Service Worker failed:', err));
-    }
-  </script>
-</body>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <title>BINTUNET.CO.KE | Fast, Reliable Internet</title>  
+  <link rel="manifest" href="manifest.json" />  
+  <meta name="theme-color" content="#e60000">  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>  
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>  
+  <style>  
+    /* All your previous CSS is kept unchanged */  
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }  
+    body { font-family: 'Inter', sans-serif; color: #333; background: #fff; overflow-x: hidden; }  
+  
+    .menu-toggle {  
+      position: fixed;  
+      top: 20px;  
+      left: 20px;  
+      background: #e60000;  
+      color: white;  
+      padding: 10px 14px;  
+      font-family: 'Runtoe', cursive;  
+      font-size: 18px;  
+      border: none;  
+      border-radius: 6px;  
+      z-index: 1001;  
+      cursor: pointer;  
+    }  
+  
+    .side-menu {  
+      position: fixed;  
+      top: 0; left: -250px;  
+      width: 250px; height: 100vh;  
+      background: rgba(0, 0, 0, 0.9);  
+      padding-top: 5rem;  
+      transition: left 0.3s ease;  
+      z-index: 1000;  
+      font-family: 'Runtoe', cursive;  
+    }  
+  
+    .side-menu a {  
+      display: block;  
+      padding: 1rem 2rem;  
+      color: yellow;  
+      text-decoration: none;  
+      font-size: 1.3rem;  
+    }  
+  
+    .side-menu a:hover { background: rgba(255, 255, 0, 0.1); }  
+    .side-menu.active { left: 0; }  
+  
+    header {  
+      position: relative;  
+      height: 60vh;  
+      min-height: 300px;  
+      max-height: 500px;  
+      color: white;  
+      text-align: center;  
+      padding-top: 6rem;  
+      overflow: hidden;  
+    }  
+  
+    .header-video-container {  
+      position: absolute;  
+      top: 0; left: 0;  
+      width: 100%; height: 100%;  
+      z-index: -1;  
+      overflow: hidden;  
+    }  
+  
+    .header-video-container video {  
+      width: 100%;  
+      height: 100%;  
+      object-fit: cover;  
+      filter: brightness(0.5);  
+    }  
+  
+    .social-icons {  
+      position: absolute;  
+      top: 20px;  
+      right: 20px;  
+      display: flex;  
+      gap: 1rem;  
+    }  
+  
+    .social-icons a img {  
+      width: 26px;  
+      height: 26px;  
+      border-radius: 4px;  
+    }  
+  
+    .brand {  
+      font-family: 'Runtoe', cursive;  
+      font-size: 3rem;  
+      text-transform: uppercase;  
+    }  
+  
+    .btn {  
+      background: white;  
+      color: #e60000;  
+      padding: 0.6rem 1.2rem;  
+      border-radius: 30px;  
+      font-weight: 600;  
+      margin: 0.5rem;  
+      text-decoration: none;  
+      display: inline-block;  
+    }  
+  
+    #coverageMessage {  
+      display: none;  
+      background: white;  
+      color: #e60000;  
+      padding: 1rem;  
+      border-radius: 10px;  
+      margin-top: 1rem;  
+      max-width: 600px;  
+      margin-left: auto;  
+      margin-right: auto;  
+    }  
+  
+    section {  
+      padding: 3rem 2rem;  
+      max-width: 1200px;  
+      margin: auto;  
+    }  
+  
+    .section-title {  
+      text-align: center;  
+      font-size: 1.8rem;  
+      margin-bottom: 2rem;  
+    }  
+  
+    .plans {  
+      display: grid;  
+      gap: 1.5rem;  
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  
+      text-align: center;  
+    }  
+  
+    .plan-card {  
+      border: 1px solid #ccc;  
+      border-radius: 12px;  
+      padding: 1.5rem;  
+    }  
+  
+    .plan-card h3 { margin-bottom: 1rem; color: #e60000; }  
+  
+    .sponsored-ads {  
+      background: rgba(255, 0, 0, 0.1);  
+      overflow: hidden;  
+      white-space: nowrap;  
+      padding: 1rem 0;  
+      margin-bottom: 2rem;  
+    }  
+  
+    .sponsored-track {  
+      display: inline-block;  
+      animation: scroll-left 30s linear infinite;  
+    }  
+  
+    .sponsored-track span {  
+      display: inline-block;  
+      margin: 0 2rem;  
+      color: #b30000;  
+      font-weight: bold;  
+    }  
+  
+    @keyframes scroll-left {  
+      0% { transform: translateX(100%); }  
+      100% { transform: translateX(-100%); }  
+    }  
+  
+    .testimonials-carousel {  
+      display: flex;  
+      gap: 2rem;  
+      animation: slide 30s linear infinite;  
+    }  
+  
+    @keyframes slide {  
+      0% { transform: translateX(0); }  
+      100% { transform: translateX(-50%); }  
+    }  
+  
+    .testimonial-box {  
+      background: white;  
+      padding: 1.5rem;  
+      border-radius: 12px;  
+      max-width: 300px;  
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
+      text-align: center;  
+      flex-shrink: 0;  
+    }  
+  
+    .testimonial-box img {  
+      width: 80px;  
+      height: 80px;  
+      border-radius: 50%;  
+      border: 3px solid #e60000;  
+      object-fit: cover;  
+      margin-bottom: 1rem;  
+    }  
+  
+    .youtube-live {  
+      position: relative;  
+      padding-bottom: 56.25%;  
+      height: 0;  
+      overflow: hidden;  
+      margin-bottom: 2rem;  
+    }  
+  
+    .youtube-live iframe {  
+      position: absolute;  
+      top: 0; left: 0;  
+      width: 100%;  
+      height: 100%;  
+      border: none;  
+    }  
+  
+    .music-download {  
+      text-align: center;  
+      background: #f9f9f9;  
+      padding: 2rem;  
+      border-radius: 12px;  
+      margin-bottom: 2rem;  
+    }  
+  
+    .music-download a {  
+      display: inline-block;  
+      margin-top: 1rem;  
+      padding: 0.5rem 1rem;  
+      background: #e60000;  
+      color: white;  
+      border-radius: 20px;  
+      text-decoration: none;  
+    }  
+  
+    .contact {  
+      text-align: center;  
+      background: #f0f0f0;  
+      padding: 2rem;  
+      border-radius: 8px;  
+    }  
+  
+    footer {  
+      text-align: center;  
+      padding: 1rem;  
+      background: #111;  
+      color: white;  
+      font-size: 0.9rem;  
+    }  
+  
+    .whatsapp-float {  
+      position: fixed;  
+      bottom: 20px;  
+      right: 20px;  
+      background-color: #25d366;  
+      color: white;  
+      padding: 14px 16px;  
+      border-radius: 50px;  
+      text-decoration: none;  
+      font-weight: bold;  
+      font-size: 16px;  
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
+      z-index: 999;  
+    }  
+  </style>  
+</head>  
+<body>  
+  
+  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>  
+  <div class="side-menu" id="sideMenu">  
+    <a href="#home">Home</a>  
+    <a href="#plans">Plans</a>  
+    <a href="#contact">Contact</a>  
+    <a href="download.html">Download Now</a>  
+  </div>  
+  
+  <header id="home">  
+    <div class="header-video-container">  
+      <video autoplay muted playsinline loop>  
+        <source src="background.mp4" type="video/mp4">  
+      </video>  
+    </div>  
+  
+    <div class="social-icons">  
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>  
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>  
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>  
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok"></a>  
+    </div>  
+  
+    <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" style="max-width: 140px; margin-bottom: 1rem;">  
+    <h1 class="brand">BINTUNET.CO.KE</h1>  
+    <p>Fast, Reliable & Affordable Internet</p>  
+    <a href="#plans" class="btn">Get Connected</a>  
+    <a href="javascript:void(0);" class="btn" onclick="showCoverage()">Check Coverage</a>  
+    <div id="coverageMessage">  
+      <strong>Coverage Areas:</strong><br>  
+      Nairobi, Eldoret, Kisumu, and surrounding areas. Contact us via WhatsApp for confirmation.  
+    </div>  
+  </header>  
+  
+  <div class="sponsored-ads">  
+    <div class="sponsored-track">  
+      <span>🔥 Sponsored Ad: Your Ad Here</span>  
+      <span>🌍 Starlink Kenya</span>  
+      <span>🎧 Buy Airtime Online at Bintunet</span>  
+      <span>🛰 High-Speed Satellite Internet</span>  
+    </div>  
+  </div>  
+  
+  <section id="plans">  
+    <h2 class="section-title">Plans & Pricing</h2>  
+    <div class="plans">  
+      <div class="plan-card"><h3>Daily</h3><p>KSh 50</p><p>5 Mbps</p><p>24 hours</p><a class="btn" href="daily.html">Select</a></div>  
+      <div class="plan-card"><h3>Weekly</h3><p>KSh 300</p><p>10 Mbps</p><p>7 days</p><a class="btn" href="weekly.html">Select</a></div>  
+      <div class="plan-card"><h3>Monthly</h3><p>KSh 1,000</p><p>10 Mbps</p><p>30 days</p><a class="btn" href="monthly.html">Select</a></div>  
+    </div>  
+  </section>  
+  
+  <section class="youtube-live">  
+    <h2 class="section-title">Live on YouTube</h2>  
+    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfUIm_Fwxafbq0q2cmhvHNg" allowfullscreen></iframe>  
+  </section>  
+  
+  <section class="music-download">  
+    <h2 class="section-title">Download Unlimited VPN Files</h2>  
+    <p>Click below to access country-based configuration files.</p>  
+    <a href="download.html">⬇ Download Now</a>  
+  </section>  
+  
+  <section class="testimonials" style="background:#f9f9f9; overflow:hidden;">  
+    <h2 class="section-title">What Our Customers Say</h2>  
+    <div class="testimonials-carousel">  
+      <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg"><p>“Since I switched to BINTUNET, I’ve never looked back!”</p><strong>— Nancy, Nairobi</strong></div>  
+      <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg"><p>“Instant top-up. No buffering.”</p><strong>— Bintu, Eldoret</strong></div>  
+      <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>  
+    </div>  
+  </section>  
+  
+ <section style="position: relative; padding: 4rem 2rem; background: #f5f5f5;">  
+  <!-- Background Video (optional) -->  
+  <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2;">  
+    <source src="partnership-bg.mp4" type="video/mp4">  
+    Your browser does not support the video tag.  
+  </video>  
+  
+  <div style="max-width: 800px; margin: 0 auto; text-align: center;">  
+    <h2 style="font-family: 'Runtoe', cursive; color: #e60000; font-size: 2rem;">Our Partnership</h2>  
+  
+    <!-- Starlink Logo -->  
+    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png"   
+         alt="Starlink Logo" style="max-width: 200px; margin: 1rem auto; display: block;">  
+  
+    <p id="typed-text" style="  
+      font-size: 1.1rem;  
+      overflow: hidden;  
+      display: inline-block;  
+      border-right: 2px solid #e60000;  
+      max-width: 100%;  
+      white-space: normal;  
+      word-break: break-word;  
+      min-height: 120px;  
+      padding-top: 1rem;  
+    "></p>  
+  </div>  
+</section>  
+  
+<script>  
+  const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.<br><br>Through this collaboration, we deliver fast and stable satellite connectivity where traditional coverage is limited.';  
+  const typedText = document.getElementById("typed-text");  
+  let index = 0;  
+  
+  function type() {  
+    if (index < fullText.length) {  
+      let currentChar = fullText.charAt(index);  
+      if (currentChar === '<') {  
+        const endTag = fullText.indexOf('>', index) + 1;  
+        typedText.innerHTML += fullText.substring(index, endTag);  
+        index = endTag;  
+      } else {  
+        typedText.innerHTML += currentChar;  
+        index++;  
+      }  
+      setTimeout(type, 35);  
+    }  
+  }  
+  
+  window.addEventListener("load", type);  
+</script>  
+  
+  <section id="contact" class="contact">  
+    <h2>Contact Us</h2>  
+    <p>Call: <a href="tel:0729499463">0729 499 463</a> | WhatsApp: <a href="https://wa.me/254729499463">+254 729 499463</a></p>  
+    <p>Email: support@bintunet.co.ke</p>  
+    <p>Visit Us: Nairobi CBD</p>  
+    <p>USSD: *123#</p>  
+  </section>  
+  
+  <footer>  
+    <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>  
+  </footer>  
+  
+  <a href="https://wa.me/254729499463" class="whatsapp-float">💬 Chat</a>  
+  
+  <script>  
+    function toggleMenu() {  
+      document.getElementById('sideMenu').classList.toggle('active');  
+    }  
+  
+    function showCoverage() {  
+      const coverage = document.getElementById('coverageMessage');  
+      coverage.style.display = coverage.style.display === 'none' ? 'block' : 'none';  
+    }  
+  
+    // PWA registration  
+    if ('serviceWorker' in navigator) {  
+      navigator.serviceWorker.register('service-worker.js')  
+        .then(reg => console.log('✅ Service Worker registered'))  
+        .catch(err => console.error('❌ Service Worker failed:', err));  
+    }  
+  </script>  
+</body>  
 </html>

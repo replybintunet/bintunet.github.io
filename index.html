@@ -362,14 +362,59 @@
     </div>
   </section>
 
-  <section class="partnership" style="background: #f0f8ff; text-align: center;">
-    <h2 class="section-title">In Partnership With</h2>
-    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin-bottom: 1rem;">
-    <p style="max-width: 700px; margin: auto; font-size: 1.1rem;">
-      We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.
-    </p>
-  </section>
+<section style="position: relative; padding: 4rem 2rem; background: transparent;">
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2;">
+    <source src="partnership-bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
+  <div style="max-width: 800px; margin: 0 auto; text-align: center; color: white;">
+    <h2 style="font-family: 'Runtoe', cursive; font-size: 2rem; color: #fff;">Our Partnership</h2>
+
+    <!-- Starlink Logo -->
+    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png"
+      alt="Starlink Logo"
+      style="max-width: 200px; margin: 1rem auto; display: block; filter: brightness(0) invert(1);">
+
+    <!-- Typing Text -->
+    <p id="typed-text" style="
+      font-size: 1.1rem;
+      overflow: hidden;
+      display: inline-block;
+      border-right: 2px solid #fff;
+      max-width: 100%;
+      white-space: normal;
+      word-break: break-word;
+      min-height: 120px;
+      padding-top: 1rem;
+    "></p>
+  </div>
+</section>
+
+<script>
+  const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.<br><br>Through this collaboration, we deliver fast and stable satellite connectivity where traditional coverage is limited.';
+  const typedText = document.getElementById("typed-text");
+  let index = 0;
+
+  function type() {
+    if (index < fullText.length) {
+      let currentChar = fullText.charAt(index);
+      if (currentChar === '<') {
+        const endTag = fullText.indexOf('>', index) + 1;
+        typedText.innerHTML += fullText.substring(index, endTag);
+        index = endTag;
+      } else {
+        typedText.innerHTML += currentChar;
+        index++;
+      }
+      setTimeout(type, 35);
+    }
+  }
+
+  window.addEventListener("load", type);
+</script>
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <p>Call: 0729 499 463 | WhatsApp: +254 729 499463</p>

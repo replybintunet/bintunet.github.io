@@ -217,6 +217,18 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       z-index: 999;
     }
+
+    #coverageMessage {
+      display: none;
+      background: white;
+      color: #e60000;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
 </head>
 <body>
@@ -242,7 +254,12 @@
     <h1 class="brand">BINTUNET.CO.KE</h1>
     <p>Fast, Reliable & Affordable Internet</p>
     <a href="#plans" class="btn">Get Connected</a>
-    <a href="#coverage" class="btn">Check Coverage</a>
+    <a href="javascript:void(0);" class="btn" onclick="showCoverage()">Check Coverage</a>
+    <div id="coverageMessage">
+      <strong>Coverage Areas:</strong><br>
+      We currently cover parts of <strong>Nairobi</strong>, <strong>Eldoret</strong>, <strong>Kisumu</strong>, and surrounding regions.<br>
+      Contact us on WhatsApp for confirmation in your area.
+    </div>
   </header>
 
   <section id="plans">
@@ -259,12 +276,11 @@
     <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfUIm_Fwxafbq0q2cmhvHNg" allowfullscreen></iframe>
   </section>
 
-  <section class="music-download">
-    <h2 class="section-title">Music Download</h2>
-    <p>Click below to download the latest music.</p>
-    <a href="#" download>⬇ Download Now</a>
-  </section>
-
+<section class="music-download">
+  <h2 class="section-title">Download Unlimited VPN Files</h2>
+  <p>Click below to access country-based configuration files.</p>
+  <a href="download.html">⬇ Download Now</a>
+</section>
   <section class="testimonials" style="background:#f9f9f9; overflow:hidden;">
     <h2 class="section-title">What Our Customers Say</h2>
     <div class="testimonials-carousel">
@@ -292,6 +308,11 @@
   <script>
     function toggleMenu() {
       document.getElementById('sideMenu').classList.toggle('active');
+    }
+
+    function showCoverage() {
+      const coverage = document.getElementById('coverageMessage');
+      coverage.style.display = coverage.style.display === 'none' ? 'block' : 'none';
     }
   </script>
 </body>

@@ -56,7 +56,9 @@
 
     header {
       position: relative;
-      height: 100vh;
+      height: 60vh;
+      min-height: 300px;
+      max-height: 500px;
       color: white;
       text-align: center;
       padding-top: 6rem;
@@ -66,15 +68,15 @@
     .header-video-container {
       position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       z-index: -1;
-      pointer-events: none;
       overflow: hidden;
     }
 
     .header-video-container video {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
@@ -148,6 +150,31 @@
 
     .plan-card h3 { margin-bottom: 1rem; color: #e60000; }
 
+    .sponsored-ads {
+      background: rgba(255, 0, 0, 0.1);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .sponsored-track {
+      display: inline-block;
+      animation: scroll-left 30s linear infinite;
+    }
+
+    .sponsored-track span {
+      display: inline-block;
+      margin: 0 2rem;
+      color: #b30000;
+      font-weight: bold;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
     .testimonials-carousel {
       display: flex;
       gap: 2rem;
@@ -212,16 +239,6 @@
       text-decoration: none;
     }
 
-    .slideshow {
-      text-align: center;
-      margin-top: 3rem;
-    }
-
-    .slideshow img {
-      max-width: 100%;
-      border-radius: 20px;
-    }
-
     .contact {
       text-align: center;
       background: #f0f0f0;
@@ -265,7 +282,7 @@
 
   <header id="home">
     <div class="header-video-container">
-      <video autoplay muted playsinline>
+      <video autoplay muted playsinline loop>
         <source src="background.mp4" type="video/mp4">
       </video>
     </div>
@@ -287,6 +304,15 @@
       Nairobi, Eldoret, Kisumu, and surrounding areas. Contact us via WhatsApp for confirmation.
     </div>
   </header>
+
+  <div class="sponsored-ads">
+    <div class="sponsored-track">
+      <span>🔥 Sponsored Ad: Your Ad Here</span>
+      <span>🌍 Starlink Kenya</span>
+      <span>🎧 Buy Airtime Online at Bintunet</span>
+      <span>🛰 High-Speed Satellite Internet</span>
+    </div>
+  </div>
 
   <section id="plans">
     <h2 class="section-title">Plans & Pricing</h2>
@@ -317,8 +343,7 @@
     </div>
   </section>
 
-  <!-- Partnership Section -->
-  <section class="partnership" style="background: #f0f8ff; padding: 3rem 2rem; text-align: center;">
+  <section class="partnership" style="background: #f0f8ff; text-align: center;">
     <h2 class="section-title">In Partnership With</h2>
     <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin-bottom: 1rem;">
     <p style="max-width: 700px; margin: auto; font-size: 1.1rem;">

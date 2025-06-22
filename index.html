@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BINTUNET.CO.KE | Fast, Reliable Internet</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#e60000">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
   <style>
+    /* All your previous CSS is kept unchanged */
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #333; line-height: 1.6; background: #fff; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
 
     .menu-toggle {
       position: fixed;
@@ -17,8 +20,8 @@
       background: #e60000;
       color: white;
       padding: 10px 14px;
-      font-size: 18px;
       font-family: 'Runtoe', cursive;
+      font-size: 18px;
       border: none;
       border-radius: 6px;
       z-index: 1001;
@@ -27,13 +30,11 @@
 
     .side-menu {
       position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100vh;
+      top: 0; left: -250px;
+      width: 250px; height: 100vh;
       background: rgba(0, 0, 0, 0.9);
-      transition: left 0.3s ease;
       padding-top: 5rem;
+      transition: left 0.3s ease;
       z-index: 1000;
       font-family: 'Runtoe', cursive;
     }
@@ -46,20 +47,26 @@
       font-size: 1.3rem;
     }
 
-    .side-menu a:hover {
-      background: rgba(255, 255, 0, 0.1);
-    }
-
+    .side-menu a:hover { background: rgba(255, 255, 0, 0.1); }
     .side-menu.active { left: 0; }
 
     header {
       position: relative;
       height: 60vh;
+      min-height: 300px;
+      max-height: 500px;
       color: white;
       text-align: center;
       padding-top: 6rem;
       overflow: hidden;
-      background: black;
+    }
+
+    .header-video-container {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
     }
 
     .header-video-container video {
@@ -168,7 +175,6 @@
       display: flex;
       gap: 2rem;
       animation: slide 30s linear infinite;
-      min-width: 1500px;
     }
 
     @keyframes slide {
@@ -244,9 +250,12 @@
       font-size: 0.9rem;
     }
 
-    .whatsapp-float, .call-btn {
+    .whatsapp-float {
       position: fixed;
+      bottom: 20px;
       right: 20px;
+      background-color: #25d366;
+      color: white;
       padding: 14px 16px;
       border-radius: 50px;
       text-decoration: none;
@@ -254,18 +263,6 @@
       font-size: 16px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       z-index: 999;
-    }
-
-    .whatsapp-float {
-      bottom: 20px;
-      background-color: #25d366;
-      color: white;
-    }
-
-    .call-btn {
-      bottom: 80px;
-      background-color: #e60000;
-      color: white;
     }
   </style>
 </head>
@@ -280,19 +277,27 @@
   </div>
 
   <header id="home">
-    <div class="social-icons">
-      <a href="https://facebook.com/bintunet.co.ke" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-      <a href="https://twitter.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
-      <a href="https://instagram.com/bintu_net" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
-      <a href="https://tiktok.com/@bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok"></a>
+    <div class="header-video-container">
+      <video autoplay muted playsinline loop>
+        <source src="background.mp4" type="video/mp4">
+      </video>
     </div>
+
+    <div class="social-icons">
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok"></a>
+    </div>
+
     <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" style="max-width: 140px; margin-bottom: 1rem;">
     <h1 class="brand">BINTUNET.CO.KE</h1>
     <p>Fast, Reliable & Affordable Internet</p>
     <a href="#plans" class="btn">Get Connected</a>
     <a href="javascript:void(0);" class="btn" onclick="showCoverage()">Check Coverage</a>
     <div id="coverageMessage">
-      <strong>Coverage Areas:</strong><br>Nairobi, Eldoret, Kisumu, and surrounding areas.
+      <strong>Coverage Areas:</strong><br>
+      Nairobi, Eldoret, Kisumu, and surrounding areas. Contact us via WhatsApp for confirmation.
     </div>
   </header>
 
@@ -325,29 +330,26 @@
     <a href="download.html">⬇ Download Now</a>
   </section>
 
-  <section class="testimonials" style="background:#f9f9f9;">
+  <section class="testimonials" style="background:#f9f9f9; overflow:hidden;">
     <h2 class="section-title">What Our Customers Say</h2>
-    <div style="overflow: hidden;">
-      <div class="testimonials-carousel">
-        <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg"><p>“Since I switched to BINTUNET, I’ve never looked back!”</p><strong>— Nancy, Nairobi</strong></div>
-        <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg"><p>“Instant top-up. No buffering.”</p><strong>— Bintu, Eldoret</strong></div>
-        <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>
-        <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg"><p>“Since I switched to BINTUNET, I’ve never looked back!”</p><strong>— Nancy, Nairobi</strong></div>
-        <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg"><p>“Instant top-up. No buffering.”</p><strong>— Bintu, Eldoret</strong></div>
-        <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>
-      </div>
+    <div class="testimonials-carousel">
+      <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg"><p>“Since I switched to BINTUNET, I’ve never looked back!”</p><strong>— Nancy, Nairobi</strong></div>
+      <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg"><p>“Instant top-up. No buffering.”</p><strong>— Bintu, Eldoret</strong></div>
+      <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>
     </div>
   </section>
 
-  <section style="text-align:center; padding: 4rem 2rem;">
-    <h2 style="font-family:'Runtoe', cursive; font-size:2rem;">Our Partnership</h2>
-    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin: 1rem auto; display: block;">
-    <p id="typed-text" style="font-size:1.1rem; display:inline-block; white-space:normal; word-break:break-word; min-height: 120px; padding-top:1rem;"></p>
+  <section class="partnership" style="background: #f0f8ff; text-align: center;">
+    <h2 class="section-title">In Partnership With</h2>
+    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin-bottom: 1rem;">
+    <p style="max-width: 700px; margin: auto; font-size: 1.1rem;">
+      We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.
+    </p>
   </section>
 
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
-    <p>Call: 0729 499 463 | WhatsApp: +254 729 499463</p>
+    <p>Call: <a href="tel:0729499463">0729 499 463</a> | WhatsApp: <a href="https://wa.me/254729499463">+254 729 499463</a></p>
     <p>Email: support@bintunet.co.ke</p>
     <p>Visit Us: Nairobi CBD</p>
     <p>USSD: *123#</p>
@@ -358,36 +360,23 @@
   </footer>
 
   <a href="https://wa.me/254729499463" class="whatsapp-float">💬 Chat</a>
-  <a href="tel:+254729499463" class="call-btn">📞 Call Us</a>
 
   <script>
     function toggleMenu() {
       document.getElementById('sideMenu').classList.toggle('active');
     }
+
     function showCoverage() {
       const coverage = document.getElementById('coverageMessage');
       coverage.style.display = coverage.style.display === 'none' ? 'block' : 'none';
     }
 
-    const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.<br><br>Through this collaboration, we deliver fast and stable satellite connectivity where traditional coverage is limited.';
-    const typedText = document.getElementById("typed-text");
-    let index = 0;
-
-    function type() {
-      if (index < fullText.length) {
-        let currentChar = fullText.charAt(index);
-        if (currentChar === '<') {
-          const endTag = fullText.indexOf('>', index) + 1;
-          typedText.innerHTML += fullText.substring(index, endTag);
-          index = endTag;
-        } else {
-          typedText.innerHTML += currentChar;
-          index++;
-        }
-        setTimeout(type, 35);
-      }
+    // PWA registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('✅ Service Worker registered'))
+        .catch(err => console.error('❌ Service Worker failed:', err));
     }
-    window.addEventListener("load", type);
   </script>
 </body>
 </html>

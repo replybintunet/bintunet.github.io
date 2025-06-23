@@ -622,49 +622,74 @@
   }
 </style>
 
-<!-- Floating Chat Button -->
-<a href="https://wa.me/254729499463" class="whatsapp-float">
-  💬 Chat
-</a>  
-<!-- Floating Account Button -->
-<a href="account.html" class="account-float">
-  👤 My Account 
+<!-- WhatsApp Floating Chat -->
+<a href="https://wa.me/254729499463?text=Hello%20Bintunet%2C%20I%20am%20interested%20in%20your%20internet%20services." 
+   class="whatsapp-float" target="_blank">
+  
+  💬WhatsApp
+  
 </a>
 
-<!-- Floating Account Button Style -->
 <style>
-  .account-float {
-    position: fixed;
-    bottom: 80px; /* just above WhatsApp button */
-    right: 20px;
-    background-color: #e60000;
-    color: white;
-    font-size: 16px;
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 9998;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Inter', sans-serif;
-    animation: pulse 2s infinite;
-  }
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  font-size: 16px;
+  padding: 14px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 9999;
+  animation: bounce 2s infinite;
+  font-family: 'Inter', sans-serif;
+}
+.whatsapp-float:hover {
+  background-color: #1ebe5d;
+}
 
-  .account-float:hover {
-    background-color: #c40000;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  50% {
+    transform: translateY(-10px);
   }
+}
 </style>
 
+<!-- Floating My Account Button -->
+<a href="login.html?redirect=account.html" class="my-account-float">
+  👤 My Account
+</a>
+
+<style>
+.my-account-float {
+  position: fixed;
+  bottom: 80px; /* just above WhatsApp button */
+  right: 20px;
+  background-color: #e60000; /* red */
+  color: white;
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: bounce 2s infinite;
+  font-family: 'Inter', sans-serif;
+}
+.my-account-float:hover {
+  background-color: #b30000;
+}
+</style>
   </script>  
 </body>  
 </html>

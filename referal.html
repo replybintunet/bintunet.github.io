@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refer & Earn | Bintunet</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Runtoe&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #fff4f4, #ffeaea);
+      color: #333;
+    }
+
+    header {
+      background: #e60000;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+    header h1 {
+      font-family: 'Runtoe', cursive;
+      font-size: 2.3rem;
+      margin: 0;
+      display: inline-block;
+      border-right: 3px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blinkCursor 1s step-end infinite;
+    }
+
+    @keyframes blinkCursor {
+      from, to { border-color: transparent; }
+      50% { border-color: white; }
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 35px 25px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .content h2 {
+      font-family: 'Runtoe', cursive;
+      color: #e60000;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      font-size: 15px;
+      margin: 10px 0;
+    }
+
+    .referral-code {
+      background: #ffeaea;
+      border: 2px dashed #e60000;
+      padding: 15px;
+      margin: 20px auto;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 10px;
+      color: #e60000;
+      width: fit-content;
+    }
+
+    .invite-button {
+      display: inline-flex;
+      align-items: center;
+      background: #25D366;
+      color: white;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin: 25px 0;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .invite-button i {
+      margin-right: 10px;
+    }
+
+    .invite-button:hover {
+      background: #20ba58;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+      margin-top: 25px;
+    }
+
+    .note i {
+      color: #28a745;
+      margin-right: 8px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #0a66c2;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 id="typed-title"></h1>
+  </header>
+
+<div class="content">
+  <h2>Invite Friends. Earn Rewards.</h2>
+  <p>Let others join Bintunet and earn <strong>KES 500</strong> credit when they sign up using your code!</p>
+
+  <div class="referral-code">
+    Enter Your Referral Code or Name:
+    <input type="text" id="refCode" placeholder="e.g. Enter Bintunet" style="margin-top: 10px; padding: 10px; width: 80%; border-radius: 8px; border: 1px solid #ccc;" />
+  </div>
+
+  <a id="shareBtn" class="invite-button" href="#" target="_blank" onclick="generateWhatsAppLink()">
+    <i class="fab fa-whatsapp"></i> Invite via WhatsApp
+  </a>
+
+  <div class="note">
+    <p><i class="fas fa-check-circle"></i> Your referral code must be mentioned during signup.</p>
+    <p><i class="fas fa-check-circle"></i> Rewards are given after successful installation.</p>
+  </div>
+
+  <a class="back-link" href="index.html">← Back to Homepage</a>
+</div>
+
+<script>
+  function generateWhatsAppLink() {
+    const code = document.getElementById("refCode").value.trim();
+    if (!code) {
+      alert("Please enter your referral code or name first.");
+      return false;
+    }
+
+    const message = `Hi! Join Bintunet for fast internet. Use my referral code *${code}* and get connected today! https://bintunet.co.ke`;
+    const encoded = encodeURIComponent(message);
+    const url = `https://wa.me/?text=${encoded}`;
+    
+    // update the button link
+    document.getElementById("shareBtn").href = url;
+  }
+</script>
+
+  <footer>
+    © 2025 Bintunet.co.ke | All Rights Reserved
+  </footer>
+
+  <!-- Typing Script -->
+  <script>
+    const title = "Refer & Earn";
+    let i = 0;
+    const speed = 100;
+    const typedTitle = document.getElementById("typed-title");
+
+    function typeTitle() {
+      if (i < title.length) {
+        typedTitle.innerHTML += title.charAt(i);
+        i++;
+        setTimeout(typeTitle, speed);
+      }
+    }
+
+    window.addEventListener("load", typeTitle);
+  </script>
+
+</body>
+</html>

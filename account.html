@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account | Bintunet</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* 🔺 Moving Ads Bar */
+    .sponsored-ads {
+      width: 100%;
+      background: #e60000;
+      overflow: hidden;
+      white-space: nowrap;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .sponsored-track {
+      display: inline-block;
+      padding: 10px 0;
+      animation: scroll-left 18s linear infinite;
+    }
+
+    .sponsored-track span {
+      margin: 0 40px;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    header {
+      background: #fff;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-family: 'Runtoe', cursive;
+      font-size: 1.8rem;
+      color: #e60000;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logout-btn {
+      background: none;
+      border: 1px solid #ccc;
+      padding: 8px 14px;
+      border-radius: 6px;
+      color: #333;
+      cursor: pointer;
+      transition: 0.3s ease;
+      font-size: 14px;
+    }
+
+    .logout-btn:hover {
+      background: #eee;
+    }
+
+    .notification {
+      position: relative;
+      cursor: pointer;
+      font-size: 18px;
+      color: #e60000;
+    }
+
+    .notification .badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: #e60000;
+      color: white;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .dashboard-title {
+      font-family: 'Runtoe', cursive;
+      font-size: 2rem;
+      color: #e60000;
+      margin-bottom: 25px;
+    }
+
+    .add-shortcut {
+      display: inline-block;
+      font-size: 13px;
+      color: #e60000;
+      font-weight: 600;
+      text-decoration: none;
+      background: #fff0f0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid #e60000;
+      transition: 0.3s ease;
+    }
+
+    .add-shortcut:hover {
+      background: #e60000;
+      color: white;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      padding: 18px 16px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card i {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #e60000;
+    }
+
+    .card-title {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .card-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .quick-actions {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      text-align: center;
+    }
+
+    .quick-btn {
+      background: #ffffff;
+      border: 2px solid #e60000;
+      color: #e60000;
+      border-radius: 20px;
+      padding: 16px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+    }
+
+    .quick-btn:hover {
+      background: #e60000;
+      color: #fff;
+    }
+
+    .quick-btn i {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .actions {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .action-btn {
+      background: #e60000;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .action-btn:hover {
+      background: #c30000;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <!-- 🔔 Header -->
+  <header>
+    <div class="logo">Bintunet</div>
+    <div class="header-right">
+      <div class="notification" onclick="openNotifications()">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3</span>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="dashboard-title">Welcome, <span id="userName">Guest</span></div>
+
+<!-- 🔴 Ad Banner with Image Backgrounds -->
+<div class="ad-banner-container">
+  <div class="bintunet-ads">
+    <div class="bintunet-ad show" style="background-image: url('https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png');">
+      <div class="ad-overlay">
+        <p>🌍 Bintunet partners with Starlink for rural connectivity</p>
+      </div>
+    </div>
+    <div class="bintunet-ad" style="background-image: url('https://i.ibb.co/yfP5xL4/airtime.png');">
+      <div class="ad-overlay">
+        <p>💳 Buy Airtime, Data & Pay Bills Instantly</p>
+      </div>
+    </div>
+    <div class="bintunet-ad" style="background-image: url('https://i.ibb.co/JHJnxQW/vpn.png');">
+      <div class="ad-overlay">
+        <p>🛡️ Download Unlimited VPN Configs Now</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.ad-banner-container {
+  width: 95%;
+  max-width: 950px;
+  margin: 30px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.bintunet-ads {
+  position: relative;
+  height: 160px;
+}
+
+.bintunet-ad {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bintunet-ad.show {
+  opacity: 1;
+  z-index: 1;
+}
+
+.ad-overlay {
+  width: 100%;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.4); /* dark overlay */
+  text-align: center;
+}
+
+.ad-overlay p {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const ads = document.querySelectorAll(".bintunet-ad");
+  let currentAd = 0;
+
+  function showAd(index) {
+    ads.forEach((ad, i) => {
+      ad.classList.toggle("show", i === index);
+    });
+  }
+
+  showAd(currentAd);
+
+  setInterval(() => {
+    currentAd = (currentAd + 1) % ads.length;
+    showAd(currentAd);
+  }, 5000);
+});
+</script>
+    <!-- Add Shortcut Button -->
+    <div style="text-align: right; margin-bottom: 10px;">
+      <a href="plans.html" class="add-shortcut">
+        <i class="fas fa-plus-circle"></i> Add
+      </a>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-wifi"></i>
+        <div class="card-title">Current Plan</div>
+        <div class="card-value">Home 10Mbps</div>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-wallet"></i>
+        <div class="card-title">Balance</div>
+        <div class="card-value">KES 1,200</div>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-calendar-alt"></i>
+        <div class="card-title">Expiry</div>
+        <div class="card-value">30 June 2025</div>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <div class="card-title">Data Used</div>
+        <div class="card-value">80 GB</div>
+      </div>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="quick-actions">
+      <a href="add-money.html" class="quick-btn">
+        <i class="fas fa-plus-circle"></i><br>Add Money
+      </a>
+      <a href="send-money.html" class="quick-btn">
+        <i class="fas fa-paper-plane"></i><br>Send Money
+      </a>
+      <a href="scan.html" class="quick-btn">
+        <i class="fas fa-qrcode"></i><br>Scan to Send
+      </a>
+      <a href="buy-airtime.html" class="quick-btn">
+        <i class="fas fa-mobile-alt"></i><br>Buy Airtime
+      </a>
+    </div>
+
+    <!-- Bottom Action Buttons -->
+    <div class="actions">
+      <a href="pay.html" class="action-btn"><i class="fas fa-credit-card"></i> Pay Now</a>
+      <a href="invite.html" class="action-btn"><i class="fas fa-user-plus"></i> Refer & Earn</a>
+      <a href="plans.html" class="action-btn"><i class="fas fa-signal"></i> Upgrade Plan</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 BINTUNET.CO.KE | All rights reserved
+  </footer>
+
+  <!-- Firebase Login Check -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+      authDomain: "bintunetapp.firebaseapp.com",
+      projectId: "bintunetapp",
+      storageBucket: "bintunetapp.appspot.com",
+      messagingSenderId: "747554903234",
+      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      const userSpan = document.getElementById("userName");
+      if (user && user.phoneNumber) {
+        userSpan.textContent = user.phoneNumber;
+      } else {
+        userSpan.textContent = "Guest";
+      }
+    });
+
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        alert("Logged out!");
+      });
+    }
+
+    function openNotifications() {
+      alert("You have 3 new notifications!");
+    }
+  </script>
+
+</body>
+</html>

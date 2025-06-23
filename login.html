@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BINTUNET LOGIN</title>
+
+  <!-- Web App Meta -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#007BFF" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
+
+  <!-- Styling -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #e0f0ff, #cce4ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      max-width: 90px;
+      margin-bottom: 15px;
+    }
+
+    h1.runtoe {
+      font-family: 'Runtoe', cursive;
+      font-size: 2rem;
+      color: #007BFF;
+      margin: 0 0 10px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056cc;
+    }
+
+    #recaptcha-container {
+      margin-top: 10px;
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 13px;
+      color: green;
+    }
+
+    .divider {
+      margin: 20px 0;
+      border-bottom: 1px dashed #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" class="logo" />
+    <h1 class="runtoe">BINTUNET LOGIN</h1>
+    <div class="tagline">Secure login to manage your internet account.</div>
+
+    <!-- Phone input -->
+    <input type="text" id="phone" placeholder="+254712345678" />
+    <div id="recaptcha-container"></div>
+    <button onclick="sendOTP()">Send OTP</button>
+
+    <div class="divider"></div>
+
+    <!-- OTP input -->
+    <input type="text" id="otp" placeholder="Enter OTP Code" />
+    <button onclick="verifyOTP()">Verify & Login</button>
+
+    <div class="status" id="statusMessage"></div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+      authDomain: "bintunetapp.firebaseapp.com",
+      projectId: "bintunetapp",
+      storageBucket: "bintunetapp.appspot.com",
+      messagingSenderId: "747554903234",
+      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      size: 'normal',
+      callback: () => {},
+      'expired-callback': () => {}
+    });
+
+    const sendOTP = () => {
+      const phone = document.getElementById("phone").value;
+      firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          document.getElementById("statusMessage").innerText = "✅ OTP sent successfully!";
+        }).catch((error) => {
+          document.getElementById("statusMessage").innerText = "❌ " + error.message;
+        });
+    };
+
+    const verifyOTP = () => {
+      const code = document.getElementById("otp").value;
+      window.confirmationResult.confirm(code).then((result) => {
+        document.getElementById("statusMessage").innerText = "✅ Login successful! Redirecting...";
+        setTimeout(() => window.location.href = "account.html", 1500);
+      }).catch((error) => {
+        document.getElementById("statusMessage").innerText = "❌ Invalid OTP. Please try again.";
+      });
+    };
+  </script>
+
+</body>
+</html>

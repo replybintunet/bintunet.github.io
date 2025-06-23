@@ -626,7 +626,44 @@
 <a href="https://wa.me/254729499463" class="whatsapp-float">
   💬 Chat
 </a>  
-  
+<!-- Floating Account Button -->
+<a href="account.html" class="account-float">
+  👤 My Account 
+</a>
+
+<!-- Floating Account Button Style -->
+<style>
+  .account-float {
+    position: fixed;
+    bottom: 80px; /* just above WhatsApp button */
+    right: 20px;
+    background-color: #e60000;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    animation: pulse 2s infinite;
+  }
+
+  .account-float:hover {
+    background-color: #c40000;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+</style>
 
   </script>  
 </body>  

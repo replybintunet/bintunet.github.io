@@ -309,15 +309,95 @@
     </div>  
   </header>  
   
-  <div class="sponsored-ads">  
-    <div class="sponsored-track">  
-      <span>🔥 Sponsored Ad: Your Ad Here</span>  
-      <span>🌍 Starlink Kenya</span>  
-      <span>🎧 Buy Airtime Online at Bintunet</span>  
-      <span>🛰 High-Speed Satellite Internet</span>  
-    </div>  
-  </div>  
+<!-- Sponsored Ads Section -->
+<div class="sponsored-ads">
+  <div class="sponsored-track">
+    <span>🔥 Sponsored Ad: Your Ad Here</span>
+    <span>🌍 Starlink Kenya</span>
+    <span>🎧 Buy Airtime Online at Bintunet</span>
+    <span>🛰 High-Speed Satellite Internet</span>
+    <span>📡 Affordable WiFi for Homes</span>
+  </div>
+</div>
+
+<style>
+  .sponsored-ads {
+    overflow: hidden;
+    background: linear-gradient(to right, #e60000, #b30000); /* Red gradient background */
+    padding: 12px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    z-index: 5;
+  }
+
+  .sponsored-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 20s linear infinite;
+    gap: 40px;
+    padding-left: 100%;
+  }
+
+  .sponsored-track span {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff; /* ✅ Force white text */
+    padding: 6px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
   
+  <!-- Get Connected Section (One Line Buttons) -->
+<section style="padding: 60px 20px; background: #fff; text-align: center;">
+  <h2 style="font-family: 'Runtoe', cursive; font-size: 2.5rem; color: #e60000;">Get Connected Today</h2>
+  <p style="margin-bottom: 30px; font-size: 1rem;">Choose your location type to view requirements</p>
+
+  <style>
+    .connect-line {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .connect-line a {
+      padding: 15px 40px;
+      border-radius: 50px;
+      background-color: #e60000;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+    }
+
+    .connect-line a:hover {
+      background-color: #c40000;
+    }
+  </style>
+
+  <div class="connect-line">
+    <a href="home.html">Home</a>
+    <a href="office.html">Office</a>
+    <a href="residential.html">Residential</a>
+  </div>
+</section>
+  
+
   <section id="plans">  
     <h2 class="section-title">Plans & Pricing</h2>  
     <div class="plans">  

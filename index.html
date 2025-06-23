@@ -346,8 +346,7 @@
       <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>  
     </div>  
   </section>  
-  
- <section style="position: relative; padding: 4rem 2rem; background: #f5f5f5;">  
+<section style="position: relative; padding: 4rem 2rem; background: #f5f5f5;">  
   <!-- Background Video (optional) -->  
   <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2;">  
     <source src="partnership-bg.mp4" type="video/mp4">  
@@ -397,37 +396,158 @@
   
   window.addEventListener("load", type);  
 </script>  
+<!-- Contact Section Styles with Background -->
+<style>
+  .contact {
+    position: relative;
+    background: url('https://i.ibb.co/qYY24m99/section2-41f342b5.jpg') no-repeat center center/cover;
+    padding: 60px 20px;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    overflow: hidden;
+    margin: 40px auto;
+    max-width: 700px;
+  }
+
+  .contact::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+    z-index: 1;
+    border-radius: 20px;
+  }
+
+  .contact * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .contact h2 {
+    font-size: 30px;
+    font-family: 'Runtoe', cursive;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .contact p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .contact a {
+    color: #ffd700;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .contact a:hover {
+    text-decoration: underline;
+  }
+
+  .contact i {
+    margin-right: 8px;
+    color: #ffd700;
+  }
+</style>
+
+<!-- Font Awesome (icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Contact Section with Background -->
+<section id="contact" class="contact">  
+  <h2>Contact Us</h2>  
+  <p><i class="fas fa-phone"></i>Call: <a href="tel:0729499463">0729 499 463</a></p>  
+  <p><i class="fab fa-whatsapp"></i>WhatsApp: <a href="https://wa.me/254729499463">+254 729 499 463</a></p>  
+  <p><i class="fas fa-envelope"></i>Email: <a href="mailto:support@bintunet.co.ke">support@bintunet.co.ke</a></p>  
+  <p><i class="fas fa-map-marker-alt"></i>Visit Us: Nairobi CBD</p>  
+  <p><i class="fas fa-hashtag"></i>USSD: *123#</p>  
+</section>
   
-  <section id="contact" class="contact">  
-    <h2>Contact Us</h2>  
-    <p>Call: <a href="tel:0729499463">0729 499 463</a> | WhatsApp: <a href="https://wa.me/254729499463">+254 729 499463</a></p>  
-    <p>Email: support@bintunet.co.ke</p>  
-    <p>Visit Us: Nairobi CBD</p>  
-    <p>USSD: *123#</p>  
-  </section>  
+  <!-- Decorated Footer -->
+<style>
+  footer {
+    background: linear-gradient(to right, #ff4e50, #f9d423); /* Brick red to orange gradient */
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+  }
+
+  footer p {
+    margin: 0;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<footer>  
+  <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>  
+</footer>
   
-  <footer>  
-    <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>  
-  </footer>  
+  <!-- Floating Chat Button Styles -->
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    animation: bounce 2s infinite;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #1ebe5d;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
+
+<!-- Floating Chat Button -->
+<a href="https://wa.me/254729499463" class="whatsapp-float">
+  💬 Chat
+</a>  
   
-  <a href="https://wa.me/254729499463" class="whatsapp-float">💬 Chat</a>  
-  
-  <script>  
-    function toggleMenu() {  
-      document.getElementById('sideMenu').classList.toggle('active');  
-    }  
-  
-    function showCoverage() {  
-      const coverage = document.getElementById('coverageMessage');  
-      coverage.style.display = coverage.style.display === 'none' ? 'block' : 'none';  
-    }  
-  
-    // PWA registration  
-    if ('serviceWorker' in navigator) {  
-      navigator.serviceWorker.register('service-worker.js')  
-        .then(reg => console.log('✅ Service Worker registered'))  
-        .catch(err => console.error('❌ Service Worker failed:', err));  
-    }  
+
   </script>  
 </body>  
 </html>

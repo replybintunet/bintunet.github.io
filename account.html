@@ -411,85 +411,58 @@ document.addEventListener("DOMContentLoaded", () => {
     © 2025 BINTUNET.CO.KE | All rights reserved
   </footer>
 
-<script>
-firebase.auth().onAuthStateChanged((user) => {
-  if (user && user.phoneNumber) {
-    const phone = user.phoneNumber;
-    const userDoc = firebase.firestore().collection("users").doc(phone);
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+      authDomain: "bintunetapp.firebaseapp.com",
+      projectId: "bintunetapp",
+      storageBucket: "bintunetapp.appspot.com",
+      messagingSenderId: "747554903234",
+      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-    userDoc.onSnapshot((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        document.getElementById("userName").textContent = data.name || phone;
-        document.getElementById("plan").textContent = data.plan || "No Plan";
-        document.getElementById("balance").textContent = data.balance !== undefined
-          ? `KES ${data.balance}`
-          : "KES 0";
-        document.getElementById("expiry").textContent = data.expiry || "N/A";
-        document.getElementById("usedData").textContent = data.usedData || "0 GB";
-      } else {
-        alert("No Firestore data found for this user.");
-      }
-    });
-  } else {
-    document.getElementById("userName").textContent = "Guest";
-  }
-});
-      // 🔔 Realtime notification count
-      db.collection("notifications")
-        .doc(phone)
-        .collection("messages")
-        .where("seen", "==", false)
-        .onSnapshot((snapshot) => {
-          const count = snapshot.size;
-          document.getElementById("notifCount").textContent = count;
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user && user.email) {
+        const email = user.email;
+        document.getElementById("userName").textContent = user.displayName || email;
+
+        db.collection("users").doc(email).onSnapshot((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            document.getElementById("plan").textContent = data.plan || "No Plan";
+            document.getElementById("balance").textContent = data.balance !== undefined ? `KES ${data.balance}` : "KES 0";
+            document.getElementById("expiry").textContent = data.expiry || "N/A";
+            document.getElementById("usedData").textContent = data.usedData || "0 GB";
+          } else {
+            alert("Account data not found.");
+          }
         });
 
-    } else {
-      userSpan.textContent = "Guest";
-    }
-  });
+        db.collection("notifications").doc(email).collection("messages").where("seen", "==", false)
+          .onSnapshot((snapshot) => {
+            document.getElementById("notifCount").textContent = snapshot.size;
+          });
 
-  function logout() {
-    firebase.auth().signOut().then(() => {
-      alert("Logged out!");
-      window.location.href = "login.html";
+      } else {
+        document.getElementById("userName").textContent = "Guest";
+      }
     });
-  }
 
-  function openNotifications() {
-    alert("Opening notifications...");
-  }
-</script>
-<script>
-  const db = firebase.firestore();
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user && user.phoneNumber) {
-      const phone = user.phoneNumber;
-      const userDoc = db.collection("users").doc(phone);
-
-      userDoc.onSnapshot((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-
-          // Optional fallback values if fields are undefined
-          document.getElementById("userName").textContent = data.name || phone;
-          document.getElementById("plan").textContent = data.plan || "No Plan";
-          document.getElementById("balance").textContent = data.balance !== undefined
-            ? `KES ${data.balance}`
-            : "KES 0";
-          document.getElementById("expiry").textContent = data.expiry || "N/A";
-          document.getElementById("usedData").textContent = data.usedData || "0 GB";
-        } else {
-          alert("No account data found for this number.");
-        }
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        alert("Logged out!");
+        window.location.href = "login.html";
       });
-    } else {
-      document.getElementById("userName").textContent = "Guest";
     }
-  });
-</script>
 
+    function openNotifications() {
+      alert("Opening notifications...");
+    }
+  </script>
 </body>
 </html>

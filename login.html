@@ -3,176 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BINTUNET LOGIN</title>
-
-  <!-- Web App Meta -->
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#007BFF" />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
-
-  <!-- Styling -->
+  <title>Account | Bintunet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #e0f0ff, #cce4ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background: #f9f9f9;
       color: #333;
     }
 
-    .login-box {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    .container {
       max-width: 400px;
-      width: 90%;
-      text-align: center;
-      animation: fadeIn 0.8s ease-in-out;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .logo {
-      max-width: 90px;
-      margin-bottom: 15px;
-    }
-
-    h1.runtoe {
+    .brand {
       font-family: 'Runtoe', cursive;
-      font-size: 2rem;
-      color: #007BFF;
-      margin: 0 0 10px;
+      font-size: 2.2rem;
+      text-align: center;
+      color: #e60000;
+      margin-bottom: 1rem;
     }
 
-    .tagline {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 25px;
+    .toggle-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-buttons button {
+      flex: 1;
+      padding: 0.7rem;
+      font-size: 1rem;
+      font-family: 'Runtoe', cursive;
+      background: #eee;
+      border: none;
+      cursor: pointer;
+    }
+
+    .toggle-buttons button.active {
+      background: #e60000;
+      color: white;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+    }
+
+    form.active {
+      display: flex;
     }
 
     input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
       border: 1px solid #ccc;
-      font-size: 15px;
+      border-radius: 6px;
     }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #007BFF;
+    button.submit-btn {
+      margin-top: 1rem;
+      background: #e60000;
       color: white;
-      font-weight: bold;
       border: none;
-      border-radius: 10px;
+      padding: 0.7rem;
+      border-radius: 8px;
+      font-family: 'Runtoe', cursive;
       cursor: pointer;
-      font-size: 15px;
-      margin-top: 10px;
-      transition: background 0.3s ease;
     }
 
-    button:hover {
-      background: #0056cc;
+    .switch-link {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
     }
 
-    #recaptcha-container {
-      margin-top: 10px;
-    }
-
-    .status {
-      margin-top: 15px;
-      font-size: 13px;
-      color: green;
-    }
-
-    .divider {
-      margin: 20px 0;
-      border-bottom: 1px dashed #ccc;
+    .switch-link a {
+      color: #e60000;
+      cursor: pointer;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="brand">Bintunet</div>
 
-  <div class="login-box">
-    <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" class="logo" />
-    <h1 class="runtoe">BINTUNET LOGIN</h1>
-    <div class="tagline">Secure login to manage your internet account.</div>
+    <div class="toggle-buttons">
+      <button id="loginTab" class="active" onclick="switchForm('login')">Login</button>
+      <button id="signupTab" onclick="switchForm('signup')">Sign Up</button>
+    </div>
 
-    <!-- Phone input -->
-    <input type="text" id="phone" placeholder="+254712345678" />
-    <div id="recaptcha-container"></div>
-    <button onclick="sendOTP()">Send OTP</button>
+    <form id="loginForm" class="active">
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
 
-    <div class="divider"></div>
-
-    <!-- OTP input -->
-    <input type="text" id="otp" placeholder="Enter OTP Code" />
-    <button onclick="verifyOTP()">Verify & Login</button>
-
-    <div class="status" id="statusMessage"></div>
+    <form id="signupForm">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <input type="password" placeholder="Confirm Password" required />
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
   </div>
 
-  <!-- Firebase Scripts -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-      authDomain: "bintunetapp.firebaseapp.com",
-      projectId: "bintunetapp",
-      storageBucket: "bintunetapp.appspot.com",
-      messagingSenderId: "747554903234",
-      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
-    };
+    function switchForm(form) {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const loginTab = document.getElementById('loginTab');
+      const signupTab = document.getElementById('signupTab');
 
-    firebase.initializeApp(firebaseConfig);
-
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      size: 'normal',
-      callback: () => {},
-      'expired-callback': () => {}
-    });
-
-    const sendOTP = () => {
-      const phone = document.getElementById("phone").value;
-      firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-          document.getElementById("statusMessage").innerText = "✅ OTP sent successfully!";
-        }).catch((error) => {
-          document.getElementById("statusMessage").innerText = "❌ " + error.message;
-        });
-    };
-
-    const verifyOTP = () => {
-      const code = document.getElementById("otp").value;
-      window.confirmationResult.confirm(code).then((result) => {
-        document.getElementById("statusMessage").innerText = "✅ Login successful! Redirecting...";
-        setTimeout(() => window.location.href = "account.html", 1500);
-      }).catch((error) => {
-        document.getElementById("statusMessage").innerText = "❌ Invalid OTP. Please try again.";
-      });
-    };
+      if (form === 'login') {
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+      } else {
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+      }
+    }
   </script>
-
 </body>
 </html>

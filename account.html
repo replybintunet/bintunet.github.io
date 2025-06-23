@@ -257,7 +257,8 @@
   </header>
 
   <div class="container">
-    <div class="dashboard-title">Welcome, <span id="userName">Guest</span></div>
+   <!-- Welcome User -->
+<div class="dashboard-title">Welcome, <span id="userName">Loading...</span></div>
 
 <!-- 🔴 Ad Banner with Image Backgrounds -->
 <div class="ad-banner-container">
@@ -358,6 +359,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
 <!-- Info Cards (with IDs for Firebase) -->
+<!-- Welcome User -->
+
+<!-- Info Cards (with IDs for Firebase) -->
 <div class="cards">
   <div class="card">
     <i class="fas fa-wifi"></i>
@@ -411,58 +415,52 @@ document.addEventListener("DOMContentLoaded", () => {
     © 2025 BINTUNET.CO.KE | All rights reserved
   </footer>
 
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-      authDomain: "bintunetapp.firebaseapp.com",
-      projectId: "bintunetapp",
-      storageBucket: "bintunetapp.appspot.com",
-      messagingSenderId: "747554903234",
-      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user && user.email) {
-        const email = user.email;
-        document.getElementById("userName").textContent = user.displayName || email;
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+    authDomain: "bintunetapp.firebaseapp.com",
+    projectId: "bintunetapp",
+    storageBucket: "bintunetapp.appspot.com",
+    messagingSenderId: "747554903234",
+    appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+  };
 
-        db.collection("users").doc(email).onSnapshot((doc) => {
-          if (doc.exists) {
-            const data = doc.data();
-            document.getElementById("plan").textContent = data.plan || "No Plan";
-            document.getElementById("balance").textContent = data.balance !== undefined ? `KES ${data.balance}` : "KES 0";
-            document.getElementById("expiry").textContent = data.expiry || "N/A";
-            document.getElementById("usedData").textContent = data.usedData || "0 GB";
-          } else {
-            alert("Account data not found.");
-          }
-        });
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-        db.collection("notifications").doc(email).collection("messages").where("seen", "==", false)
-          .onSnapshot((snapshot) => {
-            document.getElementById("notifCount").textContent = snapshot.size;
-          });
-
-      } else {
-        document.getElementById("userName").textContent = "Guest";
-      }
-    });
-
-    function logout() {
-      firebase.auth().signOut().then(() => {
-        alert("Logged out!");
-        window.location.href = "login.html";
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      const uid = user.uid;
+      db.collection("users").doc(uid).onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          document.getElementById("userName").textContent = data.name || "No Name";
+          document.getElementById("plan").textContent = data.plan || "No Plan";
+          document.getElementById("balance").textContent = data.balance !== undefined ? `KES ${data.balance}` : "KES 0";
+          document.getElementById("expiry").textContent = data.expiry || "N/A";
+          document.getElementById("usedData").textContent = data.usedData || "0 GB";
+        } else {
+          alert("No user data found.");
+        }
       });
+    } else {
+      alert("You are not logged in. Redirecting...");
+      window.location.href = "login.html";
     }
+  });
 
-    function openNotifications() {
-      alert("Opening notifications...");
-    }
-  </script>
+  function logout() {
+    auth.signOut().then(() => {
+      alert("Logged out.");
+      window.location.href = "login.html";
+    });
+  }
+</script>
 </body>
 </html>

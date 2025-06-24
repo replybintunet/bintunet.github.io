@@ -20,6 +20,8 @@
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
     }
     .brand {
       font-family: 'Runtoe', cursive;
@@ -67,9 +69,37 @@
       font-family: 'Runtoe', cursive;
       cursor: pointer;
     }
+
+    /* 🔄 Sweet Loading Spinner Overlay */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+      display: none;
+    }
+
+    .spinner {
+      border: 4px solid #eee;
+      border-top: 4px solid #e60000;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+  <div id="loader"><div class="spinner"></div></div>
+
   <div class="container">
     <div class="brand">Bintunet</div>
     <div class="toggle-buttons">
@@ -129,6 +159,10 @@
       }
     }
 
+    function showLoader(show) {
+      document.getElementById('loader').style.display = show ? 'flex' : 'none';
+    }
+
     // Handle Signup
     document.getElementById("signupForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -143,6 +177,7 @@
       }
 
       try {
+        showLoader(true);
         const userCred = await auth.createUserWithEmailAndPassword(email, password);
         const uid = userCred.user.uid;
         await db.collection("users").doc(uid).set({
@@ -153,9 +188,9 @@
           expiry: "Not set",
           usedData: "0 GB"
         });
-        alert("Account created!");
-        window.location.href = "account.html"; // or your dashboard page
+        window.location.href = "account.html";
       } catch (error) {
+        showLoader(false);
         alert(error.message);
       }
     });
@@ -166,10 +201,11 @@
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value;
       try {
+        showLoader(true);
         await auth.signInWithEmailAndPassword(email, password);
-        alert("Login successful!");
-        window.location.href = "account.html"; // or your dashboard page
+        window.location.href = "account.html";
       } catch (error) {
+        showLoader(false);
         alert(error.message);
       }
     });

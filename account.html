@@ -260,42 +260,46 @@
    <!-- Welcome User -->
 <div class="dashboard-title">Welcome, <span id="userName">Loading...</span></div>
 
-<!-- 🔴 Ad Banner with Image Backgrounds -->
+<!-- 🌈 Animated Snake Frame Ads with Clickable Links -->
 <div class="ad-banner-container">
-  <div class="bintunet-ads">
-    <div class="bintunet-ad show" style="background-image: url('https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png');">
-      <div class="ad-overlay">
-        <p>🌍 Bintunet partners with Starlink for rural connectivity</p>
-      </div>
-    </div>
-    <div class="bintunet-ad" style="background-image: url('https://i.ibb.co/TqxZVTxy/IMG-20250622-112359.jpg');">
-      <div class="ad-overlay">
-        <p>💳 Buy Airtime, Data & Pay Bills Instantly</p>
-      </div>
-    </div>
-    <div class="bintunet-ad" style="background-image: url('https://i.ibb.co/JHJnxQW/vpn.png');">
-      <div class="ad-overlay">
-        <p>🛡️ Download Unlimited VPN Configs Now</p>
-      </div>
+  <div class="border-glow">
+    <div class="bintunet-ads">
+      <a href="https://starlink.com" target="_blank" class="bintunet-ad show" style="background-image: url('https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png');"></a>
+      <a href="https://pay.bintunet.co.ke" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/TqxZVTxy/IMG-20250622-112359.jpg');"></a>
+      <a href="https://replybintunet.github.io/bintunet.github.io/vpn.html" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/JHJnxQW/vpn.png');"></a>
+      <a href="https://i.ibb.co/d9bb7tW/Artboard-1.jpg" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/d9bb7tW/Artboard-1.jpg');"></a>
+      <a href="https://i.ibb.co/5Xbfq4L7/Artboard-1-copy-4-2.jpg" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/5Xbfq4L7/Artboard-1-copy-4-2.jpg');"></a>
     </div>
   </div>
+  <div class="ad-dots"></div>
 </div>
 
 <style>
 .ad-banner-container {
   width: 95%;
   max-width: 950px;
-  margin: 30px auto;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  margin: 30px auto 10px;
+  position: relative;
 }
 
+/* Snake glowing border */
+.border-glow {
+  padding: 5px;
+  border-radius: 24px;
+  background: linear-gradient(270deg, #e60000, #00ff88, #0099ff, #e60000);
+  background-size: 800% 800%;
+  animation: glowing-border 6s linear infinite;
+}
+
+/* Ad section */
 .bintunet-ads {
+  border-radius: 20px;
+  overflow: hidden;
   position: relative;
   height: 160px;
 }
 
+/* Each ad (now as clickable <a>) */
 .bintunet-ad {
   position: absolute;
   width: 100%;
@@ -304,11 +308,8 @@
   z-index: 0;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   transition: opacity 0.8s ease-in-out;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  display: block;
 }
 
 .bintunet-ad.show {
@@ -316,31 +317,48 @@
   z-index: 1;
 }
 
-.ad-overlay {
-  width: 100%;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.4); /* dark overlay */
-  text-align: center;
+@keyframes glowing-border {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.ad-overlay p {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 600;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
+.ad-dots {
+  text-align: center;
+  padding-top: 8px;
+}
+
+.ad-dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  background: rgba(230, 0, 0, 0.3);
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.ad-dots span.active {
+  background: #e60000;
 }
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const ads = document.querySelectorAll(".bintunet-ad");
+  const dotContainer = document.querySelector(".ad-dots");
+
+  ads.forEach(() => {
+    const dot = document.createElement("span");
+    dotContainer.appendChild(dot);
+  });
+
+  const dots = dotContainer.querySelectorAll("span");
   let currentAd = 0;
 
   function showAd(index) {
-    ads.forEach((ad, i) => {
-      ad.classList.toggle("show", i === index);
-    });
+    ads.forEach((ad, i) => ad.classList.toggle("show", i === index));
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
   }
 
   showAd(currentAd);

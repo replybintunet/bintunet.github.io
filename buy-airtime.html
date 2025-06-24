@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Airtime | Bintunet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f6f6f6;
+      color: #333;
+    }
+
+    header {
+      background: #fff;
+      color: #e60000;
+      padding: 20px 30px;
+      font-size: 2rem;
+      font-family: 'Runtoe', cursive;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #e60000;
+      font-size: 1.2rem;
+    }
+
+    select, input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px;
+      width: 100%;
+      border: none;
+      background: #e60000;
+      color: white;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #c30000;
+    }
+
+    .confirm-box {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .confirmed-name {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+
+    .network-logo {
+      width: 100px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .payment-options {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .pay-btn {
+      flex: 1 1 48%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .paypal {
+      background: linear-gradient(135deg, #0070ba, #1546a0);
+    }
+
+    .paypal:hover {
+      background: #005ea6;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #0a9396, #047c7c);
+    }
+
+    .card:hover {
+      background: #086e6e;
+    }
+
+    .pay-btn i {
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>Buy Airtime</header>
+
+<div class="container">
+  <h2>Select Network</h2>
+  <select id="network" onchange="showNetworkLogo()">
+    <option value="">-- Choose Network --</option>
+    <option value="safaricom">Safaricom</option>
+    <option value="airtel">Airtel</option>
+    <option value="telkom">Telkom</option>
+    <option value="vodacom">Vodacom</option>
+    <option value="tigo">Tigo</option>
+    <option value="bintunet">Bintunet eSIM</option>
+  </select>
+
+  <img id="networkLogo" class="network-logo" style="display:none" alt="Network Logo"/>
+
+  <h2>Enter Phone Number</h2>
+  <input type="tel" id="phone" placeholder="+254712345678" />
+
+  <div class="confirm-box">
+    <button onclick="confirmName()">🔍 Confirm Name</button>
+    <span id="confirmedName" class="confirmed-name"></span>
+  </div>
+
+  <h2>Choose Payment</h2>
+  <div class="payment-options">
+    <button class="pay-btn paypal" onclick="payWithPayPal()">
+      <i class="fab fa-paypal"></i> PayPal
+    </button>
+    <button class="pay-btn card" onclick="payWithCard()">
+      <i class="fas fa-credit-card"></i> Credit Card
+    </button>
+  </div>
+</div>
+
+<footer>
+  © 2025 BINTUNET.CO.KE — All Rights Reserved
+</footer>
+
+<script>
+  function showNetworkLogo() {
+    const select = document.getElementById("network");
+    const logo = document.getElementById("networkLogo");
+    const value = select.value;
+
+    const logos = {
+      safaricom: "https://i.ibb.co/Gp4SnDV/safaricom.png",
+      airtel: "https://i.ibb.co/KGcM1Cd/airtel.png",
+      telkom: "https://i.ibb.co/4Rs7nr9/telkom.png",
+      vodacom: "https://i.ibb.co/pPK7d0n/vodacom.png",
+      tigo: "https://i.ibb.co/xXjbFt5/tigo.png",
+      bintunet: "https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png"
+    };
+
+    if (logos[value]) {
+      logo.src = logos[value];
+      logo.style.display = "block";
+    } else {
+      logo.style.display = "none";
+    }
+  }
+
+  function confirmName() {
+    const phone = document.getElementById('phone').value;
+    const nameSpan = document.getElementById('confirmedName');
+
+    if (phone.startsWith('+2547')) {
+      nameSpan.textContent = 'Name: Safaricom User';
+    } else if (phone.startsWith('+2557')) {
+      nameSpan.textContent = 'Name: Vodacom User';
+    } else if (phone.startsWith('+2556')) {
+      nameSpan.textContent = 'Name: Tigo User';
+    } else if (phone.startsWith('+25473')) {
+      nameSpan.textContent = 'Name: Telkom Kenya';
+    } else if (phone.startsWith('+234')) {
+      nameSpan.textContent = 'Name: Airtel Nigeria';
+    } else {
+      nameSpan.textContent = 'Name: Verified User';
+    }
+  }
+
+  function payWithPayPal() {
+    alert("Redirecting to PayPal...");
+    window.location.href = "https://www.paypal.com/paypalme/YOURUSERNAME"; // Replace with your actual link
+  }
+
+  function payWithCard() {
+    alert("Card payment coming soon.");
+  }
+</script>
+
+</body>
+</html>

@@ -283,6 +283,7 @@
 .sliding-dots span.active {
   background: #008cdd;
 }
+
 </style>
 
 <script>
@@ -351,6 +352,21 @@ updateSlider();
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
+   auth.onAuthStateChanged(user => {
+    if (user) {
+      db.collection("users").doc(user.uid).onSnapshot(doc => {
+        const data = doc.data();
+        document.getElementById("fullName").textContent = data.name || "No Name";
+        document.getElementById("userHandle").textContent = "@" + (data.username || "username");
+        document.getElementById("plan").textContent = data.plan || "None";
+        document.getElementById("balance").textContent = data.balance !== undefined ? "KES " + data.balance : "KES 0";
+        document.getElementById("expiry").textContent = data.expiry || "N/A";
+        document.getElementById("usedData").textContent = data.usedData || "0 GB";
+      });
+    } else {
+      window.location.href = "login.html";
+    }
+  });
 
   // 🔒 Redirect if not logged in or email not verified
   auth.onAuthStateChanged(user => {

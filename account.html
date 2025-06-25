@@ -335,6 +335,56 @@ updateSlider();
 </div>
 
   </div>  <footer>© 2025 BINTUNET.CO.KE | All rights reserved</footer>  
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+    authDomain: "bintunetapp.firebaseapp.com",
+    projectId: "bintunetapp",
+    storageBucket: "bintunetapp.appspot.com",
+    messagingSenderId: "747554903234",
+    appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+<script>
+auth.onAuthStateChanged(user => {
+  if (user) {
+    loadUserData(user.uid);
+  } else {
+    window.location.href = "login.html"; // Redirect to login if not signed in
+  }
+});
+
+function loadUserData(uid) {
+  db.collection("users").doc(uid).get().then(doc => {
+    if (doc.exists) {
+      const data = doc.data();
+      document.getElementById("fullName").textContent = data.name || "No Name";
+      document.getElementById("userHandle").textContent = "@" + (data.username || "username");
+      document.getElementById("balance").textContent = data.balance ? `KES ${data.balance}` : "KES 0";
+      document.getElementById("plan").textContent = data.plan || "None";
+      document.getElementById("expiry").textContent = data.expiry || "N/A";
+      document.getElementById("usedData").textContent = data.usedData || "0 GB";
+    } else {
+      alert("User data not found.");
+    }
+  }).catch(error => {
+    console.error("Error getting user data:", error);
+  });
+}
+
+function logout() {
+  auth.signOut().then(() => {
+    window.location.href = "login.html";
+  });
+}
+</script>
+
   <!-- Firebase Scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>

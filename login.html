@@ -3,207 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login / Signup | Bintunet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
+  <title>Login | Bintunet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet">
   <style>
     body {
-      font-family: 'Inter', sans-serif;
       margin: 0;
-      background: #ffffff;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      padding: 20px;
+      height: 100vh;
     }
-
     .container {
-      background: #f4faff;
+      width: 100%;
+      max-width: 400px;
       padding: 30px;
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      max-width: 400px;
-      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      background: #fff;
     }
-
-    h2 {
+    h1 {
       font-family: 'Runtoe', cursive;
       text-align: center;
-      color: #007BFF;
-      margin-bottom: 25px;
+      color: #007fff;
+      margin-bottom: 30px;
     }
-
     input {
       width: 100%;
       padding: 12px;
-      margin: 8px 0 16px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 14px;
+      border-radius: 8px;
     }
-
     button {
       width: 100%;
       padding: 12px;
-      background: #007BFF;
-      color: #fff;
+      background: #007fff;
+      color: white;
       border: none;
+      border-radius: 8px;
       font-weight: bold;
-      font-size: 15px;
-      border-radius: 10px;
       cursor: pointer;
-      margin-bottom: 10px;
+      transition: 0.3s;
     }
-
     button:hover {
-      background: #005dc5;
+      background: #0066cc;
     }
-
-    .toggle {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 13px;
-    }
-
-    .toggle span {
-      color: #007BFF;
-      cursor: pointer;
-    }
-
-    #verifySection {
+    #loader {
       display: none;
       text-align: center;
-      margin-top: 20px;
-    }
-
-    .info {
-      font-size: 14px;
-      color: #333;
-      background: #e0f0ff;
-      padding: 12px;
-      border-radius: 10px;
-    }
-
-    .resend-btn {
-      background: transparent;
-      border: none;
-      color: #007BFF;
-      font-size: 13px;
-      cursor: pointer;
       margin-top: 10px;
     }
+    #loader span {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      background: #007fff;
+      margin: 0 4px;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+    #loader span:nth-child(2) { animation-delay: 0.2s; }
+    #loader span:nth-child(3) { animation-delay: 0.4s; }
 
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    .toggle-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    #signup-section {
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Bintunet</h1>
 
-<div class="container">
-  <h2>Bintunet</h2>
-
-  <div id="formSection">
-    <input type="text" id="fullName" placeholder="Full Name" />
-    <input type="text" id="username" placeholder="Username (start with @)" />
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <button onclick="handleSubmit()">Sign Up / Login</button>
-
-    <div class="toggle">
-      Already signed up? <span onclick="switchMode()">Switch to Login</span>
+    <!-- Login Section -->
+    <div id="login-section">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+      <div class="toggle-link" onclick="toggleSignup()">Don't have an account? Sign up</div>
     </div>
+
+    <!-- Signup Section -->
+    <div id="signup-section">
+      <input type="text" id="signup-fullname" placeholder="Full Name" required>
+      <input type="text" id="signup-username" placeholder="@username" required>
+      <input type="email" id="signup-email" placeholder="Email" required>
+      <input type="password" id="signup-password" placeholder="Password" required>
+      <button onclick="signup()">Create Account</button>
+      <div class="toggle-link" onclick="toggleSignup()">Already have an account? Login</div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader"><span></span><span></span><span></span></div>
   </div>
 
-  <div id="verifySection">
-    <div class="info">
-      A verification link has been sent to your email.<br>
-      Please click it, then click continue.
-    </div>
-    <button onclick="checkVerification()">Continue</button>
-    <button class="resend-btn" onclick="resendEmail()">Resend Email</button>
-  </div>
-</div>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+      authDomain: "bintunetapp.firebaseapp.com",
+      projectId: "bintunetapp",
+      storageBucket: "bintunetapp.appspot.com",
+      messagingSenderId: "747554903234",
+      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+    };
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-    authDomain: "bintunetapp.firebaseapp.com",
-    projectId: "bintunetapp",
-    storageBucket: "bintunetapp.appspot.com",
-    messagingSenderId: "747554903234",
-    appId: "1:747554903234:web:your-web-app-id"
-  };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
+    function toggleSignup() {
+      const login = document.getElementById('login-section');
+      const signup = document.getElementById('signup-section');
+      login.style.display = login.style.display === 'none' ? 'block' : 'none';
+      signup.style.display = signup.style.display === 'block' ? 'none' : 'block';
+    }
 
-  let isSignup = true;
+    async function login() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      document.getElementById('loader').style.display = 'block';
+      try {
+        const userCred = await auth.signInWithEmailAndPassword(email, password);
+        const user = userCred.user;
+        if (!user.emailVerified) {
+          alert("Please verify your email first.");
+          document.getElementById('loader').style.display = 'none';
+          return;
+        }
+        window.location.href = 'account.html';
+      } catch (error) {
+        alert(error.message);
+        document.getElementById('loader').style.display = 'none';
+      }
+    }
 
-  function switchMode() {
-    isSignup = !isSignup;
-    document.getElementById("fullName").style.display = isSignup ? "block" : "none";
-    document.getElementById("username").style.display = isSignup ? "block" : "none";
-  }
+    async function signup() {
+      const fullName = document.getElementById('signup-fullname').value.trim();
+      let username = document.getElementById('signup-username').value.trim().toLowerCase();
+      if (!username.startsWith('@')) username = '@' + username;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      document.getElementById('loader').style.display = 'block';
 
-  async function handleSubmit() {
-    const fullName = document.getElementById("fullName").value.trim();
-    const username = document.getElementById("username").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+      const check = await db.collection("users").where("username", "==", username).get();
+      if (!check.empty) {
+        alert("Username already taken.");
+        document.getElementById('loader').style.display = 'none';
+        return;
+      }
 
-    try {
-      if (isSignup) {
-        const result = await auth.createUserWithEmailAndPassword(email, password);
-        await db.collection("users").doc(result.user.uid).set({
+      try {
+        const userCred = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCred.user;
+
+        await db.collection("users").doc(user.uid).set({
           name: fullName,
           username: username,
           email: email,
           balance: 0,
           plan: "None",
-          expiry: "N/A",
-          usedData: "0 GB"
+          usedData: "0 GB",
+          expiry: "Not Set"
         });
-        await result.user.sendEmailVerification();
-        document.getElementById("formSection").style.display = "none";
-        document.getElementById("verifySection").style.display = "block";
-      } else {
-        const result = await auth.signInWithEmailAndPassword(email, password);
-        if (result.user.emailVerified) {
-          window.location.href = "account.html";
-        } else {
-          await result.user.sendEmailVerification();
-          document.getElementById("formSection").style.display = "none";
-          document.getElementById("verifySection").style.display = "block";
-        }
+
+        await user.sendEmailVerification();
+        alert("Verification link sent to your email. Please check your inbox.");
+
+        const wait = setInterval(async () => {
+          await user.reload();
+          if (user.emailVerified) {
+            clearInterval(wait);
+            alert("Email verified! Redirecting...");
+            window.location.href = 'account.html';
+          }
+        }, 3000);
+      } catch (error) {
+        alert(error.message);
+        document.getElementById('loader').style.display = 'none';
       }
-    } catch (err) {
-      alert(err.message);
     }
-  }
-
-  function resendEmail() {
-    const user = auth.currentUser;
-    if (user) {
-      user.sendEmailVerification().then(() => {
-        alert("Verification email resent.");
-      });
-    }
-  }
-
-  function checkVerification() {
-    auth.currentUser.reload().then(() => {
-      if (auth.currentUser.emailVerified) {
-        window.location.href = "account.html";
-      } else {
-        alert("Please verify your email before continuing.");
-      }
-    });
-  }
-</script>
-
+  </script>
 </body>
 </html>

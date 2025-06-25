@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Account | Bintunet</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <title>My Account | Bintunet</title>  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />  <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -177,87 +171,22 @@
       padding: 20px;
     }
 
-    .ad-banner-container {
-      width: 95%;
-      max-width: 950px;
-      margin: 30px auto 10px;
-      position: relative;
-    }
-
-    .border-glow {
-      padding: 5px;
-      border-radius: 24px;
-      background: linear-gradient(270deg, #008cdd, #fdd835, #0099ff, #008cdd);
-      background-size: 800% 800%;
-      animation: glowing-border 6s linear infinite;
-    }
-
-    @keyframes glowing-border {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .bintunet-ads {
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      height: 160px;
-    }
-
-    .bintunet-ad {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      z-index: 0;
-      background-size: cover;
-      background-position: center;
-      transition: opacity 0.8s ease-in-out;
-      display: block;
-    }
-
-    .bintunet-ad.show {
-      opacity: 1;
-      z-index: 1;
-    }
-
-    .ad-dots {
-      text-align: center;
-      padding-top: 8px;
-    }
-
-    .ad-dots span {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 4px;
-      background: rgba(0, 140, 221, 0.3);
-      border-radius: 50%;
-    }
-
-    .ad-dots span.active {
-      background: #008cdd;
-    }
-    .verified-icon {
-  height: 16px;
-  width: 16px;
+   .verified-icon {
+  height: 27px;
+  width: 27px;
   object-fit: contain;
-  animation: colorCycle 3s linear infinite;
+  animation: colorCycle 5s linear infinite;
   filter: hue-rotate(0deg);
 }
 
-@keyframes colorCycle {
-  0%   { filter: hue-rotate(0deg); }
-  33%  { filter: hue-rotate(120deg); }
-  66%  { filter: hue-rotate(240deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-  </style>
-</head>
+    @keyframes colorCycle {
+      0%   { filter: hue-rotate(0deg); }
+      33%  { filter: hue-rotate(120deg); }
+      66%  { filter: hue-rotate(240deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+  </style></head>
 <body>
-
-  <!-- 🔔 Header -->
   <header>
     <div class="logo">Bintunet</div>
     <div class="header-right">
@@ -267,61 +196,144 @@
       </div>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-  </header>
+  </header>  <div class="container">
+    <div class="dashboard-title">Welcome to Your Account
 
-  <div class="container">
-    <div class="dashboard-title">Welcome to Your Account</div>
 
-   <div class="user-info-box" style="display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600;">
+
+</div>
+<div class="user-info-box" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 16px; font-weight: 600;">
   <div style="display: flex; align-items: center; gap: 4px;">
     <span id="fullName">Loading...</span>
-    <img src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" style="height: 16px; width: 16px; object-fit: contain;" />
-  
-    <div class="user-info-box">
-      <span id="fullName">Loading...</span>
-      <span id="userHandle">username</span>
-    </div>
-
-    <!-- 🔁 Sliding Ads -->
-    <div class="ad-banner-container">
-      <div class="border-glow">
-        <div class="bintunet-ads">
-          <a href="#" class="bintunet-ad show" style="background-image: url('https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png');"></a>
-          <a href="#" class="bintunet-ad" style="background-image: url('https://i.ibb.co/TqxZVTxy/IMG-20250622-112359.jpg');"></a>
-          <a href="#" class="bintunet-ad" style="background-image: url('https://i.ibb.co/JHJnxQW/vpn.png');"></a>
-        </div>
-      </div>
-      <div class="ad-dots"></div>
-    </div>
-
-    <div class="cards">
-      <div class="card"><i class="fas fa-wifi"></i><div class="card-title">Current Plan</div><div class="card-value" id="plan">Loading...</div></div>
-      <div class="card"><i class="fas fa-wallet"></i><div class="card-title">Balance</div><div class="card-value" id="balance">Loading...</div></div>
-      <div class="card"><i class="fas fa-calendar-alt"></i><div class="card-title">Expiry</div><div class="card-value" id="expiry">Loading...</div></div>
-      <div class="card"><i class="fas fa-chart-line"></i><div class="card-title">Data Used</div><div class="card-value" id="usedData">Loading...</div></div>
-    </div>
-
-    <div class="quick-actions">
-      <a href="add-money.html" class="quick-btn"><i class="fas fa-plus-circle"></i><br>Add Money</a>
-      <a href="send-money.html" class="quick-btn"><i class="fas fa-paper-plane"></i><br>Send Money</a>
-      <a href="scan.html" class="quick-btn"><i class="fas fa-qrcode"></i><br>Scan to Send</a>
-      <a href="buy-airtime.html" class="quick-btn"><i class="fas fa-mobile-alt"></i><br>Buy Airtime</a>
-    </div>
-
-    <div class="actions">
-      <a href="pay.html" class="action-btn"><i class="fas fa-credit-card"></i> Pay Now</a>
-      <a href="invite.html" class="action-btn"><i class="fas fa-user-plus"></i> Refer & Earn</a>
-      <a href="plans.html" class="action-btn"><i class="fas fa-signal"></i> Upgrade Plan</a>
-    </div>
+    <img src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" class="verified-icon" />
   </div>
+  <span id="userHandle" style="color: #444; font-size: 8px;">@username</span>
+</div>
+<!-- 🌟 Sliding Ad Section with Inside Dots -->
+<div class="sliding-ads-container">
+  <div class="sliding-ads-track" id="adsTrack">
+    <a href="https://example.com/ad1" class="ad-slide">
+      <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Ad 1">
+    </a>
+    <a href="https://example.com/ad2" class="ad-slide">
+      <img src="https://i.ibb.co/TqxZVTxy/IMG-20250622-112359.jpg" alt="Ad 2">
+    </a>
+    <a href="https://example.com/ad3" class="ad-slide">
+      <img src="https://i.ibb.co/JHJnxQW/vpn.png" alt="Ad 3">
+    </a>
+  </div>
+  <div class="sliding-dots" id="adsDots"></div>
+</div>
 
-  <footer>© 2025 BINTUNET.CO.KE | All rights reserved</footer>
+<style>
+.sliding-ads-container {
+  position: relative;
+  width: 95%;
+  max-width: 950px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background: #fff; /* Background stays clean */
+}
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script>
+.sliding-ads-track {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+}
+
+.ad-slide {
+  min-width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.ad-slide img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  display: block;
+}
+
+.sliding-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.4);
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.sliding-dots span {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sliding-dots span.active {
+  background: #008cdd;
+}
+</style>
+
+<script>
+const track = document.getElementById('adsTrack');
+const dotsContainer = document.getElementById('adsDots');
+const slides = track.querySelectorAll('.ad-slide');
+let currentIndex = 0;
+
+slides.forEach((_, index) => {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => {
+    currentIndex = index;
+    updateSlider();
+  });
+  dotsContainer.appendChild(dot);
+});
+
+function updateSlider() {
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  const dots = dotsContainer.querySelectorAll('span');
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+}
+
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateSlider();
+}, 4000);
+
+updateSlider();
+</script>
+<div class="cards">
+  <div class="card"><i class="fas fa-wifi"></i><div class="card-title">Current Plan</div><div class="card-value" id="plan">Loading...</div></div>
+  <div class="card"><i class="fas fa-wallet"></i><div class="card-title">Balance</div><div class="card-value" id="balance">Loading...</div></div>
+  <div class="card"><i class="fas fa-calendar-alt"></i><div class="card-title">Expiry</div><div class="card-value" id="expiry">Loading...</div></div>
+  <div class="card"><i class="fas fa-chart-line"></i><div class="card-title">Data Used</div><div class="card-value" id="usedData">Loading...</div></div>
+</div>
+
+<div class="quick-actions">
+  <a href="add-money.html" class="quick-btn"><i class="fas fa-plus-circle"></i><br>Add Money</a>
+  <a href="send-money.html" class="quick-btn"><i class="fas fa-paper-plane"></i><br>Send Money</a>
+  <a href="scan.html" class="quick-btn"><i class="fas fa-qrcode"></i><br>Scan to Send</a>
+  <a href="buy-airtime.html" class="quick-btn"><i class="fas fa-mobile-alt"></i><br>Buy Airtime</a>
+</div>
+
+<div class="actions">
+  <a href="pay.html" class="action-btn"><i class="fas fa-credit-card"></i> Pay Now</a>
+  <a href="invite.html" class="action-btn"><i class="fas fa-user-plus"></i> Refer & Earn</a>
+  <a href="plans.html" class="action-btn"><i class="fas fa-signal"></i> Upgrade Plan</a>
+</div>
+
+  </div>  <footer>© 2025 BINTUNET.CO.KE | All rights reserved</footer>  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
       authDomain: "bintunetapp.firebaseapp.com",
@@ -357,27 +369,5 @@
         window.location.href = "login.html";
       });
     }
-
-    // Sliding ads
-    document.addEventListener("DOMContentLoaded", () => {
-      const ads = document.querySelectorAll(".bintunet-ad");
-      const dotContainer = document.querySelector(".ad-dots");
-
-      ads.forEach(() => dotContainer.appendChild(document.createElement("span")));
-      const dots = dotContainer.querySelectorAll("span");
-      let currentAd = 0;
-
-      function showAd(index) {
-        ads.forEach((ad, i) => ad.classList.toggle("show", i === index));
-        dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-      }
-
-      showAd(currentAd);
-      setInterval(() => {
-        currentAd = (currentAd + 1) % ads.length;
-        showAd(currentAd);
-      }, 4000);
-    });
-  </script>
-</body>
+  </script></body>
 </html>

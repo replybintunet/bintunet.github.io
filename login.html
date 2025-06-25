@@ -219,15 +219,20 @@
         if (!fullName || !username || !phone || !email || !password)
           throw new Error("Please fill all fields");
 
-        const cred = await auth.createUserWithEmailAndPassword(email, password);
-        await cred.user.sendEmailVerification();
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+const user = userCredential.user;
 
-        await db.collection("users").doc(cred.user.uid).set({
-          name: fullName,
-          username,
-          phone,
-          email
-        });
+await firebase.firestore().collection("users").doc(user.uid).set({
+  name: fullName,
+  username: "@" + username,
+  email: email,
+  phone: phone,               // ✅ Save phone number
+  uid: user.uid,              // ✅ Save Firebase UID
+  plan: "No Plan",
+  balance: 0,
+  expiry: "N/A",
+  usedData: "0 GB"
+});
 
         showToast("Signup successful, verify your email", "success");
         toggleForm(false);

@@ -1,49 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Account | Bintunet</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
-
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <style>
+  <title>My Account | Bintunet</title>  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />  <!-- Icons -->  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />  <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       background: #f9f9f9;
       color: #333;
-    }
-
-    /* 🔺 Moving Ads Bar */
-    .sponsored-ads {
-      width: 100%;
-      background: #e60000;
-      overflow: hidden;
-      white-space: nowrap;
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .sponsored-track {
-      display: inline-block;
-      padding: 10px 0;
-      animation: scroll-left 18s linear infinite;
-    }
-
-    .sponsored-track span {
-      margin: 0 40px;
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
     }
 
     header {
@@ -58,7 +23,7 @@
     .logo {
       font-family: 'Runtoe', cursive;
       font-size: 1.8rem;
-      color: #e60000;
+      color: #00aaff;
     }
 
     .header-right {
@@ -86,14 +51,14 @@
       position: relative;
       cursor: pointer;
       font-size: 18px;
-      color: #e60000;
+      color: #00aaff;
     }
 
     .notification .badge {
       position: absolute;
       top: -6px;
       right: -8px;
-      background: #e60000;
+      background: #00aaff;
       color: white;
       font-size: 11px;
       padding: 2px 6px;
@@ -110,26 +75,8 @@
     .dashboard-title {
       font-family: 'Runtoe', cursive;
       font-size: 2rem;
-      color: #e60000;
+      color: #00aaff;
       margin-bottom: 25px;
-    }
-
-    .add-shortcut {
-      display: inline-block;
-      font-size: 13px;
-      color: #e60000;
-      font-weight: 600;
-      text-decoration: none;
-      background: #fff0f0;
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid #e60000;
-      transition: 0.3s ease;
-    }
-
-    .add-shortcut:hover {
-      background: #e60000;
-      color: white;
     }
 
     .cards {
@@ -154,7 +101,7 @@
     .card i {
       font-size: 1.3rem;
       margin-bottom: 8px;
-      color: #e60000;
+      color: #00aaff;
     }
 
     .card-title {
@@ -178,8 +125,8 @@
 
     .quick-btn {
       background: #ffffff;
-      border: 2px solid #e60000;
-      color: #e60000;
+      border: 2px solid #00aaff;
+      color: #00aaff;
       border-radius: 20px;
       padding: 16px 10px;
       font-size: 14px;
@@ -190,7 +137,7 @@
     }
 
     .quick-btn:hover {
-      background: #e60000;
+      background: #00aaff;
       color: #fff;
     }
 
@@ -207,7 +154,7 @@
     }
 
     .action-btn {
-      background: #e60000;
+      background: #00aaff;
       color: white;
       padding: 12px 20px;
       border-radius: 20px;
@@ -217,7 +164,71 @@
     }
 
     .action-btn:hover {
-      background: #c30000;
+      background: #0094cc;
+    }
+
+    .ad-banner-container {
+      width: 95%;
+      max-width: 950px;
+      margin: 30px auto 10px;
+      position: relative;
+    }
+
+    .border-glow {
+      padding: 5px;
+      border-radius: 24px;
+      background: linear-gradient(270deg, #00aaff, #00ff88, #0099ff, #00aaff);
+      background-size: 800% 800%;
+      animation: glowing-border 6s linear infinite;
+    }
+
+    .bintunet-ads {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      height: 160px;
+    }
+
+    .bintunet-ad {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 0;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.8s ease-in-out;
+      display: block;
+    }
+
+    .bintunet-ad.show {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    @keyframes glowing-border {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .ad-dots {
+      text-align: center;
+      padding-top: 8px;
+    }
+
+    .ad-dots span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 4px;
+      background: rgba(0, 170, 255, 0.3);
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    .ad-dots span.active {
+      background: #00aaff;
     }
 
     footer {
@@ -227,258 +238,89 @@
       margin-top: 50px;
       padding: 20px;
     }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .actions {
-        flex-direction: column;
-      }
-    }
-  </style>
-</head>
+  </style></head>
 <body>
-
-
-
-  <!-- 🔔 Header -->
   <header>
     <div class="logo">Bintunet</div>
     <div class="header-right">
       <div class="notification" onclick="openNotifications()">
         <i class="fas fa-bell"></i>
-       <span id="notifCount" class="badge">0</span>
+        <span id="notifCount" class="badge">0</span>
       </div>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-  </header>
-
-  <div class="container">
-   <!-- Welcome User -->
-<div class="dashboard-title">Welcome, <span id="userName">Loading...</span></div>
-
-<!-- 🌈 Animated Snake Frame Ads with Clickable Links -->
-<div class="ad-banner-container">
+  </header>  <div class="container">
+    <div class="dashboard-title">Welcome, <span id="userName">Loading...</span></div><div class="ad-banner-container">
   <div class="border-glow">
     <div class="bintunet-ads">
       <a href="https://starlink.com" target="_blank" class="bintunet-ad show" style="background-image: url('https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png');"></a>
       <a href="https://pay.bintunet.co.ke" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/TqxZVTxy/IMG-20250622-112359.jpg');"></a>
       <a href="https://replybintunet.github.io/bintunet.github.io/vpn.html" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/JHJnxQW/vpn.png');"></a>
-      <a href="https://i.ibb.co/d9bb7tW/Artboard-1.jpg" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/d9bb7tW/Artboard-1.jpg');"></a>
-      <a href="https://i.ibb.co/5Xbfq4L7/Artboard-1-copy-4-2.jpg" target="_blank" class="bintunet-ad" style="background-image: url('https://i.ibb.co/5Xbfq4L7/Artboard-1-copy-4-2.jpg');"></a>
     </div>
   </div>
   <div class="ad-dots"></div>
 </div>
 
-<style>
-.ad-banner-container {
-  width: 95%;
-  max-width: 950px;
-  margin: 30px auto 10px;
-  position: relative;
-}
-
-/* Snake glowing border */
-.border-glow {
-  padding: 5px;
-  border-radius: 24px;
-  background: linear-gradient(270deg, #e60000, #00ff88, #0099ff, #e60000);
-  background-size: 800% 800%;
-  animation: glowing-border 6s linear infinite;
-}
-
-/* Ad section */
-.bintunet-ads {
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  height: 160px;
-}
-
-/* Each ad (now as clickable <a>) */
-.bintunet-ad {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 0;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 0.8s ease-in-out;
-  display: block;
-}
-
-.bintunet-ad.show {
-  opacity: 1;
-  z-index: 1;
-}
-
-@keyframes glowing-border {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.ad-dots {
-  text-align: center;
-  padding-top: 8px;
-}
-
-.ad-dots span {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 4px;
-  background: rgba(230, 0, 0, 0.3);
-  border-radius: 50%;
-  transition: background 0.3s ease;
-}
-
-.ad-dots span.active {
-  background: #e60000;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const ads = document.querySelectorAll(".bintunet-ad");
-  const dotContainer = document.querySelector(".ad-dots");
-
-  ads.forEach(() => {
-    const dot = document.createElement("span");
-    dotContainer.appendChild(dot);
-  });
-
-  const dots = dotContainer.querySelectorAll("span");
-  let currentAd = 0;
-
-  function showAd(index) {
-    ads.forEach((ad, i) => ad.classList.toggle("show", i === index));
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-  }
-
-  showAd(currentAd);
-
-  setInterval(() => {
-    currentAd = (currentAd + 1) % ads.length;
-    showAd(currentAd);
-  }, 5000);
-});
-</script>
-    <!-- Add Shortcut Button -->
-    <div style="text-align: right; margin-bottom: 10px;">
-      <a href="plans.html" class="add-shortcut">
-        <i class="fas fa-plus-circle"></i> Add
-      </a>
-    </div>
-
-<!-- Info Cards (with IDs for Firebase) -->
-<!-- Welcome User -->
-
-<!-- Info Cards (with IDs for Firebase) -->
 <div class="cards">
   <div class="card">
     <i class="fas fa-wifi"></i>
     <div class="card-title">Current Plan</div>
     <div class="card-value" id="plan">Loading...</div>
   </div>
-
   <div class="card">
     <i class="fas fa-wallet"></i>
     <div class="card-title">Balance</div>
     <div class="card-value" id="balance">Loading...</div>
   </div>
-
   <div class="card">
     <i class="fas fa-calendar-alt"></i>
     <div class="card-title">Expiry</div>
     <div class="card-value" id="expiry">Loading...</div>
   </div>
-
   <div class="card">
     <i class="fas fa-chart-line"></i>
     <div class="card-title">Data Used</div>
     <div class="card-value" id="usedData">Loading...</div>
   </div>
 </div>
-    <!-- Quick Action Buttons -->
-    <div class="quick-actions">
-      <a href="add-money.html" class="quick-btn">
-        <i class="fas fa-plus-circle"></i><br>Add Money
-      </a>
-      <a href="send-money.html" class="quick-btn">
-        <i class="fas fa-paper-plane"></i><br>Send Money
-      </a>
-      <a href="scan.html" class="quick-btn">
-        <i class="fas fa-qrcode"></i><br>Scan to Send
-      </a>
-      <a href="buy-airtime.html" class="quick-btn">
-        <i class="fas fa-mobile-alt"></i><br>Buy Airtime
-      </a>
-    </div>
 
-    <!-- Bottom Action Buttons -->
-    <div class="actions">
-      <a href="pay.html" class="action-btn"><i class="fas fa-credit-card"></i> Pay Now</a>
-      <a href="invite.html" class="action-btn"><i class="fas fa-user-plus"></i> Refer & Earn</a>
-      <a href="plans.html" class="action-btn"><i class="fas fa-signal"></i> Upgrade Plan</a>
-    </div>
-  </div>
+<div class="quick-actions">
+  <a href="#" class="quick-btn"><i class="fas fa-plus-circle"></i><br>Add Money</a>
+  <a href="#" class="quick-btn"><i class="fas fa-paper-plane"></i><br>Send Money</a>
+  <a href="#" class="quick-btn"><i class="fas fa-qrcode"></i><br>Scan</a>
+  <a href="#" class="quick-btn"><i class="fas fa-mobile-alt"></i><br>Buy Airtime</a>
+</div>
 
-  <footer>
+<div class="actions">
+  <a href="#" class="action-btn"><i class="fas fa-credit-card"></i> Pay Now</a>
+  <a href="#" class="action-btn"><i class="fas fa-user-plus"></i> Refer</a>
+  <a href="#" class="action-btn"><i class="fas fa-signal"></i> Upgrade</a>
+</div>
+
+  </div>  <footer>
     © 2025 BINTUNET.CO.KE | All rights reserved
-  </footer>
+  </footer>  <script>
+    const ads = document.querySelectorAll(".bintunet-ad");
+    const dotContainer = document.querySelector(".ad-dots");
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-    authDomain: "bintunetapp.firebaseapp.com",
-    projectId: "bintunetapp",
-    storageBucket: "bintunetapp.appspot.com",
-    messagingSenderId: "747554903234",
-    appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      const uid = user.uid;
-      db.collection("users").doc(uid).onSnapshot((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          document.getElementById("userName").textContent = data.name || "No Name";
-          document.getElementById("plan").textContent = data.plan || "No Plan";
-          document.getElementById("balance").textContent = data.balance !== undefined ? `KES ${data.balance}` : "KES 0";
-          document.getElementById("expiry").textContent = data.expiry || "N/A";
-          document.getElementById("usedData").textContent = data.usedData || "0 GB";
-        } else {
-          alert("No user data found.");
-        }
-      });
-    } else {
-      alert("You are not logged in. Redirecting...");
-      window.location.href = "login.html";
-    }
-  });
-
-  function logout() {
-    auth.signOut().then(() => {
-      alert("Logged out.");
-      window.location.href = "login.html";
+    ads.forEach(() => {
+      const dot = document.createElement("span");
+      dotContainer.appendChild(dot);
     });
-  }
-</script>
-</body>
+
+    const dots = dotContainer.querySelectorAll("span");
+    let currentAd = 0;
+
+    function showAd(index) {
+      ads.forEach((ad, i) => ad.classList.toggle("show", i === index));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+    }
+
+    showAd(currentAd);
+
+    setInterval(() => {
+      currentAd = (currentAd + 1) % ads.length;
+      showAd(currentAd);
+    }, 5000);
+  </script></body>
 </html>

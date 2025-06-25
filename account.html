@@ -453,6 +453,25 @@ function logout() {
   }
 </script>
   
-  
+  <script>
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      // ✅ Display Firebase UID
+      document.getElementById("uidValue").textContent = user.uid;
+
+      // ✅ Get user profile data from Firestore
+      db.collection("users").doc(user.uid).onSnapshot(doc => {
+        const data = doc.data();
+        document.getElementById("fullName").textContent = data.name || "No Name";
+      });
+    } else {
+      // ⛔ Redirect if not logged in
+      window.location.href = "login.html";
+    }
+  });
+</script>
   </body>
 </html>

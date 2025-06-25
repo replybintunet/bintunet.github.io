@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | Bintunet</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet">
@@ -77,141 +76,142 @@
       0%, 80%, 100% { transform: scale(0); }
       40% { transform: scale(1); }
     }
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f44336;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      display: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Bintunet</h2>
-
-    <!-- Login Form -->
-    <div id="formBox">
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="login()">Login</button>
-
-      <div class="toggle">
-        Don't have an account? <a onclick="toggleForm(true)">Sign up</a>
-      </div>
-      <div class="toggle" style="margin-top: 15px;">
-        <a href="forgot.html">Forgot password?</a>
-      </div>
+<div class="container">
+  <h2>Bintunet</h2>  <div id="formBox">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <div class="toggle">
+      Don't have an account? <a onclick="toggleForm(true)">Sign up</a>
     </div>
-
-    <!-- Signup Form -->
-    <div id="signupBox" style="display:none;">
-      <input type="text" id="fullName" placeholder="Full Name">
-      <input type="text" id="username" placeholder="Username">
-      <input type="email" id="signupEmail" placeholder="Email">
-      <input type="password" id="signupPassword" placeholder="Password">
-      <button onclick="signup()">Sign up</button>
-
-      <div class="toggle">
-        Already have an account? <a onclick="toggleForm(false)">Login</a>
-      </div>
+    <div class="toggle">
+      <a href="forgot.html">Forgot password?</a>
     </div>
-
-    <!-- Loader -->
-    <div class="loader" id="loadingBox">
-      <p>Loading...</p>
-      <div class="dots"><span></span><span></span><span></span></div>
+  </div>  <div id="signupBox" style="display:none;">
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="text" id="username" placeholder="Username">
+    <input type="email" id="signupEmail" placeholder="Email">
+    <input type="password" id="signupPassword" placeholder="Password">
+    <button onclick="signup()">Sign up</button>
+    <div class="toggle">
+      Already have an account? <a onclick="toggleForm(false)">Login</a>
     </div>
+  </div>  <div class="loader" id="loadingBox">
+    <p>Waiting for verification...</p>
+    <div class="dots"><span></span><span></span><span></span></div>
   </div>
+</div><div id="toast"></div><script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script><script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+    authDomain: "bintunetapp.firebaseapp.com",
+    projectId: "bintunetapp",
+    storageBucket: "bintunetapp.appspot.com",
+    messagingSenderId: "747554903234",
+    appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+  };
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-      authDomain: "bintunetapp.firebaseapp.com",
-      projectId: "bintunetapp",
-      storageBucket: "bintunetapp.appspot.com",
-      messagingSenderId: "747554903234",
-      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-    function toggleForm(isSignup) {
-      document.getElementById('formBox').style.display = isSignup ? 'none' : 'block';
-      document.getElementById('signupBox').style.display = isSignup ? 'block' : 'none';
-      document.getElementById('loadingBox').style.display = 'none';
-    }
+  function toggleForm(isSignup) {
+    document.getElementById('formBox').style.display = isSignup ? 'none' : 'block';
+    document.getElementById('signupBox').style.display = isSignup ? 'block' : 'none';
+    document.getElementById('loadingBox').style.display = 'none';
+  }
 
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      document.getElementById('formBox').style.display = 'none';
-      document.getElementById('loadingBox').style.display = 'block';
+  function showToast(message, duration = 3000) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, duration);
+  }
 
-      auth.signInWithEmailAndPassword(email, password)
-        .then(userCred => {
-          const user = userCred.user;
-          if (user.emailVerified) {
-            window.location.href = "account.html";
-          } else {
-            const interval = setInterval(() => {
-              user.reload().then(() => {
-                if (user.emailVerified) {
-                  clearInterval(interval);
-                  window.location.href = "account.html";
-                }
+  function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(userCred => {
+        const user = userCred.user;
+        if (user.emailVerified) {
+          window.location.href = "account.html";
+        } else {
+          document.getElementById('formBox').style.display = 'none';
+          document.getElementById('loadingBox').style.display = 'block';
+          const interval = setInterval(() => {
+            user.reload().then(() => {
+              if (user.emailVerified) {
+                clearInterval(interval);
+                window.location.href = "account.html";
+              }
+            });
+          }, 3000);
+        }
+      })
+      .catch(() => {
+        showToast("Login failed. Check your email and password.");
+      });
+  }
+
+  function signup() {
+    const name = document.getElementById('fullName').value;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    db.collection("users").where("username", "==", "@" + username).get()
+      .then(snapshot => {
+        if (!snapshot.empty) {
+          showToast("Username already taken. Try another.");
+        } else {
+          auth.createUserWithEmailAndPassword(email, password)
+            .then(userCred => {
+              const uid = userCred.user.uid;
+              db.collection("users").doc(uid).set({
+                name: name,
+                username: "@" + username,
+                plan: "No Plan",
+                balance: 0,
+                expiry: "N/A",
+                usedData: "0 GB"
               });
-            }, 3000);
-          }
-        })
-        .catch(() => {
-          alert("Invalid email or password.");
-          document.getElementById('formBox').style.display = 'block';
-          document.getElementById('loadingBox').style.display = 'none';
-        });
-    }
+              userCred.user.sendEmailVerification();
+              document.getElementById('signupBox').style.display = 'none';
+              document.getElementById('loadingBox').style.display = 'block';
 
-    function signup() {
-      const name = document.getElementById('fullName').value;
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('signupEmail').value;
-      const password = document.getElementById('signupPassword').value;
-
-      document.getElementById('signupBox').style.display = 'none';
-      document.getElementById('loadingBox').style.display = 'block';
-
-      db.collection("users").where("username", "==", username).get()
-        .then(snapshot => {
-          if (!snapshot.empty) {
-            alert("Username already taken.");
-            toggleForm(true);
-          } else {
-            auth.createUserWithEmailAndPassword(email, password)
-              .then(userCred => {
-                const uid = userCred.user.uid;
-                db.collection("users").doc(uid).set({
-                  name: name,
-                  username: "@" + username,
-                  plan: "No Plan",
-                  balance: 0,
-                  expiry: "N/A",
-                  usedData: "0 GB"
+              const interval = setInterval(() => {
+                userCred.user.reload().then(() => {
+                  if (userCred.user.emailVerified) {
+                    clearInterval(interval);
+                    window.location.href = "account.html";
+                  }
                 });
-                userCred.user.sendEmailVerification();
-                const interval = setInterval(() => {
-                  userCred.user.reload().then(() => {
-                    if (userCred.user.emailVerified) {
-                      clearInterval(interval);
-                      window.location.href = "account.html";
-                    }
-                  });
-                }, 3000);
-              })
-              .catch(() => {
-                alert("Signup failed.");
-                toggleForm(true);
-              });
-          }
-        });
-    }
-  </script>
-</body>
+              }, 3000);
+            })
+            .catch(() => {
+              showToast("Sign up failed. Please try again.");
+            });
+        }
+      });
+  }
+</script></body>
 </html>

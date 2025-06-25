@@ -3,240 +3,207 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Account | Bintunet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
+  <title>Login / Signup | Bintunet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background: #f9f9f9;
-      color: #333;
-    }
-    .container {
-      max-width: 400px;
-      margin: 4rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      position: relative;
-      z-index: 2;
-    }
-    .brand {
-      font-family: 'Runtoe', cursive;
-      font-size: 2.2rem;
-      text-align: center;
-      color: #00aef0;
-      margin-bottom: 1rem;
-    }
-    .toggle-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-    }
-    .toggle-buttons button {
-      flex: 1;
-      padding: 0.7rem;
-      font-size: 1rem;
-      font-family: 'Runtoe', cursive;
-      background: #eee;
-      border: none;
-      cursor: pointer;
-    }
-    .toggle-buttons button.active {
-      background: #00aef0;
-      color: white;
-    }
-    form {
-      display: none;
-      flex-direction: column;
-    }
-    form.active { display: flex; }
-    input {
-      padding: 0.6rem;
-      margin: 0.5rem 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button.submit-btn {
-      margin-top: 1rem;
-      background: #00aef0;
-      color: white;
-      border: none;
-      padding: 0.7rem;
-      border-radius: 8px;
-      font-family: 'Runtoe', cursive;
-      cursor: pointer;
-    }
-
-    .forgot {
-      text-align: right;
-      font-size: 0.9rem;
-      margin-top: -0.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .forgot a {
-      color: #00aef0;
-      text-decoration: none;
-    }
-
-    #loader {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(255,255,255,0.9);
+      margin: 0;
+      background: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 99;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: #f4faff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      font-family: 'Runtoe', cursive;
+      text-align: center;
+      color: #007BFF;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      font-weight: bold;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background: #005dc5;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    .toggle span {
+      color: #007BFF;
+      cursor: pointer;
+    }
+
+    #verifySection {
       display: none;
+      text-align: center;
+      margin-top: 20px;
     }
 
-    .spinner {
-      border: 4px solid #eee;
-      border-top: 4px solid #00aef0;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
+    .info {
+      font-size: 14px;
+      color: #333;
+      background: #e0f0ff;
+      padding: 12px;
+      border-radius: 10px;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .resend-btn {
+      background: transparent;
+      border: none;
+      color: #007BFF;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
     }
+
   </style>
 </head>
 <body>
-  <div id="loader"><div class="spinner"></div></div>
 
-  <div class="container">
-    <div class="brand">Bintunet</div>
-    <div class="toggle-buttons">
-      <button id="loginTab" class="active" onclick="switchForm('login')">Login</button>
-      <button id="signupTab" onclick="switchForm('signup')">Sign Up</button>
+<div class="container">
+  <h2>Bintunet</h2>
+
+  <div id="formSection">
+    <input type="text" id="fullName" placeholder="Full Name" />
+    <input type="text" id="username" placeholder="Username (start with @)" />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button onclick="handleSubmit()">Sign Up / Login</button>
+
+    <div class="toggle">
+      Already signed up? <span onclick="switchMode()">Switch to Login</span>
     </div>
-
-    <form id="loginForm" class="active">
-      <input type="email" id="loginEmail" placeholder="Email" required />
-      <input type="password" id="loginPassword" placeholder="Password" required />
-      <div class="forgot">
-        <a href="#" onclick="resetPassword()">Forgot Password?</a>
-      </div>
-      <button type="submit" class="submit-btn">Login</button>
-    </form>
-
-    <form id="signupForm">
-      <input type="text" id="signupName" placeholder="Full Name" required />
-      <input type="email" id="signupEmail" placeholder="Email" required />
-      <input type="password" id="signupPassword" placeholder="Password" required />
-      <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required />
-      <button type="submit" class="submit-btn">Create Account</button>
-    </form>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <div id="verifySection">
+    <div class="info">
+      A verification link has been sent to your email.<br>
+      Please click it, then click continue.
+    </div>
+    <button onclick="checkVerification()">Continue</button>
+    <button class="resend-btn" onclick="resendEmail()">Resend Email</button>
+  </div>
+</div>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-      authDomain: "bintunetapp.firebaseapp.com",
-      projectId: "bintunetapp",
-      storageBucket: "bintunetapp.appspot.com",
-      messagingSenderId: "747554903234",
-      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
-    };
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+    authDomain: "bintunetapp.firebaseapp.com",
+    projectId: "bintunetapp",
+    storageBucket: "bintunetapp.appspot.com",
+    messagingSenderId: "747554903234",
+    appId: "1:747554903234:web:your-web-app-id"
+  };
 
-    function switchForm(form) {
-      const loginForm = document.getElementById('loginForm');
-      const signupForm = document.getElementById('signupForm');
-      const loginTab = document.getElementById('loginTab');
-      const signupTab = document.getElementById('signupTab');
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-      if (form === 'login') {
-        loginForm.classList.add('active');
-        signupForm.classList.remove('active');
-        loginTab.classList.add('active');
-        signupTab.classList.remove('active');
-      } else {
-        signupForm.classList.add('active');
-        loginForm.classList.remove('active');
-        signupTab.classList.add('active');
-        loginTab.classList.remove('active');
-      }
-    }
+  let isSignup = true;
 
-    function showLoader(show) {
-      document.getElementById('loader').style.display = show ? 'flex' : 'none';
-    }
+  function switchMode() {
+    isSignup = !isSignup;
+    document.getElementById("fullName").style.display = isSignup ? "block" : "none";
+    document.getElementById("username").style.display = isSignup ? "block" : "none";
+  }
 
-    document.getElementById("signupForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = document.getElementById("signupName").value.trim();
-      const email = document.getElementById("signupEmail").value.trim();
-      const password = document.getElementById("signupPassword").value;
-      const confirm = document.getElementById("signupConfirmPassword").value;
+  async function handleSubmit() {
+    const fullName = document.getElementById("fullName").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-      if (password !== confirm) {
-        alert("Passwords do not match.");
-        return;
-      }
-
-      try {
-        showLoader(true);
-        const userCred = await auth.createUserWithEmailAndPassword(email, password);
-        const uid = userCred.user.uid;
-        await db.collection("users").doc(uid).set({
-          name,
-          email,
+    try {
+      if (isSignup) {
+        const result = await auth.createUserWithEmailAndPassword(email, password);
+        await db.collection("users").doc(result.user.uid).set({
+          name: fullName,
+          username: username,
+          email: email,
           balance: 0,
-          plan: "No Plan",
-          expiry: "Not set",
+          plan: "None",
+          expiry: "N/A",
           usedData: "0 GB"
         });
-        window.location.href = "account.html";
-      } catch (error) {
-        showLoader(false);
-        alert(error.message);
+        await result.user.sendEmailVerification();
+        document.getElementById("formSection").style.display = "none";
+        document.getElementById("verifySection").style.display = "block";
+      } else {
+        const result = await auth.signInWithEmailAndPassword(email, password);
+        if (result.user.emailVerified) {
+          window.location.href = "account.html";
+        } else {
+          await result.user.sendEmailVerification();
+          document.getElementById("formSection").style.display = "none";
+          document.getElementById("verifySection").style.display = "block";
+        }
       }
-    });
-
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
-      try {
-        showLoader(true);
-        await auth.signInWithEmailAndPassword(email, password);
-        window.location.href = "account.html";
-      } catch (error) {
-        showLoader(false);
-        alert(error.message);
-      }
-    });
-
-    function resetPassword() {
-      const email = document.getElementById("loginEmail").value.trim();
-      if (!email) {
-        alert("Please enter your email first.");
-        return;
-      }
-
-      firebase.auth().sendPasswordResetEmail(email)
-        .then(() => {
-          alert("Password reset email sent. Check your inbox.");
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+    } catch (err) {
+      alert(err.message);
     }
-  </script>
+  }
+
+  function resendEmail() {
+    const user = auth.currentUser;
+    if (user) {
+      user.sendEmailVerification().then(() => {
+        alert("Verification email resent.");
+      });
+    }
+  }
+
+  function checkVerification() {
+    auth.currentUser.reload().then(() => {
+      if (auth.currentUser.emailVerified) {
+        window.location.href = "account.html";
+      } else {
+        alert("Please verify your email before continuing.");
+      }
+    });
+  }
+</script>
+
 </body>
 </html>

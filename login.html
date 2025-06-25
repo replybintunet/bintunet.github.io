@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login | Bintunet</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background: white;
@@ -19,16 +19,16 @@
     .container {
       background: #fff;
       padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
-      width: 90%;
-      max-width: 420px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 400px;
     }
     h2 {
       font-family: 'Runtoe', cursive;
       color: #1e88e5;
-      margin-bottom: 20px;
       text-align: center;
+      margin-bottom: 25px;
     }
     input, button {
       width: 100%;
@@ -40,8 +40,7 @@
     button {
       background: #1e88e5;
       color: white;
-      border: none;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
     }
     button:hover {
@@ -57,9 +56,16 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .loader {
-      display: none;
+    .message {
+      color: red;
+      font-size: 14px;
       text-align: center;
+      display: none;
+    }
+    .loader {
+      text-align: center;
+      margin-top: 10px;
+      display: none;
     }
     .dots span {
       display: inline-block;
@@ -76,142 +82,141 @@
       0%, 80%, 100% { transform: scale(0); }
       40% { transform: scale(1); }
     }
-    #toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #f44336;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-size: 14px;
-      display: none;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      z-index: 999;
-    }
   </style>
 </head>
 <body>
-<div class="container">
-  <h2>Bintunet</h2>  <div id="formBox">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-    <div class="toggle">
-      Don't have an account? <a onclick="toggleForm(true)">Sign up</a>
+  <div class="container">
+    <h2>Bintunet</h2>
+
+    <div id="formBox">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <div class="loader" id="loginLoader">
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="message" id="loginMsg"></div>
+      <div class="toggle">
+        Don't have an account? <a onclick="toggleForm(true)">Sign up</a>
+      </div>
+      <div class="toggle">
+        <a href="forgot-password.html">Forgot password?</a>
+      </div>
     </div>
-    <div class="toggle">
-      <a href="forget-password.html">Forgot password?</a>
+
+    <div id="signupBox" style="display:none;">
+      <input type="text" id="fullName" placeholder="Full Name">
+      <input type="text" id="username" placeholder="Username">
+      <input type="email" id="signupEmail" placeholder="Email">
+      <input type="password" id="signupPassword" placeholder="Password">
+      <button onclick="signup()">Sign up</button>
+      <div class="loader" id="signupLoader">
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="message" id="signupMsg"></div>
+      <div class="toggle">
+        Already have an account? <a onclick="toggleForm(false)">Login</a>
+      </div>
     </div>
-  </div>  <div id="signupBox" style="display:none;">
-    <input type="text" id="fullName" placeholder="Full Name">
-    <input type="text" id="username" placeholder="Username">
-    <input type="email" id="signupEmail" placeholder="Email">
-    <input type="password" id="signupPassword" placeholder="Password">
-    <button onclick="signup()">Sign up</button>
-    <div class="toggle">
-      Already have an account? <a onclick="toggleForm(false)">Login</a>
-    </div>
-  </div>  <div class="loader" id="loadingBox">
-    <p>Waiting for verification...</p>
-    <div class="dots"><span></span><span></span><span></span></div>
   </div>
-</div><div id="toast"></div><script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script><script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
-    authDomain: "bintunetapp.firebaseapp.com",
-    projectId: "bintunetapp",
-    storageBucket: "bintunetapp.appspot.com",
-    messagingSenderId: "747554903234",
-    appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
-  };
 
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAh9IIT9ryIJmPZ17bGOtyP__Khlfajbik",
+      authDomain: "bintunetapp.firebaseapp.com",
+      projectId: "bintunetapp",
+      storageBucket: "bintunetapp.appspot.com",
+      messagingSenderId: "747554903234",
+      appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-  function toggleForm(isSignup) {
-    document.getElementById('formBox').style.display = isSignup ? 'none' : 'block';
-    document.getElementById('signupBox').style.display = isSignup ? 'block' : 'none';
-    document.getElementById('loadingBox').style.display = 'none';
-  }
+    function toggleForm(signup) {
+      document.getElementById('formBox').style.display = signup ? 'none' : 'block';
+      document.getElementById('signupBox').style.display = signup ? 'block' : 'none';
+    }
 
-  function showToast(message, duration = 3000) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.style.display = "block";
-    setTimeout(() => {
-      toast.style.display = "none";
-    }, duration);
-  }
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const loader = document.getElementById('loginLoader');
+      const msg = document.getElementById('loginMsg');
+      loader.style.display = 'block';
+      msg.style.display = 'none';
 
-  function login() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    auth.signInWithEmailAndPassword(email, password)
-      .then(userCred => {
-        const user = userCred.user;
-        if (user.emailVerified) {
+      if (!email || !password) {
+        msg.textContent = "Please fill in all fields.";
+        msg.style.display = 'block';
+        loader.style.display = 'none';
+        return;
+      }
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCred => {
+          loader.style.display = 'none';
           window.location.href = "account.html";
-        } else {
-          document.getElementById('formBox').style.display = 'none';
-          document.getElementById('loadingBox').style.display = 'block';
-          const interval = setInterval(() => {
-            user.reload().then(() => {
-              if (user.emailVerified) {
-                clearInterval(interval);
-                window.location.href = "account.html";
-              }
-            });
-          }, 3000);
-        }
-      })
-      .catch(() => {
-        showToast("Login failed. Check your email and password.");
-      });
-  }
+        })
+        .catch(error => {
+          loader.style.display = 'none';
+          msg.textContent = error.message.replace("Firebase:", "").split(".")[0] + ".";
+          msg.style.display = 'block';
+        });
+    }
 
-  function signup() {
-    const name = document.getElementById('fullName').value;
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
+    function signup() {
+      const name = document.getElementById('fullName').value;
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const loader = document.getElementById('signupLoader');
+      const msg = document.getElementById('signupMsg');
+      loader.style.display = 'block';
+      msg.style.display = 'none';
 
-    db.collection("users").where("username", "==", "@" + username).get()
-      .then(snapshot => {
-        if (!snapshot.empty) {
-          showToast("Username already taken. Try another.");
-        } else {
-          auth.createUserWithEmailAndPassword(email, password)
-            .then(userCred => {
-              const uid = userCred.user.uid;
-              db.collection("users").doc(uid).set({
-                name: name,
-                username: "@" + username,
-                plan: "No Plan",
-                balance: 0,
-                expiry: "N/A",
-                usedData: "0 GB"
-              });
-              userCred.user.sendEmailVerification();
-              document.getElementById('signupBox').style.display = 'none';
-              document.getElementById('loadingBox').style.display = 'block';
+      if (!name || !username || !email || !password) {
+        msg.textContent = "Please fill in all fields.";
+        msg.style.display = 'block';
+        loader.style.display = 'none';
+        return;
+      }
 
-              const interval = setInterval(() => {
-                userCred.user.reload().then(() => {
-                  if (userCred.user.emailVerified) {
-                    clearInterval(interval);
-                    window.location.href = "account.html";
-                  }
+      db.collection("users").where("username", "==", username).get()
+        .then(snapshot => {
+          if (!snapshot.empty) {
+            loader.style.display = 'none';
+            msg.textContent = "Username already taken.";
+            msg.style.display = 'block';
+          } else {
+            auth.createUserWithEmailAndPassword(email, password)
+              .then(userCred => {
+                const uid = userCred.user.uid;
+                db.collection("users").doc(uid).set({
+                  name: name,
+                  username: "@" + username,
+                  plan: "No Plan",
+                  balance: 0,
+                  expiry: "N/A",
+                  usedData: "0 GB"
                 });
-              }, 3000);
-            })
-            .catch(() => {
-              showToast("Sign up failed. Please try again.");
-            });
-        }
-      });
-  }
-</script></body>
+                msg.textContent = "Signup successful. Please login.";
+                msg.style.color = "green";
+                msg.style.display = 'block';
+                loader.style.display = 'none';
+                toggleForm(false);
+              })
+              .catch(error => {
+                loader.style.display = 'none';
+                msg.textContent = error.message.replace("Firebase:", "").split(".")[0] + ".";
+                msg.style.display = 'block';
+              });
+          }
+        });
+    }
+  </script>
+</body>
 </html>

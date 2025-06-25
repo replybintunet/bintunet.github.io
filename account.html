@@ -236,16 +236,6 @@
       border-radius: 50%;
     }
 
-document.getElementById("fullName").textContent = data.name || "No Name";
-document.getElementById("userHandle").textContent = data.username || "@unknown";
-
-// Show verified tick only if verified is true
-if (data.verified === true) {
-  document.getElementById("verifiedTick").style.display = "inline-block";
-} else {
-  document.getElementById("verifiedTick").style.display = "none";
-}
-
     .ad-dots span.active {
       background: #008cdd;
     }
@@ -269,11 +259,9 @@ if (data.verified === true) {
     <div class="dashboard-title">Welcome to Your Account</div>
 
     <div class="user-info-box">
-  <span id="fullName">Loading...</span><br>
+  <span id="fullName">Loading...</span>
+  <img id="verifiedTick" src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" style="height: 18px; margin-left: 6px; display: inline-block; vertical-align: middle;">
   <span id="userHandle">@username</span>
-  <img id="verifiedTick" src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" 
-       alt="Verified" 
-       style="display:none; width: 16px; height: 16px; border-radius: 50%; vertical-align: middle; margin-left: 5px;">
 </div>
 
     <!-- 🔁 Sliding Ads -->

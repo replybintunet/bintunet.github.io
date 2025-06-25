@@ -236,6 +236,13 @@
       border-radius: 50%;
     }
 
+.verified-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
     .ad-dots span.active {
       background: #008cdd;
     }
@@ -296,6 +303,12 @@
     </div>
   </div>
 
+<div class="dashboard-title">
+  Welcome, <span id="userFullName">Loading...</span><br>
+  <span id="userUsername">@loading</span>
+  <img id="verifiedTick" src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" class="verified-icon" style="display:none;">
+</div>
+
   <footer>© 2025 BINTUNET.CO.KE | All rights reserved</footer>
 
   <!-- Firebase -->
@@ -321,6 +334,10 @@
           const data = doc.data();
           document.getElementById("fullName").textContent = data.name || "No Name";
           document.getElementById("userHandle").textContent = "@" + (data.username || "username");
+          // Show green tick only if verified
+if (data.verified === true) {
+  document.getElementById("verifiedTick").style.display = "inline-block";
+}
           document.getElementById("plan").textContent = data.plan || "None";
           document.getElementById("balance").textContent = data.balance !== undefined ? "KES " + data.balance : "KES 0";
           document.getElementById("expiry").textContent = data.expiry || "N/A";

@@ -202,14 +202,45 @@
 
 
 </div>
-<div class="user-info-box" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 16px; font-weight: 600;">
-  <div style="display: flex; align-items: center; gap: 4px;">
+<div class="user-info-box" style="
+  position: relative;
+  padding: 24px 28px;
+  border: 2px solid #008cdd;
+  border-radius: 20px;
+  background: #fff;
+  width: 100%;
+  max-width: 380px;
+  font-weight: 600;
+  font-size: 17px;
+">
+
+  <!-- 🔹 Top-left: Full Name + Verified Tick -->
+  <div style="display: flex; align-items: center; gap: 6px;">
     <span id="fullName">Loading...</span>
-    <img src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" class="verified-icon" />
+    <img src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" class="verified-icon" style="height: 18px; width: 18px; object-fit: contain;" />
   </div>
-  <span style="font-size: 12px; color: #666; text-decoration: underline;">
-    <strong>Account ID:</strong> <span id="uidValue">Loading...</span>
+
+  <!-- 🔹 Top-right: Firebase UID (Section ID) -->
+  <span style="
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 12px;
+    color: #008cdd;
+    text-decoration: underline;">
+    ID: <span id="uidValue">Loading...</span>
   </span>
+
+  <!-- 🔹 Bottom-right: Phone Number -->
+  <span id="userPhone" style="
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    font-size: 13px;
+    color: #333;">
+    +2547xxxxxxx
+  </span>
+
 </div>
 <!-- 🌟 Sliding Ad Section with Inside Dots -->
 <div class="sliding-ads-container">
@@ -402,76 +433,24 @@ function logout() {
     appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
   };
 
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
-   auth.onAuthStateChanged(user => {
-    if (user) {
-      db.collection("users").doc(user.uid).onSnapshot(doc => {
-        const data = doc.data();
-        document.getElementById("fullName").textContent = data.name || "No Name";
-        document.getElementById("userHandle").textContent = "@" + (data.username || "username");
-        document.getElementById("plan").textContent = data.plan || "None";
-        document.getElementById("balance").textContent = data.balance !== undefined ? "KES " + data.balance : "KES 0";
-        document.getElementById("expiry").textContent = data.expiry || "N/A";
-        document.getElementById("usedData").textContent = data.usedData || "0 GB";
-      });
-    } else {
-      window.location.href = "login.html";
-    }
-  });
 
-  // 🔒 Redirect if not logged in or email not verified
   auth.onAuthStateChanged(user => {
-    if (!user || !user.emailVerified) {
-      window.location.href = "login.html";
-    } else {
-      // ✅ Fetch user data
-      db.collection("users").doc(user.uid).onSnapshot(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          document.getElementById("fullName").textContent = data.name || "No Name";
-          document.getElementById("userHandle").textContent = "@" + (data.username || "username");
-          document.getElementById("plan").textContent = data.plan || "None";
-          document.getElementById("balance").textContent = data.balance !== undefined ? `KES ${data.balance}` : "KES 0";
-          document.getElementById("expiry").textContent = data.expiry || "N/A";
-          document.getElementById("usedData").textContent = data.usedData || "0 GB";
-        } else {
-          alert("User data not found.");
-        }
-      }, error => {
-        console.error("Firestore error:", error);
-        alert("Error loading account data.");
-      });
-    }
-  });
-
-  function logout() {
-    auth.signOut().then(() => {
-      window.location.href = "login.html";
+  if (user) {
+    const uid = user.uid;
+    document.getElementById("uidValue").textContent = uid;
+    db.collection("users").doc(uid).onSnapshot(doc => {
+      const data = doc.data();
+      document.getElementById("fullName").textContent = data.name || "No Name";
+      document.getElementById("userPhone").textContent = data.phone || "No Phone";
     });
+  } else {
+    window.location.href = "login.html";
   }
-</script>
+});
+
   
-  <script>
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      // ✅ Display Firebase UID
-      document.getElementById("uidValue").textContent = user.uid;
-
-      // ✅ Get user profile data from Firestore
-      db.collection("users").doc(user.uid).onSnapshot(doc => {
-        const data = doc.data();
-        document.getElementById("fullName").textContent = data.name || "No Name";
-      });
-    } else {
-      // ⛔ Redirect if not logged in
-      window.location.href = "login.html";
-    }
-  });
-</script>
   </body>
 </html>

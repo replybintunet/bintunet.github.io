@@ -236,11 +236,14 @@
       border-radius: 50%;
     }
 
-.verified-icon {
-  width: 16px;
-  height: 16px;
-  margin-left: 4px;
-  vertical-align: middle;
+document.getElementById("fullName").textContent = data.name || "No Name";
+document.getElementById("userHandle").textContent = data.username || "@unknown";
+
+// Show verified tick only if verified is true
+if (data.verified === true) {
+  document.getElementById("verifiedTick").style.display = "inline-block";
+} else {
+  document.getElementById("verifiedTick").style.display = "none";
 }
 
     .ad-dots span.active {
@@ -266,9 +269,12 @@
     <div class="dashboard-title">Welcome to Your Account</div>
 
     <div class="user-info-box">
-      <span id="fullName">Loading...</span>
-      <span id="userHandle">username</span>
-    </div>
+  <span id="fullName">Loading...</span><br>
+  <span id="userHandle">@username</span>
+  <img id="verifiedTick" src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" 
+       alt="Verified" 
+       style="display:none; width: 16px; height: 16px; border-radius: 50%; vertical-align: middle; margin-left: 5px;">
+</div>
 
     <!-- 🔁 Sliding Ads -->
     <div class="ad-banner-container">
@@ -303,12 +309,6 @@
     </div>
   </div>
 
-<div class="dashboard-title">
-  Welcome, <span id="userFullName">Loading...</span><br>
-  <span id="userUsername">@loading</span>
-  <img id="verifiedTick" src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" class="verified-icon" style="display:none;">
-</div>
-
   <footer>© 2025 BINTUNET.CO.KE | All rights reserved</footer>
 
   <!-- Firebase -->
@@ -334,10 +334,6 @@
           const data = doc.data();
           document.getElementById("fullName").textContent = data.name || "No Name";
           document.getElementById("userHandle").textContent = "@" + (data.username || "username");
-          // Show green tick only if verified
-if (data.verified === true) {
-  document.getElementById("verifiedTick").style.display = "inline-block";
-}
           document.getElementById("plan").textContent = data.plan || "None";
           document.getElementById("balance").textContent = data.balance !== undefined ? "KES " + data.balance : "KES 0";
           document.getElementById("expiry").textContent = data.expiry || "N/A";

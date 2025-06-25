@@ -239,6 +239,20 @@
     .ad-dots span.active {
       background: #008cdd;
     }
+    .verified-icon {
+  height: 16px;
+  width: 16px;
+  object-fit: contain;
+  animation: colorCycle 3s linear infinite;
+  filter: hue-rotate(0deg);
+}
+
+@keyframes colorCycle {
+  0%   { filter: hue-rotate(0deg); }
+  33%  { filter: hue-rotate(120deg); }
+  66%  { filter: hue-rotate(240deg); }
+  100% { filter: hue-rotate(360deg); }
+}
   </style>
 </head>
 <body>
@@ -258,10 +272,12 @@
   <div class="container">
     <div class="dashboard-title">Welcome to Your Account</div>
 
-    <div class="user-info-box">
-  <span id="fullName">Loading...</span>
-  <img id="verifiedTick" src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" style="height: 18px; margin-left: 6px; display: inline-block; vertical-align: middle;">
-  <span id="userHandle">@username</span>
+   <div class="user-info-box" style="display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600;">
+  <div style="display: flex; align-items: center; gap: 4px;">
+    <span id="fullName">Loading...</span>
+    <img src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" style="height: 16px; width: 16px; object-fit: contain;" />
+  </div>
+  <span id="userHandle" style="color: #444;">@username</span>
 </div>
 
     <!-- 🔁 Sliding Ads -->

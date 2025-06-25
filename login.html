@@ -80,26 +80,27 @@
 </head>
 <body>
   <div class="container">
-    <h2>Bintunet</h2><div id="formBox">
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-
-  <div class="toggle">
-    Don't have an account? <a onclick="toggleForm(true)">Sign up</a>
-  </div>
-</div>
-
-<div id="signupBox" style="display:none;">
+    <h2>Bintunet</h2>
+    <div id="formBox">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <div class="toggle">
+        Don't have an account? <a onclick="toggleForm(true)">Sign up</a>
+      </div>
+    </div><div id="signupBox" style="display:none;">
   <input type="text" id="fullName" placeholder="Full Name">
   <input type="text" id="username" placeholder="Username">
   <input type="email" id="signupEmail" placeholder="Email">
   <input type="password" id="signupPassword" placeholder="Password">
   <button onclick="signup()">Sign up</button>
-
   <div class="toggle">
     Already have an account? <a onclick="toggleForm(false)">Login</a>
   </div>
+</div>
+
+<div class="toggle">
+  <a href="forget-password.html">Forgot password?</a>
 </div>
 
 <div class="loader" id="loadingBox">
@@ -118,6 +119,7 @@
       messagingSenderId: "747554903234",
       appId: "1:747554903234:android:a1a0b2ff98477adaff975b"
     };
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
@@ -138,6 +140,7 @@
             window.location.href = "account.html";
           } else {
             document.getElementById('formBox').style.display = 'none';
+            document.getElementById('signupBox').style.display = 'none';
             document.getElementById('loadingBox').style.display = 'block';
             const interval = setInterval(() => {
               user.reload().then(() => {
@@ -149,7 +152,7 @@
             }, 3000);
           }
         })
-        .catch(error => alert(error.message));
+        .catch(error => console.error(error.message));
     }
 
     function signup() {
@@ -158,7 +161,7 @@
       const email = document.getElementById('signupEmail').value;
       const password = document.getElementById('signupPassword').value;
 
-      db.collection("users").where("username", "==", username).get()
+      db.collection("users").where("username", "==", "@" + username).get()
         .then(snapshot => {
           if (!snapshot.empty) {
             alert("Username already taken.");
@@ -175,10 +178,19 @@
                   usedData: "0 GB"
                 });
                 userCred.user.sendEmailVerification();
-                alert("Check your email for verification.");
-                toggleForm(false);
+                document.getElementById('signupBox').style.display = 'none';
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('loadingBox').style.display = 'block';
+                const interval = setInterval(() => {
+                  userCred.user.reload().then(() => {
+                    if (userCred.user.emailVerified) {
+                      clearInterval(interval);
+                      window.location.href = "account.html";
+                    }
+                  });
+                }, 3000);
               })
-              .catch(error => alert(error.message));
+              .catch(error => console.error(error.message));
           }
         });
     }

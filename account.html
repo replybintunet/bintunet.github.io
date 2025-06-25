@@ -207,7 +207,9 @@
     <span id="fullName">Loading...</span>
     <img src="https://i.ibb.co/3gLVy0s/istockphoto-1616521131-612x612.jpg" alt="Verified" class="verified-icon" />
   </div>
-  <span id="userHandle" style="color: #444; font-size: 8px;">@username</span>
+  <span style="font-size: 12px; color: #666; text-decoration: underline;">
+    <strong>Account ID:</strong> <span id="uidValue">Loading...</span>
+  </span>
 </div>
 <!-- 🌟 Sliding Ad Section with Inside Dots -->
 <div class="sliding-ads-container">
@@ -368,6 +370,7 @@ function loadUserData(uid) {
       document.getElementById("userHandle").textContent = "@" + (data.username || "username");
       document.getElementById("balance").textContent = data.balance ? `KES ${data.balance}` : "KES 0";
       document.getElementById("plan").textContent = data.plan || "None";
+      document.getElementById("uidValue").textContent = user.uid;
       document.getElementById("expiry").textContent = data.expiry || "N/A";
       document.getElementById("usedData").textContent = data.usedData || "0 GB";
     } else {

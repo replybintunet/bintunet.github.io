@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BintuMusic - Song</title>
+<link href="https://fonts.googleapis.com/css2?family=Runtoe&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    margin: 0;
+    color: #333;
+}
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+h1 {
+    font-family: 'Runtoe', cursive;
+    color: #00bfff;
+    text-align: center;
+}
+a.download {
+    display: inline-block;
+    background: #00bfff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 10px 0 20px;
+    border-radius: 4px;
+}
+a.download:hover {
+    background: #009acd;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin: 20px 0;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lyrics-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.lyrics-line {
+    margin: 8px 0;
+}
+.highlight {
+    color: #00bfff;
+    font-weight: bold;
+}
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+footer a {
+    color: #00bfff;
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="songTitle">Loading...</h1>
+
+    <a id="downloadLink" href="#" class="download" target="_blank">⬇️ Download MP3</a>
+
+    <div class="video-container">
+        <div id="player"></div>
+    </div>
+
+    <div class="lyrics-card" id="lyrics"></div>
+</div>
+
+<footer>
+    📧 Contact Us: <a href="mailto:contact@bintumusic.com">contact@bintumusic.com</a> <br>
+    ©️ 2025 BintuMusic. All Rights Reserved.
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB6sSqXBc1s-PgXzRz0oHAzj-RKQFbxP0U",
+  authDomain: "bintumusicweb.firebaseapp.com",
+  projectId: "bintumusicweb",
+  storageBucket: "bintumusicweb.appspot.com",
+  messagingSenderId: "432709980317",
+  appId: "1:432709980317:web:8a5fca8298e5be67504474",
+  measurementId: "G-P3S4193CDT"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const urlParams = new URLSearchParams(window.location.search);
+const songId = urlParams.get('id');
+
+const titleEl = document.getElementById('songTitle');
+const downloadLink = document.getElementById('downloadLink');
+const lyricsEl = document.getElementById('lyrics');
+
+let player;
+let interval;
+let lyrics = [];
+
+db.collection('songs').doc(songId).get().then(doc => {
+    if (!doc.exists) {
+        titleEl.textContent = "❌ Song not found";
+        return;
+    }
+
+    const data = doc.data();
+    titleEl.textContent = data.title;
+    downloadLink.href = data.mp3;
+    lyrics = data.lyrics;
+
+    lyrics.forEach(line => {
+        const div = document.createElement('div');
+        div.className = 'lyrics-line';
+        div.dataset.time = line.time;
+        div.textContent = line.text;
+        lyricsEl.appendChild(div);
+    });
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function () {
+        const videoId = new URL(data.video).searchParams.get('v');
+        player = new YT.Player('player', {
+            videoId: videoId,
+            playerVars: {
+                autoplay: 1,
+                controls: 0,
+                modestbranding: 1,
+                rel: 0,
+                showinfo: 0
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+});
+
+function highlightLyrics(currentTime) {
+    const lines = document.querySelectorAll('.lyrics-line');
+    lines.forEach(line => line.classList.remove('highlight'));
+
+    for (let i = 0; i < lyrics.length; i++) {
+        const start = lyrics[i].time;
+        const end = i < lyrics.length -1 ? lyrics[i+1].time : Infinity;
+        if (currentTime >= start && currentTime < end) {
+            lines[i].classList.add('highlight');
+            break;
+        }
+    }
+}
+
+function onPlayerReady(event) {
+    event.target.setVolume(50);
+    event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        interval = setInterval(() => {
+            const time = player.getCurrentTime();
+            highlightLyrics(time);
+        }, 300);
+    } else {
+        clearInterval(interval);
+    }
+}
+</script>
+
+</body>
+</html>

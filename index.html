@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>  
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <script src="https://www.paypal.com/sdk/js?client-id=ARX_5m0pm3u1OZyrMoxLijWx3XUN00VwyhZshcPwaixaIWLIwtHZST3-75Gpi-a5CQMsfSO3RjXGOnuS&components=buttons,funding-eligibility&enable-funding=card"></script>
@@ -24,9 +23,8 @@
     .toast { background: #1a1a1a; color: white; padding: 16px 20px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-left: 5px solid var(--primary); }
     .toast.show { transform: translateY(0); opacity: 1; }
 
-    /* --- ANIMATIONS ON TAP --- */
+    /* --- ANIMATIONS --- */
     .tap-anim:active { transform: scale(0.92); opacity: 0.8; transition: 0.1s; }
-    
     @keyframes logoPulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.2); filter: brightness(1.2); }
@@ -39,10 +37,8 @@
     header { position: relative; height: 60vh; min-height: 400px; color: white; text-align: center; padding-top: 5rem; overflow: hidden; }  
     .header-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }  
     .header-video-container video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }  
-    
     .social-icons { position: absolute; top: 20px; right: 20px; display: flex; gap: 12px; z-index: 6000; }  
     .social-icons a img { width: 32px; height: 32px; border-radius: 6px; transition: 0.3s; }
-
     .hero-content { position: relative; z-index: 10; }
     .brand { font-family: 'Runtoe', cursive; font-size: 3.2rem; text-transform: uppercase; margin: 10px 0; }  
     .btn-hero { background: white; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }  
@@ -60,19 +56,25 @@
     .view-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 20px 25px; overflow-y: auto; background: #fff; transition: var(--transition); transform: translateX(100%); opacity: 0; }
     .view-screen.active { transform: translateX(0); opacity: 1; }
     .view-screen.prev { transform: translateX(-100%); opacity: 0; }
-
     .drawer-list { list-style: none; }
     .drawer-list li, .plan-card { padding: 18px 20px; margin-bottom: 12px; border-radius: 16px; background: #fafafa; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
     .drawer-list li:active, .plan-card:active { background: #f0f0f0; }
-    
     .input-field, .select-field, .msg-area { width: 100%; padding: 16px; margin: 8px 0; border: 2px solid #f0f0f0; border-radius: 14px; font-size: 16px; font-family: inherit; outline: none; }
-    .input-field:focus { border-color: var(--primary); }
 
     /* --- MAP & WHATSAPP --- */
-    #coverage-map { height: 100%; width: 100%; border-radius: 20px; }
+    #coverage-map { height: 100%; width: 100%; border-radius: 20px; min-height: 300px; }
     .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; cursor: pointer; z-index: 5000; box-shadow: 0 8px 20px rgba(37,211,102,0.3); transition: 0.3s; }
-    .whatsapp-float:active { transform: scale(0.8) rotate(-15deg); }
-    footer { padding: 20px; text-align: center; font-size: 11px; color: #999; }
+
+    /* --- NEW SECTIONS STYLES --- */
+    .contact-sec { position: relative; background: url('https://i.ibb.co/qYY24m99/section2-41f342b5.jpg') no-repeat center center/cover; padding: 60px 20px; border-radius: 20px; color: white; text-align: center; overflow: hidden; margin: 40px auto; max-width: 700px; }
+    .contact-sec::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1; border-radius: 20px; }
+    .contact-sec * { position: relative; z-index: 2; }
+    .contact-sec h2 { font-size: 30px; font-family: 'Runtoe', cursive; margin-bottom: 20px; color: #fff; }
+    .contact-sec p { font-size: 16px; margin: 10px 0; }
+    .contact-sec a { color: #ffd700; font-weight: 500; text-decoration: none; }
+    .contact-sec i { margin-right: 8px; color: #ffd700; }
+
+    .main-footer { background: linear-gradient(to right, #ff4e50, #f9d423); color: white; text-align: center; padding: 20px 10px; font-size: 14px; font-weight: 500; border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); margin-top: 40px; }
   </style>  
 </head>  
 <body>  
@@ -99,8 +101,31 @@
     </div>
   </header>  
 
+  <section id="partnership" style="position: relative; padding: 60px 20px; overflow: hidden;">
+    <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2;">  
+      <source src="partnership-bg.mp4" type="video/mp4">  
+    </video>  
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">  
+      <h2 style="font-family: 'Runtoe', cursive; color: #e60000; font-size: 2rem;">Our Partnership</h2>  
+      <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin: 1rem auto; display: block;">  
+      <p id="typed-text" style="font-size: 1.1rem; min-height: 120px; border-right: 2px solid #e60000; display: inline-block; padding: 10px;"></p>  
+    </div>  
+  </section>
+
+  <section id="contact" class="contact-sec">  
+    <h2>Contact Us</h2>  
+    <p><i class="fas fa-phone"></i>Call: <a href="tel:0729499463">0729 499 463</a></p>  
+    <p><i class="fab fa-whatsapp"></i>WhatsApp: <a href="https://wa.me/254729499463">+254 729 499 463</a></p>  
+    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:support@bintunet.co.ke">support@bintunet.co.ke</a></p>  
+    <p><i class="fas fa-map-marker-alt"></i>Visit Us: Nairobi CBD</p>  
+  </section>
+
+  <footer class="main-footer">  
+    <p>© 2026 BINTUNET.CO.KE | All Rights Reserved</p>  
+  </footer>
+
   <div class="drawer-overlay" id="overlay" onclick="closeAllDrawers()"></div>
-  
+
   <div class="nav-drawer" id="mainDrawer">
     <div class="drawer-handle"></div>
     <div class="drawer-header"><h2>BINTUNET</h2><button class="tap-anim" onclick="closeAllDrawers()" style="border:none;background:none;font-size:28px;color:#ccc;">&times;</button></div>
@@ -123,7 +148,6 @@
       <div class="view-screen" id="screen-coverage" style="padding: 0;">
         <div style="padding: 15px 25px; display:flex; justify-content:space-between; align-items:center;">
           <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin:0;" onclick="showScreen('screen-main')">← BACK</button>
-          <span style="font-size:12px; font-weight:700; color:#2196F3;">● BLUE = ACTIVE COUNTIES</span>
         </div>
         <div id="coverage-map"></div>
       </div>
@@ -133,7 +157,6 @@
         <div onclick="initPay('Entry - 2Mbps', 5.00)" class="plan-card tap-anim"><div><strong>2 Mbps</strong></div><span>$5.00</span></div>
         <div onclick="initPay('Standard - 10Mbps', 15.00)" class="plan-card tap-anim"><div><strong>10 Mbps</strong></div><span>$15.00</span></div>
         <div onclick="initPay('Premium - 50Mbps', 35.00)" class="plan-card tap-anim"><div><strong>50 Mbps</strong></div><span>$35.00</span></div>
-        <div onclick="initPay('Pro - 300Mbps', 120.00)" class="plan-card tap-anim"><div><strong>300 Mbps</strong></div><span>$120.00</span></div>
       </div>
 
       <div class="view-screen" id="screen-hardware">
@@ -141,12 +164,6 @@
         <form id="hardwareForm" action="https://formspree.io/f/xldnprkk" method="POST">
           <input type="text" name="name" class="input-field" placeholder="Full Name" required>
           <input type="tel" name="phone" class="input-field" placeholder="Phone Number" required>
-          <select name="kit" class="select-field" required>
-            <option value="" disabled selected>Hardware Selection</option>
-            <option value="Starlink Kit">Starlink Kit</option>
-            <option value="Fiber Router">Fiber Router</option>
-          </select>
-          <input type="text" name="location" class="input-field" placeholder="Location" required>
           <button type="submit" class="btn-hero tap-anim" style="width:100%; background:var(--primary); color:white; height:55px;">SUBMIT ORDER</button>
         </form>
       </div>
@@ -172,10 +189,27 @@
 
   <div class="whatsapp-float tap-anim" onclick="toggleDrawer('contactDrawer')"><i class="fa-brands fa-whatsapp"></i></div>
 
-  <footer>© 2026 BINTUNET KENYA</footer>
-
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
+    // --- TYPING EFFECT ---
+    const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya. Through this collaboration, we deliver fast and stable satellite connectivity.';  
+    const typedText = document.getElementById("typed-text");  
+    let charIdx = 0;  
+    function type() {  
+      if (charIdx < fullText.length) {  
+        if (fullText.charAt(charIdx) === '<') {  
+          let endTag = fullText.indexOf('>', charIdx) + 1;  
+          typedText.innerHTML += fullText.substring(charIdx, endTag);  
+          charIdx = endTag;  
+        } else {  
+          typedText.innerHTML += fullText.charAt(charIdx);  
+          charIdx++;  
+        }  
+        setTimeout(type, 35);  
+      }  
+    }  
+
+    // --- DRAWER & MAP LOGIC ---
     let selectedPrice = 0;
     let map = null;
 
@@ -183,20 +217,7 @@
       if (map) return;
       map = L.map('coverage-map').setView([0.0236, 37.9062], 6);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-      const blueStyle = { color: "#2196F3", fillColor: "#2196F3", fillOpacity: 0.5 };
-      L.circle([-1.286389, 36.817223], { radius: 30000, ...blueStyle }).addTo(map).bindPopup("Nairobi Active");
-      L.circle([0.5143, 35.2697], { radius: 25000, ...blueStyle }).addTo(map).bindPopup("Eldoret Active");
-      L.circle([-0.1022, 34.7617], { radius: 25000, ...blueStyle }).addTo(map).bindPopup("Kisumu Active");
-    }
-
-    function notify(message, type = 'error') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      toast.innerHTML = `<i class="fa-solid ${type==='error'?'fa-circle-exclamation':'fa-circle-check'}"></i> <span>${message}</span>`;
-      container.appendChild(toast);
-      setTimeout(() => toast.classList.add('show'), 10);
-      setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
+      L.circle([-1.286, 36.817], { radius: 30000, color: 'red' }).addTo(map).bindPopup("Nairobi Active");
     }
 
     function toggleDrawer(id) {
@@ -216,12 +237,22 @@
       if (id === 'screen-coverage') setTimeout(initMap, 300);
     }
 
-    function sendWhatsApp() {
-      const msg = document.getElementById('wpMsg').value;
-      if(!msg) return notify("Type a message first.");
-      window.open(`https://wa.me/254729499463?text=${encodeURIComponent(msg)}`, '_blank');
+    function notify(message, type = 'error') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<i class="fa-solid ${type==='error'?'fa-circle-exclamation':'fa-circle-check'}"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
     }
 
+    function sendWhatsApp() {
+      const msg = document.getElementById('wpMsg').value;
+      window.open(`https://wa.me/254729499463?text=${encodeURIComponent(msg || 'Hello Bintunet')}`, '_blank');
+    }
+
+    // --- FORMS & PAYPAL ---
     document.getElementById('hardwareForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const response = await fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: {'Accept': 'application/json'}});
@@ -251,6 +282,8 @@
         }
       }).render('#paypal-button-container');
     }
+
+    window.onload = () => { type(); };
   </script>
 </body>  
 </html>

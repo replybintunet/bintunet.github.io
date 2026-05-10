@@ -2,695 +2,255 @@
 <html lang="en">  
 <head>  
   <meta charset="UTF-8" />  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>  
   <title>BINTUNET.CO.KE | Fast, Reliable Internet</title>  
   <link rel="manifest" href="manifest.json" />  
   <meta name="theme-color" content="#e60000">  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>  
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <script src="https://www.paypal.com/sdk/js?client-id=ARX_5m0pm3u1OZyrMoxLijWx3XUN00VwyhZshcPwaixaIWLIwtHZST3-75Gpi-a5CQMsfSO3RjXGOnuS&components=buttons,funding-eligibility&enable-funding=card"></script>
+
   <style>  
-    /* All your previous CSS is kept unchanged */  
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }  
+    :root { --primary: #e60000; --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }  
     body { font-family: 'Inter', sans-serif; color: #333; background: #fff; overflow-x: hidden; }  
-  
-    .menu-toggle {  
-      position: fixed;  
-      top: 20px;  
-      left: 20px;  
-      background: #e60000;  
-      color: white;  
-      padding: 10px 14px;<meta name="google-site-verification" content="SVHpqXoAeIXkzf-fP9YgZqOAWp3ZwizuuqJGFEX84uk" />  
-      font-family: 'Runtoe', cursive;  
-      font-size: 18px;  
-      border: none;  
-      border-radius: 6px;  
-      z-index: 1001;  
-      cursor: pointer;  
-    }  
-  
-    .side-menu {  
-      position: fixed;  
-      top: 0; left: -250px;  
-      width: 250px; height: 100vh;  
-      background: rgba(0, 0, 0, 0.9);  
-      padding-top: 5rem;  
-      transition: left 0.3s ease;  
-      z-index: 1000;  
-      font-family: 'Runtoe', cursive;  
-    }  
-  
-    .side-menu a {  
-      display: block;  
-      padding: 1rem 2rem;  
-      color: yellow;  
-      text-decoration: none;  
-      font-size: 1.3rem;  
-    }  
-  
-    .side-menu a:hover { background: rgba(255, 255, 0, 0.1); }  
-    .side-menu.active { left: 0; }  
-  
-    header {  
-      position: relative;  
-      height: 60vh;  
-      min-height: 300px;  
-      max-height: 500px;  
-      color: white;  
-      text-align: center;  
-      padding-top: 6rem;  
-      overflow: hidden;  
-    }  
-  
-    .header-video-container {  
-      position: absolute;  
-      top: 0; left: 0;  
-      width: 100%; height: 100%;  
-      z-index: -1;  
-      overflow: hidden;  
-    }  
-  
-    .header-video-container video {  
-      width: 100%;  
-      height: 100%;  
-      object-fit: cover;  
-      filter: brightness(0.5);  
-    }  
-  
-    .social-icons {  
-      position: absolute;  
-      top: 20px;  
-      right: 20px;  
-      display: flex;  
-      gap: 1rem;  
-    }  
-  
-    .social-icons a img {  
-      width: 26px;  
-      height: 26px;  
-      border-radius: 4px;  
-    }  
-  
-    .brand {  
-      font-family: 'Runtoe', cursive;  
-      font-size: 3rem;  
-      text-transform: uppercase;  
-    }  
-  
-    .btn {  
-      background: white;  
-      color: #e60000;  
-      padding: 0.6rem 1.2rem;  
-      border-radius: 30px;  
-      font-weight: 600;  
-      margin: 0.5rem;  
-      text-decoration: none;  
-      display: inline-block;  
-    }  
-  
-    #coverageMessage {  
-      display: none;  
-      background: white;  
-      color: #e60000;  
-      padding: 1rem;  
-      border-radius: 10px;  
-      margin-top: 1rem;  
-      max-width: 600px;  
-      margin-left: auto;  
-      margin-right: auto;  
-    }  
-  
-    section {  
-      padding: 3rem 2rem;  
-      max-width: 1200px;  
-      margin: auto;  
-    }  
-  
-    .section-title {  
-      text-align: center;  
-      font-size: 1.8rem;  
-      margin-bottom: 2rem;  
-    }  
-  
-    .plans {  
-      display: grid;  
-      gap: 1.5rem;  
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  
-      text-align: center;  
-    }  
-  
-    .plan-card {  
-      border: 1px solid #ccc;  
-      border-radius: 12px;  
-      padding: 1.5rem;  
-    }  
-  
-    .plan-card h3 { margin-bottom: 1rem; color: #e60000; }  
-  
-    .sponsored-ads {  
-      background: rgba(255, 0, 0, 0.1);  
-      overflow: hidden;  
-      white-space: nowrap;  
-      padding: 1rem 0;  
-      margin-bottom: 2rem;  
-    }  
-  
-    .sponsored-track {  
-      display: inline-block;  
-      animation: scroll-left 30s linear infinite;  
-    }  
-  
-    .sponsored-track span {  
-      display: inline-block;  
-      margin: 0 2rem;  
-      color: #b30000;  
-      font-weight: bold;  
-    }  
-  
-    @keyframes scroll-left {  
-      0% { transform: translateX(100%); }  
-      100% { transform: translateX(-100%); }  
-    }  
-  
-    .testimonials-carousel {  
-      display: flex;  
-      gap: 2rem;  
-      animation: slide 30s linear infinite;  
-    }  
-  
-    @keyframes slide {  
-      0% { transform: translateX(0); }  
-      100% { transform: translateX(-50%); }  
-    }  
-  
-    .testimonial-box {  
-      background: white;  
-      padding: 1.5rem;  
-      border-radius: 12px;  
-      max-width: 300px;  
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
-      text-align: center;  
-      flex-shrink: 0;  
-    }  
-  
-    .testimonial-box img {  
-      width: 80px;  
-      height: 80px;  
-      border-radius: 50%;  
-      border: 3px solid #e60000;  
-      object-fit: cover;  
-      margin-bottom: 1rem;  
-    }  
-  
-    .youtube-live {  
-      position: relative;  
-      padding-bottom: 56.25%;  
-      height: 0;  
-      overflow: hidden;  
-      margin-bottom: 2rem;  
-    }  
-  
-    .youtube-live iframe {  
-      position: absolute;  
-      top: 0; left: 0;  
-      width: 100%;  
-      height: 100%;  
-      border: none;  
-    }  
-  
-    .music-download {  
-      text-align: center;  
-      background: #f9f9f9;  
-      padding: 2rem;  
-      border-radius: 12px;  
-      margin-bottom: 2rem;  
-    }  
-  
-    .music-download a {  
-      display: inline-block;  
-      margin-top: 1rem;  
-      padding: 0.5rem 1rem;  
-      background: #e60000;  
-      color: white;  
-      border-radius: 20px;  
-      text-decoration: none;  
-    }  
-  
-    .contact {  
-      text-align: center;  
-      background: #f0f0f0;  
-      padding: 2rem;  
-      border-radius: 8px;  
-    }  
-  
-    footer {  
-      text-align: center;  
-      padding: 1rem;  
-      background: #111;  
-      color: white;  
-      font-size: 0.9rem;  
-    }  
-  
-    .whatsapp-float {  
-      position: fixed;  
-      bottom: 20px;  
-      right: 20px;  
-      background-color: #25d366;  
-      color: white;  
-      padding: 14px 16px;  
-      border-radius: 50px;  
-      text-decoration: none;  
-      font-weight: bold;  
-      font-size: 16px;  
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
-      z-index: 999;  
-    }  
+
+    /* --- TOASTS --- */
+    #toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 90%; max-width: 400px; pointer-events: none; }
+    .toast { background: #1a1a1a; color: white; padding: 16px 20px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-100px); opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-left: 5px solid var(--primary); }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* --- ANIMATIONS ON TAP --- */
+    .tap-anim:active { transform: scale(0.92); opacity: 0.8; transition: 0.1s; }
+    
+    @keyframes logoPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); filter: brightness(1.2); }
+      100% { transform: scale(1); }
+    }
+    .social-icons a:active img { animation: logoPulse 0.3s ease-in-out; }
+
+    /* --- HEADER --- */
+    .menu-toggle { position: fixed; top: 20px; left: 20px; background: var(--primary); color: white; padding: 12px 18px; font-family: 'Runtoe', cursive; font-size: 18px; border: none; border-radius: 8px; z-index: 5000; cursor: pointer; box-shadow: 0 4px 15px rgba(230, 0, 0, 0.3); }  
+    header { position: relative; height: 60vh; min-height: 400px; color: white; text-align: center; padding-top: 5rem; overflow: hidden; }  
+    .header-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }  
+    .header-video-container video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }  
+    
+    .social-icons { position: absolute; top: 20px; right: 20px; display: flex; gap: 12px; z-index: 6000; }  
+    .social-icons a img { width: 32px; height: 32px; border-radius: 6px; transition: 0.3s; }
+
+    .hero-content { position: relative; z-index: 10; }
+    .brand { font-family: 'Runtoe', cursive; font-size: 3.2rem; text-transform: uppercase; margin: 10px 0; }  
+    .btn-hero { background: white; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }  
+
+    /* --- DRAWERS --- */
+    .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); visibility: hidden; opacity: 0; transition: var(--transition); z-index: 7000; backdrop-filter: blur(4px); }
+    .drawer-overlay.active { visibility: visible; opacity: 1; }
+    .nav-drawer { position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; height: 85vh; background: #fff; z-index: 7001; transition: var(--transition); border-radius: 32px 32px 0 0; display: flex; flex-direction: column; overflow: hidden; }
+    .nav-drawer.active { bottom: 0; }
+    .drawer-handle { width: 40px; height: 4px; background: #e0e0e0; border-radius: 10px; margin: 12px auto; flex-shrink: 0; }
+    .drawer-header { padding: 5px 25px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f5f5f5; flex-shrink: 0; }
+
+    /* --- UI --- */
+    .view-container { flex: 1; position: relative; overflow: hidden; }
+    .view-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 20px 25px; overflow-y: auto; background: #fff; transition: var(--transition); transform: translateX(100%); opacity: 0; }
+    .view-screen.active { transform: translateX(0); opacity: 1; }
+    .view-screen.prev { transform: translateX(-100%); opacity: 0; }
+
+    .drawer-list { list-style: none; }
+    .drawer-list li, .plan-card { padding: 18px 20px; margin-bottom: 12px; border-radius: 16px; background: #fafafa; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
+    .drawer-list li:active, .plan-card:active { background: #f0f0f0; }
+    
+    .input-field, .select-field, .msg-area { width: 100%; padding: 16px; margin: 8px 0; border: 2px solid #f0f0f0; border-radius: 14px; font-size: 16px; font-family: inherit; outline: none; }
+    .input-field:focus { border-color: var(--primary); }
+
+    /* --- MAP & WHATSAPP --- */
+    #coverage-map { height: 100%; width: 100%; border-radius: 20px; }
+    .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; cursor: pointer; z-index: 5000; box-shadow: 0 8px 20px rgba(37,211,102,0.3); transition: 0.3s; }
+    .whatsapp-float:active { transform: scale(0.8) rotate(-15deg); }
+    footer { padding: 20px; text-align: center; font-size: 11px; color: #999; }
   </style>  
 </head>  
 <body>  
-  
-  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>  
-  <div class="side-menu" id="sideMenu">  
-    <a href="#home">Home</a>  
-    <a href="#plans">Plans</a>  
-    <a href="#contact">Contact</a>  
-    <a href="download.html">Download Now</a>  
-  </div>  
-  
-  <header id="home">  
+
+  <div id="toast-container"></div>
+  <button class="menu-toggle tap-anim" onclick="toggleDrawer('mainDrawer')">☰ MENU</button>  
+
+  <header>  
     <div class="header-video-container">  
-      <video autoplay muted playsinline loop>  
-        <source src="background.mp4" type="video/mp4">  
-      </video>  
+      <video autoplay muted playsinline loop><source src="background.mp4" type="video/mp4"></video>  
     </div>  
-  
-  <div class="social-icons">
-  <a href="https://facebook.com/bintunet" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-  </a>
-  <a href="https://x.com/bintunet" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X">
-  </a>
-  <a href="https://instagram.com/bintunet" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
-  </a>
-  <a href="https://tiktok.com/@bintunet" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok">
-  </a>
-</div>
-  
-    <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Bintunet Logo" style="max-width: 140px; margin-bottom: 1rem;">  
-    <h1 class="brand">BINTUNET.CO.KE</h1>  
-    <p>Fast, Reliable & Affordable Internet</p>  
-    <a href="#plans" class="btn">Get Connected</a>  
-    <a href="javascript:void(0);" class="btn" onclick="showCoverage()">Check Coverage</a>  
-    <div id="coverageMessage">  
-      <strong>Coverage Areas:</strong><br>  
-      Nairobi, Eldoret, Kisumu, and surrounding areas. Contact us via WhatsApp for confirmation.  
-    </div>  
+
+    <div class="social-icons">
+      <a href="https://facebook.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB"></a>
+      <a href="https://x.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
+      <a href="https://instagram.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="IG"></a>
+      <a href="https://tiktok.com/@bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TK"></a>
+    </div>
+
+    <div class="hero-content">
+      <img src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" alt="Logo" style="max-width: 120px;">  
+      <h1 class="brand">BINTUNET.CO.KE</h1>  
+      <button class="btn-hero tap-anim" onclick="toggleDrawer('mainDrawer')">GET CONNECTED</button>  
+    </div>
   </header>  
+
+  <div class="drawer-overlay" id="overlay" onclick="closeAllDrawers()"></div>
   
-<!-- Sponsored Ads Section -->
-<div class="sponsored-ads">
-  <div class="sponsored-track">
-    <span>🔥 Sponsored Ad: Your Ad Here</span>
-    <span>🌍 Starlink Kenya</span>
-    <span>🎧 Buy Airtime Online at Bintunet</span>
-    <span>🛰 High-Speed Satellite Internet</span>
-    <span>📡 Affordable WiFi for Homes</span>
+  <div class="nav-drawer" id="mainDrawer">
+    <div class="drawer-handle"></div>
+    <div class="drawer-header"><h2>BINTUNET</h2><button class="tap-anim" onclick="closeAllDrawers()" style="border:none;background:none;font-size:28px;color:#ccc;">&times;</button></div>
+
+    <div class="view-container">
+      <div class="view-screen active" id="screen-main">
+        <ul class="drawer-list">
+          <li class="tap-anim" onclick="showScreen('screen-plans')"><div><i class="fa-solid fa-wifi" style="margin-right:12px; color:var(--primary);"></i> Browse Plans</div><i class="fa-solid fa-chevron-right"></i></li>
+          <li class="tap-anim" onclick="showScreen('screen-hardware')"><div><i class="fa-solid fa-microchip" style="margin-right:12px; color:var(--primary);"></i> Get Hardware</div><i class="fa-solid fa-chevron-right"></i></li>
+          <li class="tap-anim" onclick="showScreen('screen-speed')"><div><i class="fa-solid fa-gauge-high" style="margin-right:12px; color:var(--primary);"></i> Speed Test</div><i class="fa-solid fa-chevron-right"></i></li>
+          <li class="tap-anim" onclick="showScreen('screen-coverage')"><div><i class="fa-solid fa-map-location-dot" style="margin-right:12px; color:var(--primary);"></i> Coverage Map</div><i class="fa-solid fa-chevron-right"></i></li>
+        </ul>
+      </div>
+
+      <div class="view-screen" id="screen-speed" style="padding:0;">
+        <div style="padding: 15px 25px;"><button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin:0;" onclick="showScreen('screen-main')">← BACK</button></div>
+        <iframe src="https://fast.com" style="width:100%; height:100%; border:none;"></iframe>
+      </div>
+
+      <div class="view-screen" id="screen-coverage" style="padding: 0;">
+        <div style="padding: 15px 25px; display:flex; justify-content:space-between; align-items:center;">
+          <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin:0;" onclick="showScreen('screen-main')">← BACK</button>
+          <span style="font-size:12px; font-weight:700; color:#2196F3;">● BLUE = ACTIVE COUNTIES</span>
+        </div>
+        <div id="coverage-map"></div>
+      </div>
+
+      <div class="view-screen" id="screen-plans">
+        <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin-bottom:15px;" onclick="showScreen('screen-main')">← BACK</button>
+        <div onclick="initPay('Entry - 2Mbps', 5.00)" class="plan-card tap-anim"><div><strong>2 Mbps</strong></div><span>$5.00</span></div>
+        <div onclick="initPay('Standard - 10Mbps', 15.00)" class="plan-card tap-anim"><div><strong>10 Mbps</strong></div><span>$15.00</span></div>
+        <div onclick="initPay('Premium - 50Mbps', 35.00)" class="plan-card tap-anim"><div><strong>50 Mbps</strong></div><span>$35.00</span></div>
+        <div onclick="initPay('Pro - 300Mbps', 120.00)" class="plan-card tap-anim"><div><strong>300 Mbps</strong></div><span>$120.00</span></div>
+      </div>
+
+      <div class="view-screen" id="screen-hardware">
+        <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin-bottom:15px;" onclick="showScreen('screen-main')">← BACK</button>
+        <form id="hardwareForm" action="https://formspree.io/f/xldnprkk" method="POST">
+          <input type="text" name="name" class="input-field" placeholder="Full Name" required>
+          <input type="tel" name="phone" class="input-field" placeholder="Phone Number" required>
+          <select name="kit" class="select-field" required>
+            <option value="" disabled selected>Hardware Selection</option>
+            <option value="Starlink Kit">Starlink Kit</option>
+            <option value="Fiber Router">Fiber Router</option>
+          </select>
+          <input type="text" name="location" class="input-field" placeholder="Location" required>
+          <button type="submit" class="btn-hero tap-anim" style="width:100%; background:var(--primary); color:white; height:55px;">SUBMIT ORDER</button>
+        </form>
+      </div>
+
+      <div class="view-screen" id="screen-pay">
+        <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin-bottom:15px;" onclick="showScreen('screen-plans')">← BACK</button>
+        <h3 id="displayPlan">Plan</h3>
+        <p id="displayPrice" style="font-weight:700; margin-bottom:15px;"></p>
+        <input type="number" id="accNumber" class="input-field" placeholder="Enter Account Number">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
   </div>
-</div>
 
-<style>
-  .sponsored-ads {
-    overflow: hidden;
-    background: linear-gradient(to right, #e60000, #b30000); /* Red gradient background */
-    padding: 12px 0;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    position: relative;
-    z-index: 5;
-  }
-
-  .sponsored-track {
-    display: flex;
-    width: max-content;
-    animation: scroll-left 20s linear infinite;
-    gap: 40px;
-    padding-left: 100%;
-  }
-
-  .sponsored-track span {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff; /* ✅ Force white text */
-    padding: 6px 16px;
-    border-radius: 999px;
-    white-space: nowrap;
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-  }
-
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-</style>
-  
-  <!-- Get Connected Section (One Line Buttons) -->
-<section style="padding: 60px 20px; background: #fff; text-align: center;">
-  <h2 style="font-family: 'Runtoe', cursive; font-size: 2.5rem; color: #e60000;">Get Connected Today</h2>
-  <p style="margin-bottom: 30px; font-size: 1rem;">Choose your location type to view requirements</p>
-
-  <style>
-    .connect-line {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .connect-line a {
-      padding: 15px 40px;
-      border-radius: 50px;
-      background-color: #e60000;
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: background 0.3s ease;
-    }
-
-    .connect-line a:hover {
-      background-color: #c40000;
-    }
-  </style>
-
-  <div class="connect-line">
-    <a href="home.html">Home</a>
-    <a href="office.html">Office</a>
-    <a href="residential.html">Residential</a>
+  <div class="nav-drawer" id="contactDrawer" style="height: 55vh;">
+    <div class="drawer-handle"></div>
+    <div class="drawer-header"><h2>Support</h2><button class="tap-anim" onclick="closeAllDrawers()" style="border:none;background:none;font-size:28px;color:#ccc;">&times;</button></div>
+    <div style="padding: 25px;">
+      <textarea id="wpMsg" class="msg-area" placeholder="Message us..."></textarea>
+      <button class="btn-hero tap-anim" style="width:100%; background:#25d366; color:white; height:55px;" onclick="sendWhatsApp()">SEND TO WHATSAPP</button>
+    </div>
   </div>
-</section>
-  
 
-  <section id="plans">  
-    <h2 class="section-title">Plans & Pricing</h2>  
-    <div class="plans">  
-      <div class="plan-card"><h3>Daily</h3><p>KSh 50</p><p>5 Mbps</p><p>24 hours</p><a class="btn" href="daily.html">Select</a></div>  
-      <div class="plan-card"><h3>Weekly</h3><p>KSh 300</p><p>10 Mbps</p><p>7 days</p><a class="btn" href="weekly.html">Select</a></div>  
-      <div class="plan-card"><h3>Monthly</h3><p>KSh 1,000</p><p>10 Mbps</p><p>30 days</p><a class="btn" href="monthly.html">Select</a></div>  
-    </div>  
-  </section>  
-  
-  <section class="youtube-live">  
-    <h2 class="section-title">Live on YouTube</h2>  
-    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCfUIm_Fwxafbq0q2cmhvHNg" allowfullscreen></iframe>  
-  </section>  
-  
-  <section class="music-download">  
-    <h2 class="section-title">Download Unlimited VPN Files</h2>  
-    <p>Click below to access country-based configuration files.</p>  
-    <a href="download.html">⬇ Download Now</a>  
-  </section>  
-  
-  <section class="testimonials" style="background:#f9f9f9; overflow:hidden;">  
-    <h2 class="section-title">What Our Customers Say</h2>  
-    <div class="testimonials-carousel">  
-      <div class="testimonial-box"><img src="https://i.ibb.co/bgWMpgRY/avatar1.jpg"><p>“Since I switched to BINTUNET, I’ve never looked back!”</p><strong>— Nancy, Nairobi</strong></div>  
-      <div class="testimonial-box"><img src="https://i.ibb.co/tpNM2L8c/avatar2.jpg"><p>“Instant top-up. No buffering.”</p><strong>— Bintu, Eldoret</strong></div>  
-      <div class="testimonial-box"><img src="https://i.ibb.co/7R0wXB2/avatar3.jpg"><p>“Stable connection!”</p><strong>— Ali, Kisumu</strong></div>  
-    </div>  
-  </section>  
-<section style="position: relative; padding: 4rem 2rem; background: #f5f5f5;">  
-  <!-- Background Video (optional) -->  
-  <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2;">  
-    <source src="partnership-bg.mp4" type="video/mp4">  
-    Your browser does not support the video tag.  
-  </video>  
-  
-  <div style="max-width: 800px; margin: 0 auto; text-align: center;">  
-    <h2 style="font-family: 'Runtoe', cursive; color: #e60000; font-size: 2rem;">Our Partnership</h2>  
-  
-    <!-- Starlink Logo -->  
-    <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png"   
-         alt="Starlink Logo" style="max-width: 200px; margin: 1rem auto; display: block;">  
-  
-    <p id="typed-text" style="  
-      font-size: 1.1rem;  
-      overflow: hidden;  
-      display: inline-block;  
-      border-right: 2px solid #e60000;  
-      max-width: 100%;  
-      white-space: normal;  
-      word-break: break-word;  
-      min-height: 120px;  
-      padding-top: 1rem;  
-    "></p>  
-  </div>  
-</section>  
-  
-<script>  
-  const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya.<br><br>Through this collaboration, we deliver fast and stable satellite connectivity where traditional coverage is limited.';  
-  const typedText = document.getElementById("typed-text");  
-  let index = 0;  
-  
-  function type() {  
-    if (index < fullText.length) {  
-      let currentChar = fullText.charAt(index);  
-      if (currentChar === '<') {  
-        const endTag = fullText.indexOf('>', index) + 1;  
-        typedText.innerHTML += fullText.substring(index, endTag);  
-        index = endTag;  
-      } else {  
-        typedText.innerHTML += currentChar;  
-        index++;  
-      }  
-      setTimeout(type, 35);  
-    }  
-  }  
-  
-  window.addEventListener("load", type);  
-</script>  
-<!-- Contact Section Styles with Background -->
-<style>
-  .contact {
-    position: relative;
-    background: url('https://i.ibb.co/qYY24m99/section2-41f342b5.jpg') no-repeat center center/cover;
-    padding: 60px 20px;
-    border-radius: 20px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-    overflow: hidden;
-    margin: 40px auto;
-    max-width: 700px;
-  }
+  <div class="whatsapp-float tap-anim" onclick="toggleDrawer('contactDrawer')"><i class="fa-brands fa-whatsapp"></i></div>
 
-  .contact::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
-    z-index: 1;
-    border-radius: 20px;
-  }
+  <footer>© 2026 BINTUNET KENYA</footer>
 
-  .contact * {
-    position: relative;
-    z-index: 2;
-  }
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    let selectedPrice = 0;
+    let map = null;
 
-  .contact h2 {
-    font-size: 30px;
-    font-family: 'Runtoe', cursive;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-
-  .contact p {
-    font-size: 16px;
-    margin: 10px 0;
-  }
-
-  .contact a {
-    color: #ffd700;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  .contact a:hover {
-    text-decoration: underline;
-  }
-
-  .contact i {
-    margin-right: 8px;
-    color: #ffd700;
-  }
-</style>
-
-<!-- Font Awesome (icons) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- Contact Section with Background -->
-<section id="contact" class="contact">  
-  <h2>Contact Us</h2>  
-  <p><i class="fas fa-phone"></i>Call: <a href="tel:0729499463">0729 499 463</a></p>  
-  <p><i class="fab fa-whatsapp"></i>WhatsApp: <a href="https://wa.me/254729499463">+254 729 499 463</a></p>  
-  <p><i class="fas fa-envelope"></i>Email: <a href="mailto:support@bintunet.co.ke">support@bintunet.co.ke</a></p>  
-  <p><i class="fas fa-map-marker-alt"></i>Visit Us: Nairobi CBD</p>  
-  <p><i class="fas fa-hashtag"></i>USSD: *123#</p>  
-</section>
-  
-  <!-- Decorated Footer -->
-<style>
-  footer {
-    background: linear-gradient(to right, #ff4e50, #f9d423); /* Brick red to orange gradient */
-    color: white;
-    text-align: center;
-    padding: 20px 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 10;
-  }
-
-  footer p {
-    margin: 0;
-    animation: fadeInUp 1s ease-out;
-  }
-
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
+    function initMap() {
+      if (map) return;
+      map = L.map('coverage-map').setView([0.0236, 37.9062], 6);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      const blueStyle = { color: "#2196F3", fillColor: "#2196F3", fillOpacity: 0.5 };
+      L.circle([-1.286389, 36.817223], { radius: 30000, ...blueStyle }).addTo(map).bindPopup("Nairobi Active");
+      L.circle([0.5143, 35.2697], { radius: 25000, ...blueStyle }).addTo(map).bindPopup("Eldoret Active");
+      L.circle([-0.1022, 34.7617], { radius: 25000, ...blueStyle }).addTo(map).bindPopup("Kisumu Active");
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+
+    function notify(message, type = 'error') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<i class="fa-solid ${type==='error'?'fa-circle-exclamation':'fa-circle-check'}"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
     }
-  }
-</style>
 
-<footer>  
-  <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>  
-</footer>
-  
-  <!-- Floating Chat Button Styles -->
-<style>
-  .whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    color: white;
-    font-size: 18px;
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
-    animation: bounce 2s infinite;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .whatsapp-float:hover {
-    background-color: #1ebe5d;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  }
-
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
+    function toggleDrawer(id) {
+      closeAllDrawers();
+      document.getElementById(id).classList.add('active');
+      document.getElementById('overlay').classList.add('active');
     }
-    50% {
-      transform: translateY(-10px);
+
+    function closeAllDrawers() {
+      document.querySelectorAll('.nav-drawer').forEach(d => d.classList.remove('active'));
+      document.getElementById('overlay').classList.remove('active');
     }
-  }
-</style>
 
-<!-- WhatsApp Floating Chat -->
-<a href="https://wa.me/254729499463?text=Hello%20Bintunet%2C%20I%20am%20interested%20in%20your%20internet%20services." 
-   class="whatsapp-float" target="_blank">
-  
-  💬WhatsApp
-  
-</a>
+    function showScreen(id) {
+      document.querySelectorAll('.view-screen').forEach(s => s.classList.remove('active', 'prev'));
+      document.getElementById(id).classList.add('active');
+      if (id === 'screen-coverage') setTimeout(initMap, 300);
+    }
 
-<style>
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #25d366;
-  color: white;
-  font-size: 16px;
-  padding: 14px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  z-index: 9999;
-  animation: bounce 2s infinite;
-  font-family: 'Inter', sans-serif;
-}
-.whatsapp-float:hover {
-  background-color: #1ebe5d;
-}
+    function sendWhatsApp() {
+      const msg = document.getElementById('wpMsg').value;
+      if(!msg) return notify("Type a message first.");
+      window.open(`https://wa.me/254729499463?text=${encodeURIComponent(msg)}`, '_blank');
+    }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-</style>
+    document.getElementById('hardwareForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const response = await fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: {'Accept': 'application/json'}});
+      if (response.ok) { notify("Order received!", "success"); e.target.reset(); setTimeout(closeAllDrawers, 2000); }
+    });
 
-<!-- Floating My Account Button -->
-<a href="login.html?redirect=account.html" class="my-account-float">
-  👤 My Account
-</a>
+    function initPay(name, price) {
+      selectedPrice = price;
+      document.getElementById('displayPlan').innerText = name;
+      document.getElementById('displayPrice').innerText = "Total: $" + price.toFixed(2);
+      showScreen('screen-pay');
+      renderPaypal();
+    }
 
-<style>
-.my-account-float {
-  position: fixed;
-  bottom: 80px; /* just above WhatsApp button */
-  right: 20px;
-  background-color: #e60000; /* red */
-  color: white;
-  font-size: 16px;
-  padding: 12px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  animation: bounce 2s infinite;
-  font-family: 'Inter', sans-serif;
-}
-.my-account-float:hover {
-  background-color: #b30000;
-}
-</style>
-  </script>  
+    function renderPaypal() {
+      const container = document.getElementById('paypal-button-container');
+      container.innerHTML = ''; 
+      paypal.Buttons({
+        style: { layout: 'vertical', color: 'gold', shape: 'rect' },
+        createOrder: (data, actions) => {
+          const acc = document.getElementById('accNumber').value;
+          if(!acc || acc.length < 5) { notify("Enter Account Number first."); return; }
+          return actions.order.create({ purchase_units: [{ amount: { value: selectedPrice.toString() } }] });
+        },
+        onApprove: (data, actions) => {
+          return actions.order.capture().then(() => { notify("Payment successful!", "success"); closeAllDrawers(); });
+        }
+      }).render('#paypal-button-container');
+    }
+  </script>
 </body>  
 </html>

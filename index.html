@@ -34,8 +34,8 @@
 
     /* --- HEADER --- */
     .menu-toggle { position: fixed; top: 20px; left: 20px; background: var(--primary); color: white; padding: 12px 18px; font-family: 'Runtoe', cursive; font-size: 18px; border: none; border-radius: 8px; z-index: 5000; cursor: pointer; box-shadow: 0 4px 15px rgba(230, 0, 0, 0.3); }  
-    header { position: relative; height: 60vh; min-height: 400px; color: white; text-align: center; padding-top: 5rem; overflow: hidden; }  
-    .header-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }  
+    header { position: relative; height: 100vh; min-height: 400px; color: white; text-align: center; padding-top: 5rem; overflow: hidden; }  
+    .header-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 50%; z-index: 1; }  
     .header-video-container video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }  
     .social-icons { position: absolute; top: 20px; right: 20px; display: flex; gap: 12px; z-index: 6000; }  
     .social-icons a img { width: 32px; height: 32px; border-radius: 6px; transition: 0.3s; }
@@ -82,10 +82,14 @@
   <div id="toast-container"></div>
   <button class="menu-toggle tap-anim" onclick="toggleDrawer('mainDrawer')">☰ MENU</button>  
 
-  <header>  
-    <div class="header-video-container">  
-      <video autoplay muted playsinline loop><source src="background.mp4" type="video/mp4"></video>  
-    </div>  
+<header>
+  <div class="header-video-container">
+    <video autoplay muted playsinline loop>
+      <source src="https://raw.githubusercontent.com/replybintunet/bintunet.github.io/main/outdoor-1-A9d2ydLC.mp4" type="video/mp4">
+    </video>
+  </div>
+
+
 
     <div class="social-icons">
       <a href="https://facebook.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB"></a>
@@ -101,16 +105,20 @@
     </div>
   </header>  
 
-  <section id="partnership" style="position: relative; padding: 60px 20px; overflow: hidden;">
-    <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2;">  
-      <source src="partnership-bg.mp4" type="video/mp4">  
+ <section id="partnership" style="position: relative; padding: 60px 20px; overflow: hidden; background-color: #000;">
+    <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">  
+      <source src="https://raw.githubusercontent.com/replybintunet/bintunet.github.io/main/Starlink_What_Is_Starlink_1_1_1.mp4" type="video/mp4">  
     </video>  
-    <div style="max-width: 800px; margin: 0 auto; text-align: center;">  
+
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 2;"></div>
+
+    <div style="position: relative; max-width: 800px; margin: 0 auto; text-align: center; z-index: 3;">  
       <h2 style="font-family: 'Runtoe', cursive; color: #e60000; font-size: 2rem;">Our Partnership</h2>  
       <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin: 1rem auto; display: block;">  
-      <p id="typed-text" style="font-size: 1.1rem; min-height: 120px; border-right: 2px solid #e60000; display: inline-block; padding: 10px;"></p>  
+      <p id="typed-text" style="font-size: 1.1rem; color: #fff; min-height: 120px; border-right: 2px solid #e60000; display: inline-block; padding: 10px;"></p>  
     </div>  
-  </section>
+</section>
+
 
   <section id="contact" class="contact-sec">  
     <h2>Contact Us</h2>  

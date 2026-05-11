@@ -1,87 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kenya VPN Configs | BINTUNET.CO.KE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-      color: #333;
-      margin: 0;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-family: 'Runtoe', cursive;
-      color: #e60000;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 1.4rem;
-      color: #111;
-    }
-
-    .download-links {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .download-links a {
-      display: inline-block;
-      margin: 1rem;
-      padding: 0.6rem 1.2rem;
-      background: #e60000;
-      color: white;
-      text-decoration: none;
-      border-radius: 25px;
-    }
-
-    .download-links a:hover {
-      background: #b80000;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    .back-home {
-      display: block;
-      text-align: center;
-      margin-top: 2rem;
-      color: #e60000;
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bintunet - Internet Plans</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <h1>Kenya VPN Files</h1>
-  <p class="section-title">Click to download the latest HTTP Custom files for Kenya</p>
+<style>
+    :root {
+        --sky-blue: #00aeef;
+        --sky-gradient: linear-gradient(135deg, #00aeef 0%, #0077b6 100%);
+        --sky-dark: #003a5d;
+        --sky-bg: #f0f7ff;
+        --glass: rgba(255, 255, 255, 0.95);
+        --shadow: 0 10px 30px rgba(0, 58, 93, 0.1);
+    }
 
-  <div class="download-links">
-    <a href="https://drive.google.com/uc?export=download&id=1aeKYXTYU1tyZQLHQoDe8OpR81i3hMy5m" target="_blank">
-  🇰🇪 Kenya Config 1
-</a>
-    <a href="configs/kenya-1.hc" download>🇰🇪 Kenya Config 2</a>
-    <a href="configs/kenya-2.hc" download>🇰🇪 Kenya Config 3</a>
-  </div>
+    body { 
+        font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+        margin: 0; 
+        background: var(--sky-bg); 
+        color: var(--sky-dark);
+    }
 
-  <a href="vpn.html" class="back-home">← Back to All Countries</a>
+    /* --- SECTION & CARDS --- */
+    .service-container { padding: 60px 20px; text-align: center; }
+    
+    .package-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 25px; 
+        max-width: 1200px; 
+        margin: 40px auto 0; 
+    }
+    
+    .pkg-card {
+        background: var(--glass);
+        border-radius: 28px;
+        padding: 35px 25px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: var(--shadow);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+    }
+    
+    .pkg-card:hover { 
+        transform: translateY(-12px); 
+        box-shadow: 0 20px 40px rgba(0, 174, 239, 0.15);
+    }
 
-  <footer>
-    <p>© 2025 BINTUNET.CO.KE | All Rights Reserved</p>
-  </footer>
+    .pkg-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+    .pkg-price { font-size: 2.2rem; font-weight: 800; color: var(--sky-blue); margin-bottom: 20px; }
+    .pkg-price span { font-size: 0.9rem; color: #64748b; font-weight: 400; }
 
+    /* --- GIFT RIBBON STYLING --- */
+    .ribbon-wrapper { overflow: hidden; }
+    .gift-ribbon {
+        position: absolute; top: 0; right: 0; width: 100px; height: 100px; overflow: hidden; z-index: 10;
+    }
+    .gift-ribbon span {
+        position: absolute; display: block; width: 150px; padding: 8px 0;
+        background-color: var(--sky-blue); color: #fff; font-size: 10px; font-weight: 800;
+        text-transform: uppercase; text-align: center; right: -35px; top: 20px;
+        transform: rotate(45deg); box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    }
+
+    /* --- BUTTONS --- */
+    .btn-open-drawer, .btn-finish {
+        width: 100%; background: var(--sky-gradient); color: white; border: none;
+        padding: 18px; border-radius: 18px; font-weight: 700; font-size: 1rem; cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0, 174, 239, 0.3); transition: 0.3s;
+    }
+    .btn-finish { background: var(--sky-dark); width: auto; padding: 16px 50px; border-radius: 50px; margin-top: 20px; }
+    .btn-open-drawer:active { transform: scale(0.95); }
+
+    /* --- PROFESSIONAL DRAWER --- */
+    .bottom-drawer {
+        position: fixed; bottom: -100%; left: 0; width: 100%; height: 92vh;
+        background: white; z-index: 10001; border-radius: 40px 40px 0 0; 
+        box-shadow: 0 -15px 50px rgba(0,0,0,0.1); transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        padding: 0; box-sizing: border-box; overflow-y: auto;
+    }
+    .bottom-drawer.active { bottom: 0; }
+    .drawer-header {
+        position: sticky; top: 0; background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px); padding: 20px; text-align: center;
+        border-bottom: 1px solid #f1f5f9; z-index: 5;
+    }
+    .drawer-handle { width: 45px; height: 5px; background: #e2e8f0; margin: 0 auto 15px; border-radius: 10px; }
+    .drawer-body { padding: 30px; }
+
+    /* --- MODERN FORM INPUTS --- */
+    .input-wrapper { position: relative; margin-bottom: 20px; }
+    .input-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--sky-blue); }
+    .input-wrapper input, .input-wrapper select {
+        width: 100%; padding: 16px 16px 16px 48px; border: 2px solid #f1f5f9;
+        background: #f8fafc; border-radius: 16px; outline: none; font-size: 1rem;
+        transition: 0.3s; box-sizing: border-box;
+    }
+    .input-wrapper input:focus { border-color: var(--sky-blue); background: white; }
+    .input-label { font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: block; margin-left: 5px; text-align: left; }
+
+    /* --- STATUS POPUP --- */
+    .status-popup {
+        position: fixed; bottom: -120px; left: 20px; right: 20px;
+        background: var(--sky-dark); color: white; padding: 20px 25px;
+        border-radius: 24px; z-index: 10005; transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        display: flex; align-items: center; gap: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .status-popup.show { bottom: 30px; }
+    .drawer-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 58, 93, 0.4); backdrop-filter: blur(8px);
+        visibility: hidden; opacity: 0; transition: 0.4s; z-index: 10000;
+    }
+    .drawer-overlay.active { visibility: visible; opacity: 1; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<section class="service-container">
+    <h2 style="font-size: 2.2rem; color: var(--sky-dark);">Our Best Plans</h2>
+    <p style="color: #64748b; margin-top: -10px;">Choose a package to get started</p>
+
+    <div class="package-grid">
+        <div class="pkg-card ribbon-wrapper">
+            <div class="gift-ribbon"><span>SPECIAL</span></div>
+            <div style="color: var(--sky-blue); font-size: 0.8rem; font-weight: 800; margin-bottom: 10px;"><i class="fa-solid fa-bolt-lightning"></i> INSTANT ACCESS</div>
+            <h3>1 Hour Pass</h3>
+            <div class="pkg-price">Ksh 20<span>/hr</span></div>
+            <ul style="list-style: none; padding: 0; color: #64748b; font-size: 0.9rem; margin-bottom: 20px; text-align: left;">
+                <li style="margin-bottom:8px;"><i class="fa-solid fa-gift" style="color:var(--sky-blue)"></i> Perfect for visitors</li>
+                <li><i class="fa-solid fa-wifi" style="color:var(--sky-blue)"></i> Ultra-fast speed</li>
+            </ul>
+            <button class="btn-open-drawer" onclick="openDrawer('1 Hour Pass - 20')">ACTIVATE NOW</button>
+        </div>
+
+        <div class="pkg-card">
+            <h3>Home Lite</h3>
+            <div class="pkg-price">Ksh 1,500<span>/mo</span></div>
+            <button class="btn-open-drawer" onclick="openDrawer('Home Lite - 1,500')">GET CONNECTED</button>
+        </div>
+        
+        <div class="pkg-card" style="border: 2px solid var(--sky-blue);">
+            <div style="background: var(--sky-blue); color: white; width: fit-content; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; margin: -20px auto 10px;">MOST POPULAR</div>
+            <h3 style="color: var(--sky-blue);">Family Pro</h3>
+            <div class="pkg-price">Ksh 3,500<span>/mo</span></div>
+            <button class="btn-open-drawer" onclick="openDrawer('Family Pro - 3,500')">GET CONNECTED</button>
+        </div>
+
+        <div class="pkg-card">
+            <h3>Ultra Fiber</h3>
+            <div class="pkg-price">Ksh 5,500<span>/mo</span></div>
+            <button class="btn-open-drawer" onclick="openDrawer('Ultra Fiber - 5,500')">GET CONNECTED</button>
+        </div>
+    </div>
+</section>
+
+<div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+
+<div class="bottom-drawer" id="mainDrawer">
+    <div class="drawer-header">
+        <div class="drawer-handle"></div>
+        <h2 style="margin: 0; font-size: 1.4rem;">New Connection</h2>
+        <p id="planTag" style="color: var(--sky-blue); font-weight: 700; font-size: 0.85rem; margin-top: 5px;"></p>
+    </div>
+    
+    <div class="drawer-body">
+        <div id="formContent">
+            <form id="connectionForm" action="https://formspree.io/f/xldnprkk" method="POST">
+                <input type="hidden" name="Selected_Plan" id="planInput">
+                
+                <span class="input-label">Identity</span>
+                <div class="input-wrapper"><i class="fa-solid fa-user"></i><input type="text" name="name" placeholder="Full Name" required></div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div><span class="input-label">Phone</span><div class="input-wrapper"><i class="fa-solid fa-phone"></i><input type="tel" name="phone" placeholder="07..." required></div></div>
+                    <div><span class="input-label">Email</span><div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="email" name="email" placeholder="Email Address" required></div></div>
+                </div>
+
+                <span class="input-label">Location</span>
+                <div class="input-wrapper"><i class="fa-solid fa-location-dot"></i><input type="text" name="location" placeholder="Estate/House No." required></div>
+                <div class="input-wrapper"><i class="fa-solid fa-map-pin"></i><input type="text" name="landmark" placeholder="Nearest Landmark" required></div>
+
+                <span class="input-label">Urgency</span>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <select name="timeline" required>
+                        <option value="ASAP">As soon as possible</option>
+                        <option value="3 Days">Within 3 days</option>
+                        <option value="Weekend">This coming weekend</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-open-drawer">SEND REQUEST <i class="fa-solid fa-arrow-right" style="margin-left:10px;"></i></button>
+            </form>
+        </div>
+
+        <div id="successView" style="display:none; text-align:center; padding: 20px 0; animation: fadeIn 0.5s ease;">
+            <img src="https://i.ibb.co/MkKDrW74/image.png" alt="Success" style="width: 100%; max-width: 250px; border-radius: 20px; margin-bottom: 20px;">
+            <h2 style="margin: 0; color: var(--sky-dark); font-size: 2rem;">Request Sent!</h2>
+            <p style="color: #64748b; margin-top: 10px;">Our installation team will contact you shortly.</p>
+            <button onclick="closeDrawer()" class="btn-finish">CLOSE</button>
+        </div>
+    </div>
+</div>
+
+<div class="status-popup" id="statusPopup">
+    <span id="statusMessage">Processing...</span>
+    <div id="loader" style="width: 30px; height: 4px; background: rgba(255,255,255,0.2); overflow:hidden; display:none;"><div style="width: 100%; height: 100%; background: var(--sky-blue); animation: load 1s infinite;"></div></div>
+</div>
+
+<script>
+    function openDrawer(plan) {
+        document.getElementById('planInput').value = plan;
+        document.getElementById('planTag').innerText = "PLAN: " + plan.toUpperCase();
+        document.getElementById('mainDrawer').classList.add('active');
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('formContent').style.display = 'block';
+        document.getElementById('successView').style.display = 'none';
+    }
+
+    function closeDrawer() {
+        document.getElementById('mainDrawer').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('statusPopup').classList.remove('show');
+    }
+
+    const form = document.getElementById('connectionForm');
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        const popup = document.getElementById('statusPopup');
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('statusMessage').innerText = "Sending request...";
+        popup.classList.add('show');
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                popup.classList.remove('show');
+                document.getElementById('formContent').style.display = 'none';
+                document.getElementById('successView').style.display = 'block';
+                form.reset();
+            }
+        } catch (err) {
+            alert("Error: Check internet connection.");
+        } finally {
+            document.getElementById('submitBtn').disabled = false;
+        }
+    };
+</script>
 </body>
 </html>

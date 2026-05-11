@@ -115,6 +115,389 @@
         Get App
     </a>
 </header> 
+<style>
+/* --- INTERNET PLANS SECTION --- */
+:root {
+    --sky-blue: #00aeef;
+    --sky-gradient: linear-gradient(135deg, #00aeef 0%, #0077b6 100%);
+    --sky-dark: #003a5d;
+    --sky-bg: #f0f7ff;
+    --glass: rgba(255, 255, 255, 0.95);
+    --shadow: 0 10px 30px rgba(0, 58, 93, 0.1);
+}
+
+.service-container {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--sky-bg);
+}
+
+.package-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.pkg-card {
+    background: var(--glass);
+    border-radius: 28px;
+    padding: 35px 25px;
+    box-shadow: var(--shadow);
+    transition: 0.4s;
+    position: relative;
+}
+
+.pkg-card:hover {
+    transform: translateY(-12px);
+}
+
+.pkg-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.pkg-price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--sky-blue);
+    margin-bottom: 20px;
+}
+
+.pkg-price span {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.gift-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.gift-ribbon span {
+    position: absolute;
+    width: 150px;
+    padding: 8px 0;
+    background: var(--sky-blue);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    transform: rotate(45deg);
+    right: -35px;
+    top: 20px;
+}
+
+.plan-btn {
+    width: 100%;
+    background: var(--sky-gradient);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.plan-btn:active {
+    transform: scale(0.96);
+}
+
+/* --- PACKAGE DRAWER --- */
+.plan-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+}
+
+.plan-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.plan-drawer {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 92vh;
+    background: #fff;
+    border-radius: 35px 35px 0 0;
+    z-index: 10001;
+    transition: 0.5s ease;
+    overflow-y: auto;
+}
+
+.plan-drawer.active {
+    bottom: 0;
+}
+
+.plan-drawer-header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.plan-handle {
+    width: 50px;
+    height: 5px;
+    background: #ddd;
+    border-radius: 10px;
+    margin: auto auto 15px;
+}
+
+.plan-body {
+    padding: 25px;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sky-blue);
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    background: #f8fafc;
+    font-size: 1rem;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-align: left;
+}
+
+.finish-btn {
+    background: var(--sky-dark);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 40px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+</style>
+
+<!-- INTERNET PLANS SECTION -->
+<section class="service-container">
+
+    <h2 style="font-size:2.2rem;">Our Best Plans</h2>
+    <p style="color:#64748b;">Choose a package to get started</p>
+
+    <div class="package-grid">
+
+        <div class="pkg-card">
+            <div class="gift-ribbon">
+                <span>SPECIAL</span>
+            </div>
+
+            <h3>1 Hour Pass</h3>
+
+            <div class="pkg-price">
+                Ksh 20<span>/hr</span>
+            </div>
+
+            <button class="plan-btn" onclick="openPlanDrawer('1 Hour Pass - 20')">
+                ACTIVATE NOW
+            </button>
+        </div>
+
+        <div class="pkg-card">
+            <h3>Home Lite</h3>
+
+            <div class="pkg-price">
+                Ksh 1,500<span>/mo</span>
+            </div>
+
+            <button class="plan-btn" onclick="openPlanDrawer('Home Lite - 1,500')">
+                GET CONNECTED
+            </button>
+        </div>
+
+        <div class="pkg-card" style="border:2px solid var(--sky-blue);">
+            <h3 style="color:var(--sky-blue);">Family Pro</h3>
+
+            <div class="pkg-price">
+                Ksh 3,500<span>/mo</span>
+            </div>
+
+            <button class="plan-btn" onclick="openPlanDrawer('Family Pro - 3,500')">
+                GET CONNECTED
+            </button>
+        </div>
+
+        <div class="pkg-card">
+            <h3>Ultra Fiber</h3>
+
+            <div class="pkg-price">
+                Ksh 5,500<span>/mo</span>
+            </div>
+
+            <button class="plan-btn" onclick="openPlanDrawer('Ultra Fiber - 5,500')">
+                GET CONNECTED
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- PACKAGE DRAWER -->
+<div class="plan-overlay" id="planOverlay" onclick="closePlanDrawer()"></div>
+
+<div class="plan-drawer" id="planDrawer">
+
+    <div class="plan-drawer-header">
+        <div class="plan-handle"></div>
+
+        <h2>New Connection</h2>
+
+        <p id="selectedPlanText" style="color:var(--sky-blue); font-weight:bold;"></p>
+    </div>
+
+    <div class="plan-body">
+
+        <form id="connectionForm"
+              action="https://formspree.io/f/xldnprkk"
+              method="POST">
+
+            <input type="hidden"
+                   name="Selected_Plan"
+                   id="selectedPlanInput">
+
+            <span class="input-label">Full Name</span>
+
+            <div class="input-wrapper">
+                <i class="fa-solid fa-user"></i>
+
+                <input type="text"
+                       name="name"
+                       required
+                       placeholder="Full Name">
+            </div>
+
+            <span class="input-label">Phone Number</span>
+
+            <div class="input-wrapper">
+                <i class="fa-solid fa-phone"></i>
+
+                <input type="tel"
+                       name="phone"
+                       required
+                       placeholder="07...">
+            </div>
+
+            <span class="input-label">Location</span>
+
+            <div class="input-wrapper">
+                <i class="fa-solid fa-location-dot"></i>
+
+                <input type="text"
+                       name="location"
+                       required
+                       placeholder="Estate / House No">
+            </div>
+
+            <button type="submit" class="plan-btn">
+                SEND REQUEST
+            </button>
+
+        </form>
+
+        <div id="successBox"
+             style="display:none; text-align:center; padding:20px;">
+
+            <h2>Request Sent!</h2>
+
+            <p>Our team will contact you shortly.</p>
+
+            <button onclick="closePlanDrawer()"
+                    class="finish-btn">
+                CLOSE
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+function openPlanDrawer(plan) {
+
+    document.getElementById('selectedPlanInput').value = plan;
+
+    document.getElementById('selectedPlanText').innerText = plan;
+
+    document.getElementById('planDrawer')
+        .classList.add('active');
+
+    document.getElementById('planOverlay')
+        .classList.add('active');
+}
+
+function closePlanDrawer() {
+
+    document.getElementById('planDrawer')
+        .classList.remove('active');
+
+    document.getElementById('planOverlay')
+        .classList.remove('active');
+}
+
+document.getElementById('connectionForm')
+.addEventListener('submit', async function(e) {
+
+    e.preventDefault();
+
+    const form = this;
+
+    const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+
+    if(response.ok){
+
+        form.style.display = 'none';
+
+        document.getElementById('successBox')
+            .style.display = 'block';
+
+        form.reset();
+    }
+});
+</script>
 
  <section id="partnership" style="position: relative; padding: 60px 20px; overflow: hidden; background-color: #000;">
     <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">  
@@ -152,150 +535,4 @@
           <li class="tap-anim" onclick="showScreen('screen-plans')"><div><i class="fa-solid fa-wifi" style="margin-right:12px; color:var(--primary);"></i> Browse Plans</div><i class="fa-solid fa-chevron-right"></i></li>
           <li class="tap-anim" onclick="showScreen('screen-hardware')"><div><i class="fa-solid fa-microchip" style="margin-right:12px; color:var(--primary);"></i> Get Hardware</div><i class="fa-solid fa-chevron-right"></i></li>
           <li class="tap-anim" onclick="showScreen('screen-speed')"><div><i class="fa-solid fa-gauge-high" style="margin-right:12px; color:var(--primary);"></i> Speed Test</div><i class="fa-solid fa-chevron-right"></i></li>
-          <li class="tap-anim" onclick="showScreen('screen-coverage')"><div><i class="fa-solid fa-map-location-dot" style="margin-right:12px; color:var(--primary);"></i> Coverage Map</div><i class="fa-solid fa-chevron-right"></i></li>
-        </ul>
-      </div>
-
-      <div class="view-screen" id="screen-speed" style="padding:0;">
-        <div style="padding: 15px 25px;"><button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin:0;" onclick="showScreen('screen-main')">← BACK</button></div>
-        <iframe src="https://fast.com" style="width:100%; height:100%; border:none;"></iframe>
-      </div>
-
-      <div class="view-screen" id="screen-coverage" style="padding: 0;">
-        <div style="padding: 15px 25px; display:flex; justify-content:space-between; align-items:center;">
-          <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin:0;" onclick="showScreen('screen-main')">← BACK</button>
-        </div>
-        <div id="coverage-map"></div>
-      </div>
-
-      <div class="view-screen" id="screen-plans">
-        <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin-bottom:15px;" onclick="showScreen('screen-main')">← BACK</button>
-        <div onclick="initPay('Entry - 2Mbps', 5.00)" class="plan-card tap-anim"><div><strong>2 Mbps</strong></div><span>$5.00</span></div>
-        <div onclick="initPay('Standard - 10Mbps', 15.00)" class="plan-card tap-anim"><div><strong>10 Mbps</strong></div><span>$15.00</span></div>
-        <div onclick="initPay('Premium - 50Mbps', 35.00)" class="plan-card tap-anim"><div><strong>50 Mbps</strong></div><span>$35.00</span></div>
-      </div>
-
-      <div class="view-screen" id="screen-hardware">
-        <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin-bottom:15px;" onclick="showScreen('screen-main')">← BACK</button>
-        <form id="hardwareForm" action="https://formspree.io/f/xldnprkk" method="POST">
-          <input type="text" name="name" class="input-field" placeholder="Full Name" required>
-          <input type="tel" name="phone" class="input-field" placeholder="Phone Number" required>
-          <button type="submit" class="btn-hero tap-anim" style="width:100%; background:var(--sky-gradient); color:white; height:55px;">SUBMIT ORDER</button>
-        </form>
-      </div>
-
-      <div class="view-screen" id="screen-pay">
-        <button class="btn-hero tap-anim" style="background:#f5f5f5; color:#666; margin-bottom:15px;" onclick="showScreen('screen-plans')">← BACK</button>
-        <h3 id="displayPlan">Plan</h3>
-        <p id="displayPrice" style="font-weight:700; margin-bottom:15px;"></p>
-        <input type="number" id="accNumber" class="input-field" placeholder="Enter Account Number">
-        <div id="paypal-button-container"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="nav-drawer" id="contactDrawer" style="height: 55vh;">
-    <div class="drawer-handle"></div>
-    <div class="drawer-header"><h2>Support</h2><button class="tap-anim" onclick="closeAllDrawers()" style="border:none;background:none;font-size:28px;color:#ccc;">&times;</button></div>
-    <div style="padding: 25px;">
-      <textarea id="wpMsg" class="msg-area" placeholder="Message us..."></textarea>
-      <button class="btn-hero tap-anim" style="width:100%; background:#25d366; color:white; height:55px;" onclick="sendWhatsApp()">SEND TO WHATSAPP</button>
-    </div>
-  </div>
-
-  <div class="whatsapp-float tap-anim" onclick="toggleDrawer('contactDrawer')"><i class="fa-brands fa-whatsapp"></i></div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya. Through this collaboration, we deliver fast and stable satellite connectivity.';  
-    const typedText = document.getElementById("typed-text");  
-    let charIdx = 0;  
-    function type() {  
-      if (charIdx < fullText.length) {  
-        if (fullText.charAt(charIdx) === '<') {  
-          let endTag = fullText.indexOf('>', charIdx) + 1;  
-          typedText.innerHTML += fullText.substring(charIdx, endTag);  
-          charIdx = endTag;  
-        } else {  
-          typedText.innerHTML += fullText.charAt(charIdx);  
-          charIdx++;  
-        }  
-        setTimeout(type, 35);  
-      }  
-    }  
-
-    let map = null;
-    function initMap() {
-      if (map) return;
-      map = L.map('coverage-map').setView([-1.286, 36.817], 10);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-      L.circle([-1.286, 36.817], { radius: 30000, color: '#00aeef' }).addTo(map).bindPopup("Nairobi Active");
-    }
-
-    function toggleDrawer(id) {
-      closeAllDrawers();
-      document.getElementById(id).classList.add('active');
-      document.getElementById('overlay').classList.add('active');
-    }
-
-    function closeAllDrawers() {
-      document.querySelectorAll('.nav-drawer').forEach(d => d.classList.remove('active'));
-      document.getElementById('overlay').classList.remove('active');
-    }
-
-    function showScreen(id) {
-      document.querySelectorAll('.view-screen').forEach(s => s.classList.remove('active', 'prev'));
-      document.getElementById(id).classList.add('active');
-      if (id === 'screen-coverage') setTimeout(initMap, 300);
-    }
-
-    function notify(message, type = 'error') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      toast.innerHTML = `<i class="fa-solid ${type==='error'?'fa-circle-exclamation':'fa-circle-check'}"></i> <span>${message}</span>`;
-      container.appendChild(toast);
-      setTimeout(() => toast.classList.add('show'), 10);
-      setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
-    }
-
-    function sendWhatsApp() {
-      const msg = document.getElementById('wpMsg').value;
-      window.open(`https://wa.me/254729499463?text=${encodeURIComponent(msg || 'Hello Bintunet')}`, '_blank');
-    }
-
-    document.getElementById('hardwareForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const response = await fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: {'Accept': 'application/json'}});
-      if (response.ok) { notify("Order received!", "success"); e.target.reset(); setTimeout(closeAllDrawers, 2000); }
-    });
-
-    let selectedPrice = 0;
-    function initPay(name, price) {
-      selectedPrice = price;
-      document.getElementById('displayPlan').innerText = name;
-      document.getElementById('displayPrice').innerText = "Total: $" + price.toFixed(2);
-      showScreen('screen-pay');
-      renderPaypal();
-    }
-
-    function renderPaypal() {
-      const container = document.getElementById('paypal-button-container');
-      container.innerHTML = ''; 
-      paypal.Buttons({
-        style: { layout: 'vertical', color: 'blue', shape: 'rect' },
-        createOrder: (data, actions) => {
-          const acc = document.getElementById('accNumber').value;
-          if(!acc || acc.length < 5) { notify("Enter Account Number first."); return; }
-          return actions.order.create({ purchase_units: [{ amount: { value: selectedPrice.toString() } }] });
-        },
-        onApprove: (data, actions) => {
-          return actions.order.capture().then(() => { notify("Payment successful!", "success"); closeAllDrawers(); });
-        }
-      }).render('#paypal-button-container');
-    }
-
-    window.onload = () => { type(); };
-  </script>
-</body>  
-</html>
+          <li class="tap-anim" onclick="showScreen('screen-coverage')"><div><i class="fa-solid fa-map-location-dot" style="margin-right:12

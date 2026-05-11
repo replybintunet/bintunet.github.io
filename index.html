@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>  
   <title>BINTUNET.CO.KE | Fast, Reliable Internet</title>  
   <link rel="manifest" href="manifest.json" />  
-  <meta name="theme-color" content="#e60000">  
+  <meta name="theme-color" content="#00aeef">  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>  
   <link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,7 +14,11 @@
   <script src="https://www.paypal.com/sdk/js?client-id=ARX_5m0pm3u1OZyrMoxLijWx3XUN00VwyhZshcPwaixaIWLIwtHZST3-75Gpi-a5CQMsfSO3RjXGOnuS&components=buttons,funding-eligibility&enable-funding=card"></script>
 
   <style>  
-    :root { --primary: #e60000; --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    :root { 
+        --primary: #00aeef; /* Updated to Sky Blue */
+        --sky-gradient: linear-gradient(135deg, #00aeef 0%, #0077b6 100%);
+        --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }  
     body { font-family: 'Inter', sans-serif; color: #333; background: #fff; overflow-x: hidden; }  
 
@@ -33,33 +37,17 @@
     .social-icons a:active img { animation: logoPulse 0.3s ease-in-out; }
 
    /* --- HEADER --- */
-.menu-toggle { position: fixed; top: 20px; left: 20px; background: var(--primary); color: white; padding: 12px 18px; font-family: 'Runtoe', cursive; font-size: 18px; border: none; border-radius: 8px; z-index: 5000; cursor: pointer; box-shadow: 0 4px 15px rgba(230, 0, 0, 0.3); }  
+    /* Menu Button set to Sky Blue */
+    .menu-toggle { position: fixed; top: 20px; left: 20px; background: var(--primary); color: white; padding: 12px 18px; font-family: 'Runtoe', cursive; font-size: 18px; border: none; border-radius: 8px; z-index: 5000; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 174, 239, 0.3); }  
 
-header { 
-  position: relative; 
-  height: 50vh; /* Changed from 100vh to 50vh to remove the white gap */
-  min-height: 350px; 
-  color: white; 
-  text-align: center; 
-  padding-top: 3rem; /* Lowered padding to center text in the smaller space */
-  overflow: hidden; 
-}  
-
-.header-video-container { 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%; /* Changed to 100% so it fills the new 50vh header size */
-  z-index: 1; 
-}  
-
-.header-video-container video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }  
-.social-icons { position: absolute; top: 20px; right: 20px; display: flex; gap: 12px; z-index: 6000; }  
-.social-icons a img { width: 32px; height: 32px; border-radius: 6px; transition: 0.3s; }
-.hero-content { position: relative; z-index: 10; }
-.brand { font-family: 'Runtoe', cursive; font-size: 3.2rem; text-transform: uppercase; margin: 10px 0; }  
-.btn-hero { background: white; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    header { position: relative; height: 50vh; min-height: 350px; color: white; text-align: center; padding-top: 3rem; overflow: hidden; }  
+    .header-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }  
+    .header-video-container video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }  
+    .social-icons { position: absolute; top: 20px; right: 20px; display: flex; gap: 12px; z-index: 6000; }  
+    .social-icons a img { width: 32px; height: 32px; border-radius: 6px; transition: 0.3s; }
+    .hero-content { position: relative; z-index: 10; }
+    .brand { font-family: 'Runtoe', cursive; font-size: 3.2rem; text-transform: uppercase; margin: 10px 0; }  
+    .btn-hero { background: white; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
     /* --- DRAWERS --- */
     .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); visibility: hidden; opacity: 0; transition: var(--transition); z-index: 7000; backdrop-filter: blur(4px); }
@@ -83,46 +71,19 @@ header {
     #coverage-map { height: 100%; width: 100%; border-radius: 20px; min-height: 300px; }
     .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; cursor: pointer; z-index: 5000; box-shadow: 0 8px 20px rgba(37,211,102,0.3); transition: 0.3s; }
 
-    /* --- NEW SECTIONS STYLES --- */
+    /* --- CONTACT SECTION --- */
     .contact-sec { position: relative; background: url('https://i.ibb.co/qYY24m99/section2-41f342b5.jpg') no-repeat center center/cover; padding: 60px 20px; border-radius: 20px; color: white; text-align: center; overflow: hidden; margin: 40px auto; max-width: 700px; }
     .contact-sec::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1; border-radius: 20px; }
     .contact-sec * { position: relative; z-index: 2; }
     .contact-sec h2 { font-size: 30px; font-family: 'Runtoe', cursive; margin-bottom: 20px; color: #fff; }
     .contact-sec p { font-size: 16px; margin: 10px 0; }
-    .contact-sec a { color: #ffd700; font-weight: 500; text-decoration: none; }
-    .contact-sec i { margin-right: 8px; color: #ffd700; }
+    .contact-sec a { color: var(--primary); font-weight: 500; text-decoration: none; }
+    .contact-sec i { margin-right: 8px; color: var(--primary); }
 
-    .main-footer { background: linear-gradient(to right, #ff4e50, #f9d423); color: white; text-align: center; padding: 20px 10px; font-size: 14px; font-weight: 500; border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); margin-top: 40px; }
-    
-        /* --- NEW SECTIONS STYLES --- */
-        .download-app-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: #fff;
-  color: #000;
-  padding: 10px 15px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 6000; /* Stays above the video */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: 0.3s;
-}
+    .main-footer { background: var(--sky-gradient); color: white; text-align: center; padding: 20px 10px; font-size: 14px; font-weight: 500; border-top-left-radius: 20px; border-top-right-radius: 20px; margin-top: 40px; }
 
-.download-app-btn:active {
-  transform: scale(0.95);
-}
-
-.download-app-btn i {
-  color: #3DDC84; /* Android Green color */
-  font-size: 1.2rem;
-}
-
+    .download-app-btn { position: absolute; bottom: 20px; right: 20px; background: #fff; color: #000; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; z-index: 6000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; }
+    .download-app-btn i { color: #3DDC84; font-size: 1.2rem; }
   </style>  
 </head>  
 <body>  
@@ -137,8 +98,6 @@ header {
     </video>
   </div>
 
-
-
     <div class="social-icons">
       <a href="https://facebook.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB"></a>
       <a href="https://x.com/bintunet" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X"></a>
@@ -151,26 +110,23 @@ header {
       <h1 class="brand">BINTUNET.CO.KE</h1>  
       <button class="btn-hero tap-anim" onclick="toggleDrawer('mainDrawer')">GET CONNECTED</button>  
     </div>
-<a href="https://apk.e-droid.net/apk/app4031563-8kpqxs.apk?v=2" class="download-app-btn tap-anim">
-    <i class="fa-brands fa-android"></i>
-    Get App
-  </a>
+    <a href="https://apk.e-droid.net/apk/app4031563-8kpqxs.apk?v=2" class="download-app-btn tap-anim">
+        <i class="fa-brands fa-android"></i>
+        Get App
+    </a>
 </header> 
 
  <section id="partnership" style="position: relative; padding: 60px 20px; overflow: hidden; background-color: #000;">
     <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">  
       <source src="https://raw.githubusercontent.com/replybintunet/bintunet.github.io/main/Starlink_What_Is_Starlink_1_1_1.mp4" type="video/mp4">  
     </video>  
-
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 2;"></div>
-
     <div style="position: relative; max-width: 800px; margin: 0 auto; text-align: center; z-index: 3;">  
-      <h2 style="font-family: 'Runtoe', cursive; color: #e60000; font-size: 2rem;">Our Partnership</h2>  
+      <h2 style="font-family: 'Runtoe', cursive; color: var(--primary); font-size: 2rem;">Our Partnership</h2>  
       <img src="https://i.ibb.co/rf1JH37Y/starlink-logo-png-seeklogo-490840.png" alt="Starlink Logo" style="max-width: 200px; margin: 1rem auto; display: block;">  
-      <p id="typed-text" style="font-size: 1.1rem; color: #fff; min-height: 120px; border-right: 2px solid #e60000; display: inline-block; padding: 10px;"></p>  
+      <p id="typed-text" style="font-size: 1.1rem; color: #fff; min-height: 120px; border-right: 2px solid var(--primary); display: inline-block; padding: 10px;"></p>  
     </div>  
 </section>
-
 
   <section id="contact" class="contact-sec">  
     <h2>Contact Us</h2>  
@@ -224,7 +180,7 @@ header {
         <form id="hardwareForm" action="https://formspree.io/f/xldnprkk" method="POST">
           <input type="text" name="name" class="input-field" placeholder="Full Name" required>
           <input type="tel" name="phone" class="input-field" placeholder="Phone Number" required>
-          <button type="submit" class="btn-hero tap-anim" style="width:100%; background:var(--primary); color:white; height:55px;">SUBMIT ORDER</button>
+          <button type="submit" class="btn-hero tap-anim" style="width:100%; background:var(--sky-gradient); color:white; height:55px;">SUBMIT ORDER</button>
         </form>
       </div>
 
@@ -246,15 +202,11 @@ header {
       <button class="btn-hero tap-anim" style="width:100%; background:#25d366; color:white; height:55px;" onclick="sendWhatsApp()">SEND TO WHATSAPP</button>
     </div>
   </div>
-  
-
-
 
   <div class="whatsapp-float tap-anim" onclick="toggleDrawer('contactDrawer')"><i class="fa-brands fa-whatsapp"></i></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // --- TYPING EFFECT ---
     const fullText = 'We are proud to partner with <strong>Starlink</strong> to extend high-speed internet to underserved areas across Kenya. Through this collaboration, we deliver fast and stable satellite connectivity.';  
     const typedText = document.getElementById("typed-text");  
     let charIdx = 0;  
@@ -272,15 +224,12 @@ header {
       }  
     }  
 
-    // --- DRAWER & MAP LOGIC ---
-    let selectedPrice = 0;
     let map = null;
-
     function initMap() {
       if (map) return;
-      map = L.map('coverage-map').setView([0.0236, 37.9062], 6);
+      map = L.map('coverage-map').setView([-1.286, 36.817], 10);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-      L.circle([-1.286, 36.817], { radius: 30000, color: 'red' }).addTo(map).bindPopup("Nairobi Active");
+      L.circle([-1.286, 36.817], { radius: 30000, color: '#00aeef' }).addTo(map).bindPopup("Nairobi Active");
     }
 
     function toggleDrawer(id) {
@@ -315,13 +264,13 @@ header {
       window.open(`https://wa.me/254729499463?text=${encodeURIComponent(msg || 'Hello Bintunet')}`, '_blank');
     }
 
-    // --- FORMS & PAYPAL ---
     document.getElementById('hardwareForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const response = await fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: {'Accept': 'application/json'}});
       if (response.ok) { notify("Order received!", "success"); e.target.reset(); setTimeout(closeAllDrawers, 2000); }
     });
 
+    let selectedPrice = 0;
     function initPay(name, price) {
       selectedPrice = price;
       document.getElementById('displayPlan').innerText = name;
@@ -334,7 +283,7 @@ header {
       const container = document.getElementById('paypal-button-container');
       container.innerHTML = ''; 
       paypal.Buttons({
-        style: { layout: 'vertical', color: 'gold', shape: 'rect' },
+        style: { layout: 'vertical', color: 'blue', shape: 'rect' },
         createOrder: (data, actions) => {
           const acc = document.getElementById('accNumber').value;
           if(!acc || acc.length < 5) { notify("Enter Account Number first."); return; }

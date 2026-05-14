@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- ======================================================
+TITLE
+====================================================== -->
+<title>BINTUNET.CO.KE | Fast, Reliable Internet</title>
+
+<!-- ======================================================
+META TAGS
+====================================================== -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="theme-color" content="#e60000">
+
+<!-- ======================================================
+FONTS & ICONS
+====================================================== -->
+<link rel="manifest" href="manifest.json" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.cdnfonts.com/css/runtoe" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- ======================================================
+PAYPAL SDK
+====================================================== -->
+<script src="https://www.paypal.com/sdk/js?client-id=ARX_5m0pm3u1OZyrMoxLijWx3XUN00VwyhZshcPwaixaIWLIwtHZST3-75Gpi-a5CQMsfSO3RjXGOnuS&components=buttons,funding-eligibility&enable-funding=card"></script>
+
+<style>
+
+:root{
+  --primary:#ff0000;
+  --dark:#111;
+  --light:#ffffff;
+  --gray:#f5f5f5;
+  --transition:0.4s cubic-bezier(.2,.9,.2,1);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#fff;
+  overflow-x:hidden;
+  color:#222;
+}
+
+/* ======================================================
+HEADER
+====================================================== */
+
+header{
+  position:relative;
+  width:100%;
+  height:60vh; /* Reduced from 100vh */
+  min-height:380px;
+  max-height:600px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  border-radius:0 0 30px 30px;
+}
+
+.header-video-container{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+
+.header-video-container video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.45);
+}
+
+.hero-content{
+  position:relative;
+  z-index:10;
+  padding:20px;
+}
+
+.brand{
+  font-size:3rem;
+  font-family:'Runtoe',cursive;
+  margin:15px 0;
+}
+
+.hero-text{
+  max-width:700px;
+  margin:auto;
+  line-height:1.7;
+  opacity:.95;
+  font-size:15px;
+}
+
+.btn-hero{
+  margin-top:25px;
+  border:none;
+  background:white;
+  color:#ff0000;
+  padding:16px 28px;
+  border-radius:60px;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  transition:.3s;
+}
+
+.btn-hero:hover{
+  transform:translateY(-3px);
+}
+
+/* ======================================================
+MOBILE
+====================================================== */
+
+@media(max-width:768px){
+
+  header{
+    height:48vh;
+    min-height:320px;
+    border-radius:0 0 25px 25px;
+  }
+
+  .brand{
+    font-size:2.2rem;
+  }
+
+  .hero-text{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  .btn-hero{
+    padding:14px 24px;
+    font-size:14px;
+  }
+
+}
+/* ======================================================
+MENU BUTTON
+====================================================== */
+
+.menu-toggle{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:99999;
+  background:#ff0000;
+  color:white;
+  border:none;
+  padding:14px 22px;
+  border-radius:18px;
+  font-weight:700;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  cursor:pointer;
+  box-shadow:0 12px 40px rgba(255,0,0,.3);
+}
+
+/* ======================================================
+SOCIAL ICONS
+====================================================== */
+
+.social-icons{
+  position:absolute;
+  top:20px;
+  right:20px;
+  z-index:100;
+  display:flex;
+  gap:12px;
+}
+
+.social-icons a img{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+}
+
+/* ======================================================
+DRAWER
+====================================================== */
+
+.drawer-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(6px);
+  opacity:0;
+  visibility:hidden;
+  transition:.35s;
+  z-index:999998;
+}
+
+.drawer-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.nav-drawer{
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:92vh;
+  background:white;
+  border-radius:35px 35px 0 0;
+  transform:translateY(100%);
+  transition:var(--transition);
+  z-index:999999;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.nav-drawer.active{
+  transform:translateY(0);
+}
+
+.drawer-handle{
+  width:70px;
+  height:5px;
+  background:#ddd;
+  border-radius:20px;
+  margin:12px auto;
+}
+
+.drawer-header{
+  padding:5px 24px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #f2f2f2;
+}
+
+.drawer-header h2{
+  color:#ff0000;
+  font-size:34px;
+  font-family:'Runtoe',cursive;
+}
+
+.drawer-header p{
+  color:#777;
+  margin-top:5px;
+}
+
+.close-btn{
+  border:none;
+  background:none;
+  font-size:36px;
+  color:#999;
+}
+
+/* ======================================================
+SCREENS
+====================================================== */
+
+.view-container{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+}
+
+.view-screen{
+  position:absolute;
+  inset:0;
+  background:white;
+  overflow-y:auto;
+  padding:24px;
+  transform:translateX(100%);
+  transition:.35s;
+}
+
+.view-screen.active{
+  transform:translateX(0);
+}
+
+/* ======================================================
+CARDS
+====================================================== */
+
+.creator-card{
+  background:linear-gradient(135deg,#ff0000,#ff4747);
+  color:white;
+  border-radius:30px;
+  padding:30px;
+  margin-bottom:24px;
+}
+
+.creator-card h3{
+  font-size:34px;
+  margin:14px 0;
+}
+
+.creator-card p{
+  line-height:1.8;
+}
+
+.creator-card button{
+  margin-top:20px;
+  border:none;
+  background:white;
+  color:#ff0000;
+  padding:16px 24px;
+  border-radius:50px;
+  font-weight:700;
+}
+
+.creator-badge{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:40px;
+  background:rgba(255,255,255,.2);
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ======================================================
+MENU LIST
+====================================================== */
+
+.drawer-list{
+  list-style:none;
+}
+
+.drawer-list li{
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:24px;
+  padding:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  cursor:pointer;
+}
+
+.menu-left{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.menu-icon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  background:#fff0f0;
+  color:#ff0000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+/* ======================================================
+BUTTONS
+====================================================== */
+
+.back-btn{
+  border:none;
+  background:#f5f5f5;
+  padding:14px 18px;
+  border-radius:16px;
+  margin-bottom:20px;
+}
+
+.screen-title{
+  font-size:34px;
+  margin-bottom:24px;
+}
+
+/* ======================================================
+ABOUT
+====================================================== */
+
+.about-box{
+  background:#fafafa;
+  border-radius:30px;
+  padding:30px;
+  text-align:center;
+}
+
+.profile-pic{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:20px;
+}
+
+/* ======================================================
+YOUTUBE
+====================================================== */
+
+.youtube-card iframe{
+  width:100%;
+  height:240px;
+  border:none;
+  border-radius:24px;
+}
+
+.youtube-btn{
+  display:block;
+  margin-top:18px;
+  text-align:center;
+  background:#ff0000;
+  color:white;
+  text-decoration:none;
+  padding:18px;
+  border-radius:18px;
+  font-weight:700;
+}
+
+/* ======================================================
+FORMS
+====================================================== */
+
+form input,
+form textarea,
+form select{
+  width:100%;
+  padding:18px;
+  border-radius:18px;
+  border:2px solid #f2f2f2;
+  margin-bottom:16px;
+  font-size:16px;
+}
+
+form textarea{
+  resize:none;
+  height:140px;
+}
+
+.submit-btn{
+  width:100%;
+  border:none;
+  background:#ff0000;
+  color:white;
+  padding:18px;
+  border-radius:18px;
+  font-weight:700;
+  font-size:16px;
+}
+
+/* ======================================================
+INFO BOX
+====================================================== */
+
+.info-box{
+  background:#fff8ef;
+  border:1px solid #ffe3bb;
+  border-radius:24px;
+  padding:20px;
+  display:flex;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.info-icon{
+  min-width:50px;
+  height:50px;
+  border-radius:16px;
+  background:#fff0d9;
+  color:#ff9800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ======================================================
+PAYMENT
+====================================================== */
+
+.payment-box{
+  background:#fafafa;
+  border-radius:28px;
+  padding:24px;
+}
+
+.payment-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.payment-price{
+  font-size:36px;
+  font-weight:700;
+  color:#ff0000;
+}
+
+/* ======================================================
+MODAL
+====================================================== */
+
+.instruction-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:9999999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(6px);
+  opacity:0;
+  visibility:hidden;
+  transition:.35s;
+}
+
+.instruction-modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.instruction-box{
+  width:92%;
+  max-width:550px;
+  max-height:85vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:30px;
+  padding:28px;
+  position:relative;
+}
+
+.instruction-close{
+  position:absolute;
+  top:14px;
+  right:18px;
+  border:none;
+  background:none;
+  font-size:36px;
+}
+
+.instruction-section{
+  background:#fafafa;
+  border-radius:24px;
+  padding:20px;
+  margin-top:18px;
+}
+
+.instruction-section h3{
+  margin-bottom:12px;
+}
+
+.instruction-section ol{
+  padding-left:20px;
+  line-height:2;
+}
+
+.instruction-warning{
+  margin-top:20px;
+  background:#fff1f1;
+  color:#ff0000;
+  border-radius:20px;
+  padding:18px;
+}
+
+/* ======================================================
+TOASTS
+====================================================== */
+
+#toast-container{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:99999999;
+  width:92%;
+  max-width:420px;
+}
+
+.toast{
+  color:white;
+  padding:18px;
+  border-radius:20px;
+  margin-bottom:12px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  animation:slideDown .4s ease;
+}
+
+@keyframes slideDown{
+  from{
+    transform:translateY(-40px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* ======================================================
+WHATSAPP
+====================================================== */
+
+.whatsapp-float{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#25d366;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  z-index:9999;
+  box-shadow:0 12px 40px rgba(37,211,102,.35);
+}
+
+/* ======================================================
+RESPONSIVE
+====================================================== */
+
+@media(max-width:768px){
+
+  .brand{
+    font-size:2.7rem;
+  }
+
+  .creator-card h3,
+  .screen-title{
+    font-size:28px;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- ======================================================
+TOASTS
+====================================================== -->
+<div id="toast-container"></div>
+
+<!-- ======================================================
+MENU BUTTON
+====================================================== -->
+<button class="menu-toggle"
+onclick="toggleDrawer()">
+<i class="fa-solid fa-bars"></i>
+MENU
+</button>
+
+<!-- ======================================================
+HEADER
+====================================================== -->
+<header>
+
+<div class="header-video-container">
+<video autoplay muted loop playsinline>
+<source src="background.mp4" type="video/mp4">
+</video>
+</div>
+
+<!-- SOCIALS -->
+<div class="social-icons">
+
+<a href="https://facebook.com/bintunet" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</a>
+
+<a href="https://instagram.com/bintunet" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png">
+</a>
+
+<a href="https://x.com/bintunet" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png">
+</a>
+
+<a href="https://tiktok.com/@bintunet" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png">
+</a>
+
+</div>
+
+<!-- HERO -->
+<div class="hero-content">
+
+<img src="https://i.ibb.co/qYCmznx7/In-Shot-20250621-220352979.png"
+style="max-width:130px;">
+
+<h1 class="brand">
+BINTUNET.CO.KE
+</h1>
+
+<p class="hero-text">
+Reliable creator monetization services,
+professional content support and digital
+creator growth solutions.
+</p>
+
+<button class="btn-hero"
+onclick="toggleDrawer()">
+OPEN CREATOR HUB
+</button>
+
+</div>
+</header>
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<!-- PAYPAL -->
+<script src="https://www.paypal.com/sdk/js?client-id=ARX_5m0pm3u1OZyrMoxLijWx3XUN00VwyhZshcPwaixaIWLIwtHZST3-75Gpi-a5CQMsfSO3RjXGOnuS&currency=USD"></script>
+
+<section class="cinema-vlog-section">
+
+  <div class="vlog-top-header">
+    <span class="mini-label">BINTU PREMIUM STORIES</span>
+
+    <h1>Cinematic Creator Stories</h1>
+
+    <p>
+      Discover premium creator stories, lifestyle moments,
+      exclusive growth insights and behind-the-scenes experiences.
+    </p>
+  </div>
+
+  <div id="vlogGrid" class="premium-vlog-grid"></div>
+
+</section>
+
+<!-- PAYPAL POPUP -->
+<div id="paypalPopup" class="paypal-popup-overlay">
+
+  <div class="paypal-popup-card">
+
+    <button class="popup-close" onclick="closePaypalDrawer()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="premium-lock-icon">
+      <i class="fa-solid fa-crown"></i>
+    </div>
+
+    <h2>Unlock Premium Access</h2>
+
+    <p>
+      Get instant access to all premium creator videos and exclusive stories.
+    </p>
+
+    <div class="premium-benefits">
+      <div>
+        <i class="fa-solid fa-circle-check"></i>
+        Watch All Premium Videos
+      </div>
+
+      <div>
+        <i class="fa-solid fa-circle-check"></i>
+        HD Streaming Experience
+      </div>
+
+      <div>
+        <i class="fa-solid fa-circle-check"></i>
+        Exclusive Creator Content
+      </div>
+    </div>
+
+    <div id="paypal-button-container"></div>
+
+  </div>
+
+</div>
+
+<!-- VIDEO PLAYER -->
+<div id="videoViewer" class="viewer-overlay">
+
+  <div class="viewer-box">
+
+    <button class="viewer-close" onclick="closeViewer()">
+      <i class="fa-solid fa-xmark"></i>
+      Close Player
+    </button>
+
+    <div class="viewer-video-wrap">
+      <iframe
+        id="viewerVideo"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="viewer-content">
+
+      <span id="viewerTag"></span>
+
+      <h2 id="viewerTitle"></h2>
+
+      <p id="viewerDesc"></p>
+
+      <!-- COMMENTS -->
+      <div class="comments-area">
+
+        <div class="comments-header">
+          <h3>Community Comments</h3>
+        </div>
+
+        <form id="commentForm" class="comment-form">
+
+          <input
+            type="text"
+            id="commentName"
+            placeholder="Your name"
+            required>
+
+          <textarea
+            id="commentText"
+            placeholder="Share your thoughts..."
+            required>
+          </textarea>
+
+          <button type="submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            Send Comment
+          </button>
+
+        </form>
+
+        <div id="commentsContainer" class="comments-list"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f7f7f7;
+}
+
+.cinema-vlog-section{
+  padding:90px 20px;
+}
+
+.vlog-top-header{
+  max-width:850px;
+  margin:auto;
+  text-align:center;
+  margin-bottom:70px;
+}
+
+.mini-label{
+  display:inline-block;
+  padding:10px 18px;
+  background:#000;
+  color:#fff;
+  border-radius:100px;
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.vlog-top-header h1{
+  font-size:clamp(38px,5vw,64px);
+  margin:0 0 20px;
+  color:#111;
+  line-height:1.1;
+}
+
+.vlog-top-header p{
+  font-size:18px;
+  color:#777;
+  line-height:1.8;
+}
+
+.premium-vlog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:35px;
+  max-width:1300px;
+  margin:auto;
+}
+
+.vlog-card{
+  position:relative;
+  background:#fff;
+  border-radius:30px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.35s;
+  box-shadow:0 10px 35px rgba(0,0,0,.05);
+}
+
+.vlog-card:hover{
+  transform:translateY(-10px);
+}
+
+.video-thumb-wrap{
+  position:relative;
+  overflow:hidden;
+}
+
+.video-thumb-wrap img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  display:block;
+}
+
+.play-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(to top,rgba(0,0,0,.5),transparent);
+}
+
+.play-overlay i{
+  width:80px;
+  height:80px;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#000;
+  font-size:28px;
+}
+
+.premium-badge{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:gold;
+  color:#000;
+  padding:8px 16px;
+  border-radius:100px;
+  font-size:12px;
+  font-weight:800;
+  z-index:2;
+}
+
+.card-content{
+  padding:28px;
+}
+
+.card-tag{
+  color:#c9a227;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.card-content h3{
+  font-size:30px;
+  margin:14px 0;
+  color:#111;
+}
+
+.card-content p{
+  color:#777;
+  line-height:1.7;
+}
+
+.unlock-layer{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:4;
+}
+
+.unlock-layer button{
+  background:#000;
+  color:#fff;
+  border:none;
+  padding:16px 28px;
+  border-radius:100px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.paypal-popup-overlay,
+.viewer-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:999999;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.paypal-popup-card{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:35px;
+  padding:45px 35px;
+  position:relative;
+  animation:popupUp .4s ease;
+}
+
+@keyframes popupUp{
+  from{
+    transform:translateY(40px);
+    opacity:0;
+  }
+
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+.popup-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:45px;
+  height:45px;
+  border:none;
+  border-radius:50%;
+  background:#f3f3f3;
+  cursor:pointer;
+}
+
+.premium-lock-icon{
+  width:90px;
+  height:90px;
+  background:#000;
+  color:#fff;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+.paypal-popup-card h2{
+  text-align:center;
+  margin-top:30px;
+  font-size:38px;
+}
+
+.paypal-popup-card p{
+  text-align:center;
+  color:#777;
+  line-height:1.7;
+}
+
+.premium-benefits{
+  display:grid;
+  gap:15px;
+  margin:35px 0;
+}
+
+.premium-benefits div{
+  background:#f7f7f7;
+  padding:16px;
+  border-radius:18px;
+  font-weight:600;
+}
+
+.viewer-box{
+  width:100%;
+  max-width:1150px;
+  max-height:95vh;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:35px;
+  padding:25px;
+  position:relative;
+}
+
+.viewer-close{
+  position:sticky;
+  top:0;
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:none;
+  background:#000;
+  color:#fff;
+  padding:14px 22px;
+  border-radius:100px;
+  cursor:pointer;
+  z-index:10;
+}
+
+.viewer-video-wrap{
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:28px;
+  background:#000;
+  margin-top:20px;
+}
+
+.viewer-video-wrap iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.viewer-content{
+  padding-top:25px;
+}
+
+.viewer-content span{
+  color:#c9a227;
+  font-weight:800;
+}
+
+.viewer-content h2{
+  font-size:48px;
+  margin:10px 0;
+}
+
+.viewer-content p{
+  color:#666;
+  line-height:1.8;
+}
+
+.comments-area{
+  margin-top:50px;
+}
+
+.comments-header h3{
+  font-size:28px;
+}
+
+.comment-form{
+  display:grid;
+  gap:18px;
+  margin-top:25px;
+}
+
+.comment-form input,
+.comment-form textarea{
+  width:100%;
+  border:none;
+  background:#f5f5f5;
+  border-radius:20px;
+  padding:18px;
+  font-size:16px;
+  outline:none;
+}
+
+.comment-form textarea{
+  min-height:130px;
+  resize:none;
+}
+
+.comment-form button{
+  background:#000;
+  color:#fff;
+  border:none;
+  border-radius:100px;
+  padding:16px 22px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.comments-list{
+  margin-top:35px;
+  display:grid;
+  gap:20px;
+}
+
+.comment-box{
+  background:#f7f7f7;
+  border-radius:22px;
+  padding:20px;
+}
+
+.comment-box strong{
+  display:block;
+  margin-bottom:10px;
+  font-size:18px;
+}
+
+.comment-box p{
+  margin:0;
+}
+
+@media(max-width:768px){
+
+  .viewer-content h2{
+    font-size:34px;
+  }
+
+  .card-content h3{
+    font-size:24px;
+  }
+
+  .paypal-popup-card h2{
+    font-size:30px;
+  }
+
+}
+</style>
+
+<script>
+/* ===============================
+   FIREBASE CONFIG
+================================*/
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+/* ===============================
+   PREMIUM STATUS
+================================*/
+
+let isUnlocked = localStorage.getItem('bintu_premium') === 'true';
+
+let currentVideoId = null;
+
+/* ===============================
+   VIDEOS
+================================*/
+
+const vlogs = [
+
+  {
+    id:'video1',
+    title:'Tales of Bintu',
+    video:'https://youtu.be/BzfQADZtsHk',
+    tag:'#PREMIUM',
+    desc:'Exclusive premium creator storytelling experience.',
+    premium:true
+  },
+
+  {
+    id:'video2',
+    title:'Behind The Scenes',
+    video:'https://youtu.be/BPRUB1Rqy0I',
+    tag:'#VLOG',
+    desc:'Exploring the creative process and production.',
+    premium:false
+  },
+
+  {
+    id:'video3',
+    title:'Creator Insights',
+    video:'https://youtu.be/jIOo94_vj8c',
+    tag:'#GROWTH',
+    desc:'Digital growth and content creator success journey.',
+    premium:false
+  },
+
+  {
+    id:'video4',
+    title:'Lifestyle Moments',
+    video:'https://youtu.be/ysz5S6PUM-U',
+    tag:'#LIFESTYLE',
+    desc:'Beautiful cinematic lifestyle vlog moments.',
+    premium:false
+  }
+
+];
+
+/* ===============================
+   RENDER VIDEOS
+================================*/
+
+function renderVlogs(){
+
+  const grid = document.getElementById('vlogGrid');
+
+  grid.innerHTML = '';
+
+  vlogs.forEach((v,index)=>{
+
+    const videoId = getYouTubeID(v.video);
+
+    const thumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+    const locked = v.premium && !isUnlocked;
+
+    grid.innerHTML += `
+
+      <div class="vlog-card"
+      onclick="${locked ? 'openPaypalDrawer()' : `openViewer(${index})`}">
+
+        ${v.premium ? '<div class="premium-badge">PREMIUM</div>' : ''}
+
+        ${locked ? `
+        <div class="unlock-layer">
+          <button>Unlock To Watch</button>
+        </div>` : ''}
+
+        <div class="video-thumb-wrap">
+
+          <img src="${thumb}">
+
+          <div class="play-overlay">
+            <i class="fa-solid fa-play"></i>
+          </div>
+
+        </div>
+
+        <div class="card-content">
+
+          <span class="card-tag">${v.tag}</span>
+
+          <h3>${v.title}</h3>
+
+          <p>${v.desc}</p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* ===============================
+   PAYPAL
+================================*/
+
+function openPaypalDrawer(){
+
+  document.getElementById('paypalPopup').style.display = 'flex';
+
+  renderPaypalButtons();
+
+}
+
+function closePaypalDrawer(){
+
+  document.getElementById('paypalPopup').style.display = 'none';
+
+}
+
+function renderPaypalButtons(){
+
+  const container = document.getElementById('paypal-button-container');
+
+  container.innerHTML = '';
+
+  paypal.Buttons({
+
+    style:{
+      layout:'vertical',
+      shape:'pill',
+      color:'gold',
+      label:'pay'
+    },
+
+    createOrder:(data,actions)=>{
+
+      return actions.order.create({
+
+        purchase_units:[{
+          amount:{
+            value:'4.99'
+          }
+        }]
+
+      });
+
+    },
+
+    onApprove:(data,actions)=>{
+
+      return actions.order.capture().then(details=>{
+
+        localStorage.setItem('bintu_premium','true');
+
+        isUnlocked = true;
+
+        closePaypalDrawer();
+
+        renderVlogs();
+
+        setTimeout(()=>{
+          openViewer(0);
+        },500);
+
+      });
+
+    }
+
+  }).render('#paypal-button-container');
+
+}
+
+/* ===============================
+   OPEN VIDEO
+================================*/
+
+function openViewer(index){
+
+  const vlog = vlogs[index];
+
+  currentVideoId = vlog.id;
+
+  const youtubeId = getYouTubeID(vlog.video);
+
+  document.getElementById('viewerVideo').src =
+  `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
+
+  document.getElementById('viewerTitle').innerText = vlog.title;
+
+  document.getElementById('viewerDesc').innerText = vlog.desc;
+
+  document.getElementById('viewerTag').innerText = vlog.tag;
+
+  document.getElementById('videoViewer').style.display = 'flex';
+
+  loadComments(vlog.id);
+
+}
+
+function closeViewer(){
+
+  document.getElementById('videoViewer').style.display = 'none';
+
+  document.getElementById('viewerVideo').src = '';
+
+}
+
+/* ===============================
+   YOUTUBE ID
+================================*/
+
+function getYouTubeID(url){
+
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+
+  const match = url.match(regExp);
+
+  return (match && match[2].length === 11)
+  ? match[2]
+  : null;
+
+}
+
+/* ===============================
+   COMMENTS SYSTEM
+================================*/
+
+const commentForm = document.getElementById('commentForm');
+
+commentForm.addEventListener('submit', async(e)=>{
+
+  e.preventDefault();
+
+  const name = document.getElementById('commentName').value;
+
+  const text = document.getElementById('commentText').value;
+
+  await db.collection('vlogComments').add({
+
+    videoId: currentVideoId,
+    name,
+    text,
+    created: Date.now()
+
+  });
+
+  commentForm.reset();
+
+  loadComments(currentVideoId);
+
+});
+
+async function loadComments(videoId){
+
+  const commentsContainer = document.getElementById('commentsContainer');
+
+  commentsContainer.innerHTML = '<p>Loading comments...</p>';
+
+  const snapshot = await db
+  .collection('vlogComments')
+  .where('videoId','==',videoId)
+  .get();
+
+  commentsContainer.innerHTML = '';
+
+  snapshot.forEach(doc=>{
+
+    const data = doc.data();
+
+    commentsContainer.innerHTML += `
+
+      <div class="comment-box">
+
+        <strong>${data.name}</strong>
+
+        <p>${data.text}</p>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* ===============================
+   START
+================================*/
+
+renderVlogs();
+
+</script>
+
+<!-- BINTU TERMINAL: FINAL VERSION -->
+<div class="vps-entry-card" onclick="openVpsDrawer()">
+    <div class="vps-card-content">
+        <div class="vps-icon-container">
+            <svg viewBox="0 0 100 100" class="render-logo-svg" width="32" height="32">
+                <path d="M19.4 84.1l13.7-23.7 13.7 23.7H19.4zm31.4-54.4l13.7 23.7-13.7 23.7-13.7-23.7 13.7-23.7zm31.4 54.4H68.5l13.7-23.7 13.7 23.7zM50.8 15.9l13.7 23.7H37.1l13.7-23.7z" fill="#4e46e5"/>
+            </svg>
+        </div>
+        <div class="vps-text-group">
+            <span class="vps-label">SECURE GATEWAY</span>
+            <p class="vps-main-title">Stream Validator</p>
+            <div class="vps-status-tag">
+                <span class="status-dot"></span> Active
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="vpsDrawer" class="vps-drawer-overlay" onclick="handleOutsideClick(event)">
+    <div id="vpsPanel" class="vps-drawer-panel" onclick="event.stopPropagation()">
+        
+        <!-- HEADER -->
+        <div class="vps-header-nav">
+            <button class="vps-back-btn" onclick="closeVpsDrawer(event)">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M15 18l-6-6 6-6"/></svg>
+                Back
+            </button>
+            <div class="vps-header-center">
+                <strong>BINTU TERMINAL</strong>
+                <span class="vps-sub-label">LIGHT PRO V3.5</span>
+            </div>
+            <div class="vps-meta-group">
+                <div class="vps-timer" id="vps-clock">00:00:00</div>
+                <svg id="themeToggle" class="dark-mode-svg" viewBox="0 0 24 24" fill="currentColor" onclick="toggleDarkMode()">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </div>
+        </div>
+
+      <!-- RED RING NOTES WITH TITLE -->
+<div class="vps-notice-container">
+    <span class="vps-section-title">TERMINAL GUIDANCE & SETUP</span>
+    <div id="noteContent" class="vps-notice-body collapsed" onclick="toggleNotes()">
+        <div class="vps-notice-row">
+            <p><strong>Professional Streaming:</strong> This terminal allows you to stream comfortably without third-party restream platforms displaying their logo over your live content.</p>
+        </div>
+        <div class="vps-notice-row">
+            <p><strong>Broadcast Checklist:</strong> Once you start the live stream, visit your YouTube channel to verify the video is live. Ensure you loop your video for continuous streaming.</p>
+        </div>
+        <div class="vps-notice-row">
+            <p><strong>System Infrastructure:</strong> Running on ephemeral Render VPS nodes. Instances hibernate during inactivity; allow 30s for synchronization if the validator appears unresponsive.</p>
+        </div>
+        <div class="vps-notice-row">
+            <p><strong>Privacy Protocol:</strong> Keys are processed in volatile RAM and never stored on disk. Reset your stream key in YouTube Studio to invalidate all previous sessions instantly.</p>
+        </div>
+        <div class="fade-overlay"></div>
+    </div>
+</div>
+
+
+        <!-- ACCESS CODE -->
+        <div class="vps-access-strip">
+            <span class="strip-label">ACCESS CODE</span>
+            <div class="vps-copy-container">
+                <code id="passCode" onclick="copyPass()">bintunet</code>
+                <span id="copyFeedback" class="vps-toast">COPIED TO CLIPBOARD</span>
+            </div>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="vps-terminal-body">
+            <div id="vps-loader" class="vps-loading-screen">
+                <div class="spinner-ring"></div>
+                <h3 style="font-size: 11px; margin-top: 8px;">Synchronizing...</h3>
+            </div>
+            <iframe id="vpsIframe" src="https://bintubot-mtmc.onrender.com/" class="vps-frame-view" onload="hideVpsLoader()"></iframe>
+        </div>
+    </div>
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@600&display=swap');
+
+:root {
+    --accent-gold: #d4af37;
+    --ui-border: #e9ecef;
+    --text-dark: #1a1a1e;
+    --text-muted: #6c757d;
+    --drawer-bg: #ffffff;
+    --strip-bg: #fafbfc;
+    --ring-red: #ff4d4d;
+}
+
+.dark-theme {
+    --drawer-bg: #121214;
+    --ui-border: #2a2a2e;
+    --text-dark: #f1f3f5;
+    --text-muted: #adb5bd;
+    --strip-bg: #1c1c1e;
+}
+
+/* Entry Card (Screenshot Matched) */
+.vps-entry-card { 
+    max-width: 360px; padding: 12px 18px; background: #fff; 
+    border: 1px solid #eee; border-radius: 35px; cursor: pointer; 
+    margin: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+.vps-card-content { display: flex; align-items: center; gap: 15px; }
+.vps-icon-container { width: 50px; height: 50px; background: #f1f3f5; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.vps-label { font-size: 8px; font-weight: 800; color: var(--accent-gold); letter-spacing: 0.5px; }
+.vps-main-title { margin: 1px 0; font-size: 14px; font-weight: 700; color: #111; }
+.vps-status-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; background: #e7f5ff; border-radius: 100px; font-size: 10px; color: #228be6; font-weight: 600; }
+.status-dot { width: 5px; height: 5px; background: #228be6; border-radius: 50%; }
+
+/* Drawer Layout */
+.vps-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.15); backdrop-filter: blur(8px); z-index: 9999; display: none; align-items: flex-end; }
+.vps-drawer-panel { width: 100%; height: 94vh; background: var(--drawer-bg); border-radius: 28px 28px 0 0; display: flex; flex-direction: column; overflow: hidden; animation: slideUp 0.4s ease; transition: background-color 0.4s ease; }
+
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+/* Red Ring Notes & Title */
+.vps-notice-container { margin: 8px 15px; border: 1.2px solid var(--ring-red); border-radius: 14px; padding: 10px; cursor: pointer; }
+.vps-section-title { display: block; font-size: 9px; font-weight: 800; color: var(--ring-red); margin-bottom: 5px; letter-spacing: 0.5px; }
+.vps-notice-body { position: relative; overflow: hidden; }
+.vps-notice-body.collapsed { max-height: 32px; }
+.vps-notice-body.expanded { max-height: 300px; }
+.fade-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 20px; background: linear-gradient(transparent, var(--drawer-bg)); pointer-events: none; }
+.expanded .fade-overlay { opacity: 0; }
+.vps-notice-row p { margin: 0 0 8px 0; font-size: 15px; line-height: 1.4; color: var(--text-muted); }
+
+/* Header & Access */
+.vps-header-nav { padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ui-border); }
+.vps-back-btn { background: none; border: none; font-size: 13px; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; gap: 4px; }
+.vps-header-center strong { display: block; font-size: 10px; color: var(--text-dark); }
+.vps-sub-label { display: block; font-size: 7px; color: var(--accent-gold); font-weight: 800; }
+.vps-meta-group { display: flex; align-items: center; gap: 8px; }
+.vps-timer { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--text-muted); }
+.dark-mode-svg { width: 14px; height: 14px; color: var(--text-dark); cursor: pointer; }
+
+.vps-access-strip { padding: 8px 18px; background: var(--strip-bg); border-bottom: 1px solid var(--ui-border); display: flex; align-items: center; justify-content: space-between; }
+.strip-label { font-size: 8px; font-weight: 800; color: #adb5bd; }
+.vps-copy-container { position: relative; }
+#passCode { font-family: 'JetBrains Mono'; background: var(--drawer-bg); border: 1px solid var(--ui-border); padding: 4px 10px; border-radius: 6px; color: var(--text-dark); font-size: 11px; cursor: pointer; }
+
+/* Fixed Toast Message */
+.vps-toast { 
+    position: absolute; bottom: 130%; right: 0; white-space: nowrap;
+    background: #1a1a1e; color: #fff; padding: 5px 10px; border-radius: 6px; 
+    font-size: 9px; font-weight: 700; display: none; z-index: 10000;
+}
+.vps-toast.show { display: block; animation: toastIn 1.5s ease forwards; }
+
+@keyframes toastIn { 
+    0% { opacity: 0; transform: translateY(5px); } 
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-5px); } 
+}
+
+/* Body */
+.vps-terminal-body { flex: 1; position: relative; background: var(--drawer-bg); }
+.vps-frame-view { width: 100%; height: 100%; border: none; }
+.vps-loading-screen { position: absolute; inset: 0; background: var(--drawer-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
+.spinner-ring { width: 22px; height: 22px; border: 2px solid var(--ui-border); border-top: 2px solid var(--accent-gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+</style>
+
+<script>
+function toggleNotes() {
+    const content = document.getElementById('noteContent');
+    content.classList.toggle('collapsed');
+    content.classList.toggle('expanded');
+}
+
+function toggleDarkMode() {
+    document.getElementById('vpsPanel').classList.toggle('dark-theme');
+}
+
+function copyPass() {
+    const text = "bintunet";
+    const toast = document.getElementById('copyFeedback');
+    navigator.clipboard.writeText(text).then(() => {
+        toast.classList.remove('show');
+        void toast.offsetWidth; 
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1500);
+    });
+}
+
+function openVpsDrawer() { 
+    document.getElementById('vpsDrawer').style.display = 'flex'; 
+    document.body.style.overflow = 'hidden'; 
+    startClock(); 
+}
+
+function closeVpsDrawer(event) { 
+    if(event) event.stopPropagation();
+    document.getElementById('vpsDrawer').style.display = 'none'; 
+    document.body.style.overflow = ''; 
+}
+
+function handleOutsideClick(e) { if (e.target.id === 'vpsDrawer') closeVpsDrawer(e); }
+function hideVpsLoader() { setTimeout(() => { document.getElementById('vps-loader').style.display = 'none'; }, 1000); }
+
+function startClock() {
+    const el = document.getElementById('vps-clock');
+    const update = () => { el.innerText = new Date().toLocaleTimeString('en-GB'); };
+    update(); setInterval(update, 1000);
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- ======================================================
+OVERLAY
+====================================================== -->
+<div class="drawer-overlay"
+id="overlay"
+onclick="closeDrawer()"></div>
+
+<!-- ======================================================
+DRAWER
+====================================================== -->
+<div class="nav-drawer"
+id="creatorDrawer">
+
+<div class="drawer-handle"></div>
+
+<div class="drawer-header">
+
+<div>
+<h2>CREATOR HUB</h2>
+<p>Professional Creator Platform</p>
+</div>
+
+<button class="close-btn"
+onclick="closeDrawer()">
+&times;
+</button>
+
+</div>
+
+<div class="view-container">
+
+<!-- MAIN -->
+<div class="view-screen active"
+id="screen-main">
+
+<div class="creator-card">
+
+<div class="creator-badge">
+CREATOR SERVICES
+</div>
+
+<h3>
+Grow & Monetize Your Content
+</h3>
+
+<p>
+Professional monetization setup,
+YouTube creator support and audience growth tools.
+</p>
+
+<button onclick="showScreen('screen-monetize')">
+START NOW →
+</button>
+
+</div>
+
+<ul class="drawer-list">
+
+<li onclick="showScreen('screen-about')">
+<div class="menu-left">
+<div class="menu-icon">
+<i class="fa-solid fa-user"></i>
+</div>
+<div>
+<strong>About Me</strong><br>
+<small>Creator story & background</small>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right"></i>
+</li>
+
+<li onclick="showScreen('screen-portfolio')">
+<div class="menu-left">
+<div class="menu-icon">
+<i class="fa-solid fa-video"></i>
+</div>
+<div>
+<strong>Portfolio</strong><br>
+<small>Latest YouTube content</small>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right"></i>
+</li>
+
+<li onclick="showScreen('screen-monetize')">
+<div class="menu-left">
+<div class="menu-icon">
+<i class="fa-solid fa-dollar-sign"></i>
+</div>
+<div>
+<strong>Get Monetized</strong><br>
+<small>Submit stream key & video</small>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right"></i>
+</li>
+
+<li onclick="showScreen('screen-contact')">
+<div class="menu-left">
+<div class="menu-icon">
+<i class="fa-solid fa-paper-plane"></i>
+</div>
+<div>
+<strong>Contact</strong><br>
+<small>Business inquiries</small>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right"></i>
+</li>
+
+</ul>
+</div>
+
+<!-- ABOUT -->
+<div class="view-screen"
+id="screen-about">
+
+<button class="back-btn"
+onclick="showScreen('screen-main')">
+← BACK
+</button>
+
+<h2 class="screen-title">
+About Me
+</h2>
+
+<div class="about-box">
+
+<img src="https://i.imgur.com/2DhmtJ4.jpg"
+class="profile-pic">
+
+<h3>Tales Of Bintu</h3>
+
+<p style="margin-top:14px;line-height:1.8;">
+Creative storytelling, entertainment,
+creator education and digital media experiences.
+</p>
+
+</div>
+
+</div>
+
+<!-- PORTFOLIO -->
+<div class="view-screen"
+id="screen-portfolio">
+
+<button class="back-btn"
+onclick="showScreen('screen-main')">
+← BACK
+</button>
+
+<h2 class="screen-title">
+Latest Videos
+</h2>
+
+<div class="youtube-card">
+
+<iframe
+src="https://www.youtube.com/embed?listType=user_uploads&list=talesofbintu"
+allowfullscreen>
+</iframe>
+
+</div>
+
+<a href="https://youtube.com/@talesofbintu"
+target="_blank"
+class="youtube-btn">
+VISIT YOUTUBE CHANNEL
+</a>
+
+</div>
+
+<!-- MONETIZE -->
+<div class="view-screen"
+id="screen-monetize">
+
+<button class="back-btn"
+onclick="showScreen('screen-main')">
+← BACK
+</button>
+
+<h2 class="screen-title">
+Get Monetized
+</h2>
+
+<div class="info-box">
+
+<div class="info-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<div>
+
+<h3>Privacy & Safety</h3>
+
+<p style="margin-top:10px;line-height:1.7;">
+We do not collect personal information.
+Stream keys can be reset anytime.
+Resetting your stream key disconnects monetization access.
+</p>
+
+</div>
+</div>
+
+<button class="submit-btn"
+style="margin-bottom:18px;background:#111;"
+onclick="openInstructionModal()">
+HOW TO GET STREAM KEY
+</button>
+
+<form id="monetizeForm">
+
+<select name="platform" required>
+<option value="">Select Platform</option>
+<option value="YouTube">YouTube</option>
+<option value="Facebook">Facebook</option>
+<option value="TikTok">TikTok</option>
+</select>
+
+<input type="text"
+name="streamkey"
+placeholder="Enter Stream Key"
+required>
+
+<input type="url"
+name="videolink"
+placeholder="Hosted Video Link (Drive, Dropbox, YouTube...)"
+required>
+
+<input type="email"
+name="paypal"
+placeholder="Your PayPal Email"
+required>
+
+<textarea
+name="notes"
+placeholder="Additional Notes (Optional)"></textarea>
+
+<div class="payment-box">
+
+<div class="payment-header">
+
+<div>
+<h3>Creator Service Payment</h3>
+<p>Complete payment to continue.</p>
+</div>
+
+<div class="payment-price">
+$20
+</div>
+
+</div>
+
+<div id="paypal-button-container"></div>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- CONTACT -->
+<div class="view-screen"
+id="screen-contact">
+
+<button class="back-btn"
+onclick="showScreen('screen-main')">
+← BACK
+</button>
+
+<h2 class="screen-title">
+Contact Me
+</h2>
+
+<form id="contactForm">
+
+<input type="text"
+name="name"
+placeholder="Your Name"
+required>
+
+<input type="email"
+name="email"
+placeholder="Your Email"
+required>
+
+<textarea
+name="message"
+placeholder="Your Message"
+required></textarea>
+
+<button type="submit"
+class="submit-btn">
+SEND MESSAGE →
+</button>
+
+</form>
+
+</div>
+
+</div>
+</div>
+
+<!-- ======================================================
+MODAL
+====================================================== -->
+<div class="instruction-modal"
+id="instructionModal">
+
+<div class="instruction-box">
+
+<button class="instruction-close"
+onclick="closeInstructionModal()">
+&times;
+</button>
+
+<h2>
+Stream Key Instructions
+</h2>
+
+<div class="instruction-section">
+<h3>
+<i class="fa-brands fa-youtube"></i>
+YouTube
+</h3>
+<ol>
+<li>Open YouTube Studio</li>
+<li>Tap Create → Go Live</li>
+<li>Open Stream Settings</li>
+<li>Copy Stream Key</li>
+</ol>
+</div>
+
+<div class="instruction-section">
+<h3>
+<i class="fa-brands fa-facebook"></i>
+Facebook
+</h3>
+<ol>
+<li>Open Facebook Live Producer</li>
+<li>Select Use Stream Key</li>
+<li>Copy Stream Key</li>
+</ol>
+</div>
+
+<div class="instruction-section">
+<h3>
+<i class="fa-brands fa-tiktok"></i>
+TikTok
+</h3>
+<ol>
+<li>Open TikTok LIVE Center</li>
+<li>Select LIVE Studio</li>
+<li>Open Stream Settings</li>
+<li>Copy Stream Key</li>
+</ol>
+</div>
+
+<div class="instruction-warning">
+<i class="fa-solid fa-circle-exclamation"></i>
+Stream keys can be reset anytime.
+Resetting disconnects monetization access.
+</div>
+
+</div>
+</div>
+
+<!-- ======================================================
+WHATSAPP FLOAT
+====================================================== -->
+<div class="whatsapp-float"
+onclick="window.open('https://wa.me/254729499463','_blank')">
+<i class="fa-brands fa-whatsapp"></i>
+</div>
+
+<!-- ======================================================
+JAVASCRIPT
+====================================================== -->
+<script>
+
+/* DRAWER */
+function toggleDrawer(){
+
+  document.getElementById('creatorDrawer')
+  .classList.add('active');
+
+  document.getElementById('overlay')
+  .classList.add('active');
+
+}
+
+function closeDrawer(){
+
+  document.getElementById('creatorDrawer')
+  .classList.remove('active');
+
+  document.getElementById('overlay')
+  .classList.remove('active');
+
+}
+
+/* SCREEN SWITCHING */
+function showScreen(id){
+
+  document.querySelectorAll('.view-screen')
+  .forEach(screen => {
+
+    screen.classList.remove('active');
+
+  });
+
+  document.getElementById(id)
+  .classList.add('active');
+
+}
+
+/* MODAL */
+function openInstructionModal(){
+
+  document.getElementById('instructionModal')
+  .classList.add('active');
+
+}
+
+function closeInstructionModal(){
+
+  document.getElementById('instructionModal')
+  .classList.remove('active');
+
+}
+
+/* TOAST */
+function showToast(type,title,message){
+
+  const container =
+  document.getElementById('toast-container');
+
+  const toast =
+  document.createElement('div');
+
+  toast.className = 'toast';
+
+  toast.style.background =
+  type === 'success'
+  ? '#16a34a'
+  : '#dc2626';
+
+  toast.innerHTML = `
+
+  <i class="fa-solid ${
+    type === 'success'
+    ? 'fa-circle-check'
+    : 'fa-circle-xmark'
+  }"></i>
+
+  <div>
+
+    <strong>${title}</strong><br>
+
+    ${message}
+
+  </div>
+
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(()=>{
+
+    toast.remove();
+
+  },4500);
+
+}
+
+/* CONTACT FORM */
+document.getElementById('contactForm')
+.addEventListener('submit',
+async function(e){
+
+  e.preventDefault();
+
+  const formData =
+  new FormData(this);
+
+  try{
+
+    const response = await fetch(
+      'https://formspree.io/f/xldnprkk',
+      {
+        method:'POST',
+        body:formData,
+        headers:{
+          'Accept':'application/json'
+        }
+      }
+    );
+
+    if(response.ok){
+
+      showToast(
+        'success',
+        'Message Sent',
+        'Your message has been delivered successfully.'
+      );
+
+      this.reset();
+
+    }else{
+
+      showToast(
+        'error',
+        'Submission Failed',
+        'Unable to send your message.'
+      );
+
+    }
+
+  }catch{
+
+    showToast(
+      'error',
+      'Connection Error',
+      'Check your internet connection.'
+    );
+
+  }
+
+});
+
+/* PAYPAL */
+paypal.Buttons({
+
+  style:{
+    layout:'vertical',
+    shape:'pill',
+    color:'gold',
+    label:'paypal'
+  },
+
+  createOrder:function(data,actions){
+
+    return actions.order.create({
+
+      purchase_units:[{
+
+        amount:{
+          value:'20.00'
+        }
+
+      }]
+
+    });
+
+  },
+
+  onApprove:function(data,actions){
+
+    return actions.order.capture()
+    .then(async function(details){
+
+      const form =
+      document.getElementById('monetizeForm');
+
+      const formData =
+      new FormData(form);
+
+      formData.append(
+        'payment',
+        'PAID VIA PAYPAL'
+      );
+
+      try{
+
+        const response =
+        await fetch(
+          'https://formspree.io/f/xldnprkk',
+          {
+            method:'POST',
+            body:formData,
+            headers:{
+              'Accept':'application/json'
+            }
+          }
+        );
+
+        if(response.ok){
+
+          showToast(
+            'success',
+            'Payment Successful',
+            'Your monetization request was submitted.'
+          );
+
+          form.reset();
+
+        }else{
+
+          showToast(
+            'error',
+            'Submission Failed',
+            'Payment completed but form failed.'
+          );
+
+        }
+
+      }catch{
+
+        showToast(
+          'error',
+          'Network Error',
+          'Payment completed but network failed.'
+        );
+
+      }
+
+    });
+
+  },
+
+  onError:function(){
+
+    showToast(
+      'error',
+      'Payment Failed',
+      'PayPal could not process payment.'
+    );
+
+  }
+
+}).render('#paypal-button-container');
+
+</script>
+</body>
+</html>

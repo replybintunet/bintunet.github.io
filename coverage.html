@@ -1765,6 +1765,191 @@ function startClock() {
 }
 </script>
 
+<!-- CINEMATIC RED HERO -->
+<div class="hero-red">
+    <div class="video-layer">
+        <video autoplay muted loop playsinline class="bg-film">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-bright-and-blurry-lights-background-441-large.mp4" type="video/mp4">
+        </video>
+        <!-- RED VIGNETTE OVERLAY -->
+        <div class="red-tint"></div>
+    </div>
+
+    <div class="hero-content">
+        <span class="meta-label">INSIGHT // GROWTH // 2026</span>
+        <h1 class="hero-title">YouTube Strategy</h1>
+        <p class="hero-desc">Professional tools for dynamic content integration and high-retention subscriber growth.</p>
+        
+        <div class="action-grid">
+            <button class="btn-primary" onclick="launchDrawer('subs')">Claim Free Subs</button>
+            <button class="btn-outline" onclick="launchDrawer('policy')">Growth Policy</button>
+        </div>
+    </div>
+</div>
+
+<!-- PROFESSIONAL RED-THEME DRAWER -->
+<div id="growthDrawer" class="drawer-overlay" onclick="closeDrawer()">
+    <div class="drawer-panel" onclick="event.stopPropagation()">
+        <div class="drawer-header-handle"></div>
+        
+        <div class="drawer-nav">
+            <button id="navBack" class="nav-control" onclick="showHub()">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <span id="navTitle" class="nav-brand">Workspace</span>
+            <button class="nav-control" onclick="closeDrawer()">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <!-- HUB VIEW -->
+        <div id="hubView" class="drawer-scroll">
+            
+            <!-- GROWTH NETWORK -->
+            <div id="subsContainer" class="view-section">
+                <p class="label">Expansion Network</p>
+                <div class="link-grid">
+                    <div class="growth-card" onclick="openTarget('https://www.ytmonster.net/')">
+                        <div class="card-text"><strong>YTMonster</strong><small>Community View Exchange</small></div>
+                        <div class="card-link-icon">→</div>
+                    </div>
+                    <div class="growth-card" onclick="openTarget('https://www.subpals.com/')">
+                        <div class="card-text"><strong>SubPals</strong><small>Sub Marketing Logic</small></div>
+                        <div class="card-link-icon">→</div>
+                    </div>
+                    <div class="growth-card" onclick="openTarget('https://vaizle.com/youtube-subscribe-link-generator/')">
+                        <div class="card-text"><strong>Vaizle</strong><small>One-Click Link Generator</small></div>
+                        <div class="card-link-icon">→</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POLICY VIEW -->
+            <div id="policyContainer" class="view-section" style="display:none;">
+                <div class="policy-wrapper">
+                    <h4>2026 Core Requirements</h4>
+                    <p>Building trust requires a blend of automated data and curated quality.</p>
+                    <ul class="policy-list">
+                        <li><strong>Dynamic Integration:</strong> Utilize auto-updating feeds to maintain site relevance.</li>
+                        <li><strong>Curated Experience:</strong> Use "Start Here" playlists to guide the user journey.</li>
+                        <li><strong>Shorts SEO:</strong> Integrate short-form content sections for modern channel growth.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- BROWSER VIEW -->
+        <div id="browserView" class="browser-pane">
+            <iframe id="contentFrame"></iframe>
+        </div>
+    </div>
+</div>
+
+<style>
+:root {
+    --red: #e61e25;
+    --red-dark: #b3171d;
+    --white: #ffffff;
+    --off-white: #f8f9fa;
+    --text-main: #1a1a1a;
+    --text-muted: #666666;
+    --border: rgba(0,0,0,0.06);
+}
+
+body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: var(--white); color: var(--text-main); }
+
+/* HERO SECTION */
+.hero-red { position: relative; height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.video-layer { position: absolute; inset: 0; z-index: 1; }
+.bg-film { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.9); }
+.red-tint { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(230, 30, 37, 0.4), rgba(0, 0, 0, 0.8)); }
+
+.hero-content { position: relative; z-index: 10; text-align: center; color: var(--white); padding: 20px; }
+.meta-label { font-size: 10px; font-weight: 800; letter-spacing: 3px; opacity: 0.8; display: block; margin-bottom: 12px; }
+.hero-title { font-size: 42px; font-weight: 900; margin: 0 0 16px; letter-spacing: -1.5px; }
+.hero-desc { font-size: 16px; opacity: 0.9; line-height: 1.5; margin-bottom: 35px; max-width: 450px; margin-inline: auto; }
+
+.action-grid { display: flex; gap: 12px; justify-content: center; }
+.btn-primary { background: var(--red); color: white; border: none; padding: 14px 30px; border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+.btn-primary:hover { background: var(--red-dark); transform: scale(1.02); }
+.btn-outline { background: transparent; color: white; border: 2px solid white; padding: 12px 30px; border-radius: 14px; font-weight: 700; cursor: pointer; }
+
+/* DRAWER SYSTEM (DISMISS ON TAP BACKGROUND) */
+.drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(20px); display: none; align-items: flex-end; z-index: 1000; cursor: pointer; }
+.drawer-panel { 
+    width: 100%; height: 90vh; background: var(--white); border-radius: 30px 30px 0 0; 
+    display: flex; flex-direction: column; cursor: default;
+    box-shadow: 0 -20px 50px rgba(0,0,0,0.15);
+    animation: drawerOpen 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+@keyframes drawerOpen { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+.drawer-header-handle { width: 40px; height: 4px; background: #ddd; border-radius: 10px; margin: 12px auto; }
+.drawer-nav { padding: 10px 24px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.nav-control { background: #f4f4f4; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); cursor: pointer; }
+#navBack { display: none; }
+.nav-brand { font-weight: 800; font-size: 15px; color: var(--red); text-transform: uppercase; }
+
+/* HUB CONTENT */
+.drawer-scroll { flex: 1; overflow-y: auto; padding: 25px; }
+.label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+.link-grid { display: flex; flex-direction: column; gap: 12px; }
+.growth-card { background: var(--off-white); padding: 20px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+.growth-card:hover { border-color: var(--red); background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.card-text strong { display: block; font-size: 16px; margin-bottom: 2px; }
+.card-text small { color: var(--text-muted); font-size: 12px; }
+.card-link-icon { color: var(--red); font-weight: 800; }
+
+.policy-wrapper { background: var(--off-white); padding: 25px; border-radius: 24px; }
+.policy-list { padding-left: 20px; color: var(--text-muted); font-size: 14px; line-height: 1.8; }
+.policy-list strong { color: var(--text-main); }
+
+/* BROWSER VIEW */
+.browser-pane { display: none; flex: 1; }
+#contentFrame { width: 100%; height: 100%; border: none; background: white; }
+</style>
+
+<script>
+function launchDrawer(mode) {
+    document.getElementById('growthDrawer').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    if(mode === 'subs') {
+        document.getElementById('subsContainer').style.display = 'block';
+        document.getElementById('policyContainer').style.display = 'none';
+        document.getElementById('navTitle').innerText = 'EXPANSION';
+    } else {
+        document.getElementById('subsContainer').style.display = 'none';
+        document.getElementById('policyContainer').style.display = 'block';
+        document.getElementById('navTitle').innerText = 'STRATEGY';
+    }
+}
+
+function closeDrawer() {
+    document.getElementById('growthDrawer').style.display = 'none';
+    document.body.style.overflow = '';
+    showHub();
+}
+
+function openTarget(url) {
+    document.getElementById('hubView').style.display = 'none';
+    document.getElementById('browserView').style.display = 'block';
+    document.getElementById('navBack').style.display = 'flex';
+    document.getElementById('contentFrame').src = url;
+}
+
+function showHub() {
+    document.getElementById('hubView').style.display = 'block';
+    document.getElementById('browserView').style.display = 'none';
+    document.getElementById('navBack').style.display = 'none';
+    document.getElementById('contentFrame').src = 'about:blank';
+}
+</script>
+
+
+
+
+
 
 
 

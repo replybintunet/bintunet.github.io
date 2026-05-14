@@ -668,6 +668,849 @@ HEADER
 ====================================================== -->
 <header>
 
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<!-- PAYPAL -->
+<script src="https://www.paypal.com/sdk/js?client-id=ARX_5m0pm3u1OZyrMoxLijWx3XUN00VwyhZshcPwaixaIWLIwtHZST3-75Gpi-a5CQMsfSO3RjXGOnuS&currency=USD"></script>
+
+<section class="cinema-vlog-section">
+
+  <div class="vlog-top-header">
+    <span class="mini-label">BINTU PREMIUM STORIES</span>
+
+    <h1>Cinematic Creator Stories</h1>
+
+    <p>
+      Discover premium creator stories, lifestyle moments,
+      exclusive growth insights and behind-the-scenes experiences.
+    </p>
+  </div>
+
+  <div id="vlogGrid" class="premium-vlog-grid"></div>
+
+</section>
+
+<!-- PAYPAL POPUP -->
+<div id="paypalPopup" class="paypal-popup-overlay">
+
+  <div class="paypal-popup-card">
+
+    <button class="popup-close" onclick="closePaypalDrawer()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="premium-lock-icon">
+      <i class="fa-solid fa-crown"></i>
+    </div>
+
+    <h2>Unlock Premium Access</h2>
+
+    <p>
+      Get instant access to all premium creator videos and exclusive stories.
+    </p>
+
+    <div class="premium-benefits">
+      <div>
+        <i class="fa-solid fa-circle-check"></i>
+        Watch All Premium Videos
+      </div>
+
+      <div>
+        <i class="fa-solid fa-circle-check"></i>
+        HD Streaming Experience
+      </div>
+
+      <div>
+        <i class="fa-solid fa-circle-check"></i>
+        Exclusive Creator Content
+      </div>
+    </div>
+
+    <div id="paypal-button-container"></div>
+
+  </div>
+
+</div>
+
+<!-- VIDEO PLAYER -->
+<div id="videoViewer" class="viewer-overlay">
+
+  <div class="viewer-box">
+
+    <button class="viewer-close" onclick="closeViewer()">
+      <i class="fa-solid fa-xmark"></i>
+      Close Player
+    </button>
+
+    <div class="viewer-video-wrap">
+      <iframe
+        id="viewerVideo"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="viewer-content">
+
+      <span id="viewerTag"></span>
+
+      <h2 id="viewerTitle"></h2>
+
+      <p id="viewerDesc"></p>
+
+      <!-- COMMENTS -->
+      <div class="comments-area">
+
+        <div class="comments-header">
+          <h3>Community Comments</h3>
+        </div>
+
+        <form id="commentForm" class="comment-form">
+
+          <input
+            type="text"
+            id="commentName"
+            placeholder="Your name"
+            required>
+
+          <textarea
+            id="commentText"
+            placeholder="Share your thoughts..."
+            required>
+          </textarea>
+
+          <button type="submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            Send Comment
+          </button>
+
+        </form>
+
+        <div id="commentsContainer" class="comments-list"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f7f7f7;
+}
+
+.cinema-vlog-section{
+  padding:90px 20px;
+}
+
+.vlog-top-header{
+  max-width:850px;
+  margin:auto;
+  text-align:center;
+  margin-bottom:70px;
+}
+
+.mini-label{
+  display:inline-block;
+  padding:10px 18px;
+  background:#000;
+  color:#fff;
+  border-radius:100px;
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.vlog-top-header h1{
+  font-size:clamp(38px,5vw,64px);
+  margin:0 0 20px;
+  color:#111;
+  line-height:1.1;
+}
+
+.vlog-top-header p{
+  font-size:18px;
+  color:#777;
+  line-height:1.8;
+}
+
+.premium-vlog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:35px;
+  max-width:1300px;
+  margin:auto;
+}
+
+.vlog-card{
+  position:relative;
+  background:#fff;
+  border-radius:30px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.35s;
+  box-shadow:0 10px 35px rgba(0,0,0,.05);
+}
+
+.vlog-card:hover{
+  transform:translateY(-10px);
+}
+
+.video-thumb-wrap{
+  position:relative;
+  overflow:hidden;
+}
+
+.video-thumb-wrap img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  display:block;
+}
+
+.play-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(to top,rgba(0,0,0,.5),transparent);
+}
+
+.play-overlay i{
+  width:80px;
+  height:80px;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#000;
+  font-size:28px;
+}
+
+.premium-badge{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:gold;
+  color:#000;
+  padding:8px 16px;
+  border-radius:100px;
+  font-size:12px;
+  font-weight:800;
+  z-index:2;
+}
+
+.card-content{
+  padding:28px;
+}
+
+.card-tag{
+  color:#c9a227;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.card-content h3{
+  font-size:30px;
+  margin:14px 0;
+  color:#111;
+}
+
+.card-content p{
+  color:#777;
+  line-height:1.7;
+}
+
+.unlock-layer{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:4;
+}
+
+.unlock-layer button{
+  background:#000;
+  color:#fff;
+  border:none;
+  padding:16px 28px;
+  border-radius:100px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.paypal-popup-overlay,
+.viewer-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:999999;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.paypal-popup-card{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:35px;
+  padding:45px 35px;
+  position:relative;
+  animation:popupUp .4s ease;
+}
+
+@keyframes popupUp{
+  from{
+    transform:translateY(40px);
+    opacity:0;
+  }
+
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+.popup-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:45px;
+  height:45px;
+  border:none;
+  border-radius:50%;
+  background:#f3f3f3;
+  cursor:pointer;
+}
+
+.premium-lock-icon{
+  width:90px;
+  height:90px;
+  background:#000;
+  color:#fff;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+.paypal-popup-card h2{
+  text-align:center;
+  margin-top:30px;
+  font-size:38px;
+}
+
+.paypal-popup-card p{
+  text-align:center;
+  color:#777;
+  line-height:1.7;
+}
+
+.premium-benefits{
+  display:grid;
+  gap:15px;
+  margin:35px 0;
+}
+
+.premium-benefits div{
+  background:#f7f7f7;
+  padding:16px;
+  border-radius:18px;
+  font-weight:600;
+}
+
+.viewer-box{
+  width:100%;
+  max-width:1150px;
+  max-height:95vh;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:35px;
+  padding:25px;
+  position:relative;
+}
+
+.viewer-close{
+  position:sticky;
+  top:0;
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:none;
+  background:#000;
+  color:#fff;
+  padding:14px 22px;
+  border-radius:100px;
+  cursor:pointer;
+  z-index:10;
+}
+
+.viewer-video-wrap{
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:28px;
+  background:#000;
+  margin-top:20px;
+}
+
+.viewer-video-wrap iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.viewer-content{
+  padding-top:25px;
+}
+
+.viewer-content span{
+  color:#c9a227;
+  font-weight:800;
+}
+
+.viewer-content h2{
+  font-size:48px;
+  margin:10px 0;
+}
+
+.viewer-content p{
+  color:#666;
+  line-height:1.8;
+}
+
+.comments-area{
+  margin-top:50px;
+}
+
+.comments-header h3{
+  font-size:28px;
+}
+
+.comment-form{
+  display:grid;
+  gap:18px;
+  margin-top:25px;
+}
+
+.comment-form input,
+.comment-form textarea{
+  width:100%;
+  border:none;
+  background:#f5f5f5;
+  border-radius:20px;
+  padding:18px;
+  font-size:16px;
+  outline:none;
+}
+
+.comment-form textarea{
+  min-height:130px;
+  resize:none;
+}
+
+.comment-form button{
+  background:#000;
+  color:#fff;
+  border:none;
+  border-radius:100px;
+  padding:16px 22px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.comments-list{
+  margin-top:35px;
+  display:grid;
+  gap:20px;
+}
+
+.comment-box{
+  background:#f7f7f7;
+  border-radius:22px;
+  padding:20px;
+}
+
+.comment-box strong{
+  display:block;
+  margin-bottom:10px;
+  font-size:18px;
+}
+
+.comment-box p{
+  margin:0;
+}
+
+@media(max-width:768px){
+
+  .viewer-content h2{
+    font-size:34px;
+  }
+
+  .card-content h3{
+    font-size:24px;
+  }
+
+  .paypal-popup-card h2{
+    font-size:30px;
+  }
+
+}
+</style>
+
+<script>
+/* ===============================
+   FIREBASE CONFIG
+================================*/
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+/* ===============================
+   PREMIUM STATUS
+================================*/
+
+let isUnlocked = localStorage.getItem('bintu_premium') === 'true';
+
+let currentVideoId = null;
+
+/* ===============================
+   VIDEOS
+================================*/
+
+const vlogs = [
+
+  {
+    id:'video1',
+    title:'Tales of Bintu',
+    video:'https://youtu.be/BzfQADZtsHk',
+    tag:'#PREMIUM',
+    desc:'Exclusive premium creator storytelling experience.',
+    premium:true
+  },
+
+  {
+    id:'video2',
+    title:'Behind The Scenes',
+    video:'https://youtu.be/BPRUB1Rqy0I',
+    tag:'#VLOG',
+    desc:'Exploring the creative process and production.',
+    premium:false
+  },
+
+  {
+    id:'video3',
+    title:'Creator Insights',
+    video:'https://youtu.be/jIOo94_vj8c',
+    tag:'#GROWTH',
+    desc:'Digital growth and content creator success journey.',
+    premium:false
+  },
+
+  {
+    id:'video4',
+    title:'Lifestyle Moments',
+    video:'https://youtu.be/ysz5S6PUM-U',
+    tag:'#LIFESTYLE',
+    desc:'Beautiful cinematic lifestyle vlog moments.',
+    premium:false
+  }
+
+];
+
+/* ===============================
+   RENDER VIDEOS
+================================*/
+
+function renderVlogs(){
+
+  const grid = document.getElementById('vlogGrid');
+
+  grid.innerHTML = '';
+
+  vlogs.forEach((v,index)=>{
+
+    const videoId = getYouTubeID(v.video);
+
+    const thumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+    const locked = v.premium && !isUnlocked;
+
+    grid.innerHTML += `
+
+      <div class="vlog-card"
+      onclick="${locked ? 'openPaypalDrawer()' : `openViewer(${index})`}">
+
+        ${v.premium ? '<div class="premium-badge">PREMIUM</div>' : ''}
+
+        ${locked ? `
+        <div class="unlock-layer">
+          <button>Unlock To Watch</button>
+        </div>` : ''}
+
+        <div class="video-thumb-wrap">
+
+          <img src="${thumb}">
+
+          <div class="play-overlay">
+            <i class="fa-solid fa-play"></i>
+          </div>
+
+        </div>
+
+        <div class="card-content">
+
+          <span class="card-tag">${v.tag}</span>
+
+          <h3>${v.title}</h3>
+
+          <p>${v.desc}</p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* ===============================
+   PAYPAL
+================================*/
+
+function openPaypalDrawer(){
+
+  document.getElementById('paypalPopup').style.display = 'flex';
+
+  renderPaypalButtons();
+
+}
+
+function closePaypalDrawer(){
+
+  document.getElementById('paypalPopup').style.display = 'none';
+
+}
+
+function renderPaypalButtons(){
+
+  const container = document.getElementById('paypal-button-container');
+
+  container.innerHTML = '';
+
+  paypal.Buttons({
+
+    style:{
+      layout:'vertical',
+      shape:'pill',
+      color:'gold',
+      label:'pay'
+    },
+
+    createOrder:(data,actions)=>{
+
+      return actions.order.create({
+
+        purchase_units:[{
+          amount:{
+            value:'4.99'
+          }
+        }]
+
+      });
+
+    },
+
+    onApprove:(data,actions)=>{
+
+      return actions.order.capture().then(details=>{
+
+        localStorage.setItem('bintu_premium','true');
+
+        isUnlocked = true;
+
+        closePaypalDrawer();
+
+        renderVlogs();
+
+        setTimeout(()=>{
+          openViewer(0);
+        },500);
+
+      });
+
+    }
+
+  }).render('#paypal-button-container');
+
+}
+
+/* ===============================
+   OPEN VIDEO
+================================*/
+
+function openViewer(index){
+
+  const vlog = vlogs[index];
+
+  currentVideoId = vlog.id;
+
+  const youtubeId = getYouTubeID(vlog.video);
+
+  document.getElementById('viewerVideo').src =
+  `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
+
+  document.getElementById('viewerTitle').innerText = vlog.title;
+
+  document.getElementById('viewerDesc').innerText = vlog.desc;
+
+  document.getElementById('viewerTag').innerText = vlog.tag;
+
+  document.getElementById('videoViewer').style.display = 'flex';
+
+  loadComments(vlog.id);
+
+}
+
+function closeViewer(){
+
+  document.getElementById('videoViewer').style.display = 'none';
+
+  document.getElementById('viewerVideo').src = '';
+
+}
+
+/* ===============================
+   YOUTUBE ID
+================================*/
+
+function getYouTubeID(url){
+
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+
+  const match = url.match(regExp);
+
+  return (match && match[2].length === 11)
+  ? match[2]
+  : null;
+
+}
+
+/* ===============================
+   COMMENTS SYSTEM
+================================*/
+
+const commentForm = document.getElementById('commentForm');
+
+commentForm.addEventListener('submit', async(e)=>{
+
+  e.preventDefault();
+
+  const name = document.getElementById('commentName').value;
+
+  const text = document.getElementById('commentText').value;
+
+  await db.collection('vlogComments').add({
+
+    videoId: currentVideoId,
+    name,
+    text,
+    created: Date.now()
+
+  });
+
+  commentForm.reset();
+
+  loadComments(currentVideoId);
+
+});
+
+async function loadComments(videoId){
+
+  const commentsContainer = document.getElementById('commentsContainer');
+
+  commentsContainer.innerHTML = '<p>Loading comments...</p>';
+
+  const snapshot = await db
+  .collection('vlogComments')
+  .where('videoId','==',videoId)
+  .get();
+
+  commentsContainer.innerHTML = '';
+
+  snapshot.forEach(doc=>{
+
+    const data = doc.data();
+
+    commentsContainer.innerHTML += `
+
+      <div class="comment-box">
+
+        <strong>${data.name}</strong>
+
+        <p>${data.text}</p>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+/* ===============================
+   START
+================================*/
+
+renderVlogs();
+
+</script>
+
+
+
+
+
+
+
+
+
 <div class="header-video-container">
 <video autoplay muted loop playsinline>
 <source src="background.mp4" type="video/mp4">

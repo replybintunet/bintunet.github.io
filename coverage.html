@@ -1979,6 +1979,259 @@ CHECK IF I AM LIVE SECTION (PURE EMBED STABLE ARCHITECTURE)
 
 
 
+/* ===============================
+   GROWTH CHANNELS 
+================================*/
+<style>
+:root {
+    --pro-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    --ui-border: rgba(0, 0, 0, 0.08);
+}
+
+/* 1. INITIAL STABLE CARD */
+.growth-card-pro {
+    width: 95%;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: 40px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid var(--ui-border);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    transform: translateZ(0);
+}
+
+.growth-card-pro h2 { font-size: 28px; font-weight: 900; margin-bottom: 8px; color: #000; }
+.growth-card-pro p { color: #666; font-size: 14px; margin-bottom: 35px; }
+
+/* 2. SWIPE TRIGGER */
+.swipe-up-zone {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.swipe-circle-pro {
+    width: 70px; height: 70px;
+    background: var(--pro-grad);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 28px;
+    box-shadow: 0 12px 24px rgba(220, 39, 67, 0.3);
+    margin-bottom: 15px;
+}
+
+.swipe-pill-pro {
+    border: 2.5px solid #dc2743;
+    padding: 10px 35px;
+    border-radius: 100px;
+    color: #dc2743;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 3. HALF-SCREEN SNAP DRAWER */
+.drawer-overlay-pro {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    z-index: 9998;
+    display: none;
+    align-items: flex-end;
+}
+
+.drawer-panel-pro {
+    width: 100%;
+    max-width: 850px;
+    height: 55vh; /* Exactly half screen */
+    background: #ffffff;
+    border-radius: 40px 40px 0 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+    animation: drawerSlideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.drawer-header-pro {
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.exit-btn-red { color: #ff0000; font-weight: 800; font-size: 13px; cursor: pointer; }
+
+/* 4. PROFESSIONAL LIST VIEW */
+.list-scroll-pro {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px 20px;
+}
+
+.list-item-pro {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.list-item-pro:active { background: #f0f0f0; }
+
+.list-item-pro img {
+    width: 45px; height: 45px;
+    border-radius: 12px;
+    margin-right: 15px;
+    background: #fff;
+    padding: 5px;
+}
+
+.site-info { flex-grow: 1; text-align: left; }
+.site-info h5 { margin: 0; font-size: 15px; font-weight: 900; color: #111; }
+.site-info p { margin: 0; font-size: 11px; color: #999; text-transform: uppercase; }
+
+/* 5. FLOATING BROWSER (CENTRED) */
+.browser-floating-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.browser-window-pro {
+    width: 92%;
+    height: 82%; /* Floating effect */
+    max-width: 1000px;
+    background: #fff;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+}
+
+.browser-nav-pro {
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+
+@keyframes drawerSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+</style>
+
+<div class="growth-card-pro">
+    <h2>Creator Growth Hub</h2>
+    <p>Tap below to explore 15+ verified websites for free YouTube growth.</p>
+
+    <div class="swipe-up-zone" onclick="toggleDrawer(true)">
+        <div class="swipe-circle-pro"><i class="fa-solid fa-angles-up"></i></div>
+        <div class="swipe-pill-pro">Swipe Up to Gain Subs</div>
+    </div>
+</div>
+
+<div class="drawer-overlay-pro" id="proDrawer" onclick="toggleDrawer(false)">
+    <div class="drawer-panel-pro" onclick="event.stopPropagation()">
+        <div style="width: 40px; height: 5px; background: #e0e0e0; border-radius: 10px; margin: 12px auto;"></div>
+        <div class="drawer-header-pro">
+            <h3 style="margin:0; font-weight:900;">Growth Services</h3>
+            <span class="exit-btn-red" onclick="toggleDrawer(false)">EXIT</span>
+        </div>
+        
+        <div class="list-scroll-pro">
+            <div class="list-item-pro" onclick="openWeb('https://views4you.com/offers/free-youtube-subscribers/', 'Views4You')">
+                <img src="https://views4you.com/wp-content/themes/views4you/assets/images/favicon.png" alt="Logo">
+                <div class="site-info">
+                    <h5>Views4You</h5>
+                    <p>Free Subscriber Offers</p>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#ddd"></i>
+            </div>
+
+            <div class="list-item-pro" onclick="openWeb('https://morethanpanel.com/free-youtube-subscribers', 'MoreThanPanel')">
+                <img src="https://morethanpanel.com/assets/images/favicon.png" alt="Logo">
+                <div class="site-info">
+                    <h5>MoreThanPanel</h5>
+                    <p>Daily Free Subs</p>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#ddd"></i>
+            </div>
+
+            <div class="list-item-pro" onclick="openWeb('https://www.sonuker.com/', 'Sonuker')">
+                <img src="https://www.sonuker.com/wp-content/uploads/2018/10/sonuker-favicon.png" alt="Logo">
+                <div class="site-info">
+                    <h5>Sonuker</h5>
+                    <p>Organic Growth Network</p>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#ddd"></i>
+            </div>
+
+            <div class="list-item-pro" onclick="openWeb('https://www.subscriptionshub.com/', 'Subs Hub')">
+                <img src="https://cdn-icons-png.flaticon.com/512/3670/3670163.png" alt="Logo">
+                <div class="site-info">
+                    <h5>Subscriptions Hub</h5>
+                    <p>Verified Growth Tool</p>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#ddd"></i>
+            </div>
+            
+            </div>
+    </div>
+</div>
+
+<div class="browser-floating-overlay" id="proBrowser" onclick="closeWeb()">
+    <div class="browser-window-pro" onclick="event.stopPropagation()">
+        <div class="browser-nav-pro">
+            <div onclick="closeWeb()" style="cursor:pointer; font-weight:800; font-size:13px;">BACK</div>
+            <div id="siteTitle" style="font-size:12px; font-weight:700; color:#999; text-transform:uppercase;">Secure Browser</div>
+            <div class="exit-btn-red" onclick="closeWeb()">EXIT</div>
+        </div>
+        <iframe id="proFrame" src="" style="flex-grow:1; width:100%; border:none;"></iframe>
+    </div>
+</div>
+
+<script>
+    function toggleDrawer(show) {
+        document.getElementById('proDrawer').style.display = show ? 'flex' : 'none';
+        document.body.style.overflow = show ? 'hidden' : 'auto';
+    }
+
+    function openWeb(url, name) {
+        document.getElementById('siteTitle').innerText = name;
+        document.getElementById('proFrame').src = url;
+        document.getElementById('proBrowser').style.display = 'flex';
+    }
+
+    function closeWeb() {
+        document.getElementById('proBrowser').style.display = 'none';
+        document.getElementById('proFrame').src = "";
+    }
+</script>
+
+
+
 
 
 </body>

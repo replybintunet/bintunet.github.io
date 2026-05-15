@@ -1981,6 +1981,531 @@ CHECK IF I AM LIVE SECTION (PURE EMBED STABLE ARCHITECTURE)
 
 
 
+<!-- ======================================================
+PROFESSIONAL FINAL CLOSING SECTION
+PLACE THIS ABOVE </body>
+====================================================== -->
+
+<style>
+/* ======================================================
+FINAL WEBSITE CLOSING SECTION
+====================================================== */
+.final-website-section{
+  position:relative;
+  margin-top:90px;
+  background:#0b0b0d;
+  color:#ffffff;
+  overflow:hidden;
+  border-radius:45px 45px 0 0;
+  padding:90px 24px 35px;
+}
+
+.final-website-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+  radial-gradient(circle at top left,rgba(255,0,0,.18),transparent 35%),
+  radial-gradient(circle at bottom right,rgba(255,255,255,.05),transparent 30%);
+  pointer-events:none;
+}
+
+.final-inner{
+  position:relative;
+  z-index:2;
+  max-width:1400px;
+  margin:auto;
+}
+
+.final-top-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+  margin-bottom:70px;
+}
+
+.final-brand-box{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  padding:35px;
+  border-radius:32px;
+  backdrop-filter:blur(10px);
+}
+
+.final-brand-logo{
+  width:90px;
+  margin-bottom:20px;
+}
+
+.final-brand-title{
+  font-size:42px;
+  font-family:'Runtoe',cursive;
+  color:#ffffff;
+  margin-bottom:16px;
+}
+
+.final-brand-text{
+  color:rgba(255,255,255,.72);
+  line-height:1.9;
+  font-size:15px;
+}
+
+.final-stats-wrap{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin-top:28px;
+}
+
+.final-stat-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:20px;
+}
+
+.final-stat-card h2{
+  font-size:32px;
+  color:#ff2d2d;
+  margin-bottom:8px;
+}
+
+.final-stat-card span{
+  color:#bbb;
+  font-size:13px;
+  font-weight:600;
+}
+
+.footer-links-box{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  padding:35px;
+  border-radius:32px;
+}
+
+.footer-links-box h3{
+  font-size:24px;
+  margin-bottom:24px;
+}
+
+.footer-links{
+  display:grid;
+  gap:16px;
+}
+
+.footer-links a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  text-decoration:none;
+  transition:.3s;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.footer-links a:hover{
+  background:#ff0000;
+  transform:translateX(5px);
+}
+
+.footer-links a span{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-weight:600;
+}
+
+.final-newsletter{
+  background:linear-gradient(135deg,#ff0000,#cc0000);
+  padding:35px;
+  border-radius:32px;
+  position:relative;
+  overflow:hidden;
+}
+
+.final-newsletter::before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  right:-80px;
+  top:-80px;
+}
+
+.final-newsletter h2{
+  font-size:38px;
+  margin-bottom:15px;
+  position:relative;
+  z-index:2;
+}
+
+.final-newsletter p{
+  color:rgba(255,255,255,.88);
+  line-height:1.8;
+  position:relative;
+  z-index:2;
+}
+
+.newsletter-form{
+  margin-top:24px;
+  position:relative;
+  z-index:2;
+}
+
+.newsletter-form input{
+  width:100%;
+  border:none;
+  padding:18px 22px;
+  border-radius:18px;
+  margin-bottom:14px;
+  font-size:15px;
+}
+
+.newsletter-form button{
+  width:100%;
+  border:none;
+  background:#111;
+  color:#fff;
+  padding:18px;
+  border-radius:18px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:15px;
+  transition:.3s;
+}
+
+.newsletter-form button:hover{
+  transform:translateY(-2px);
+}
+
+.final-socials{
+  margin-top:28px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.final-socials a{
+  width:55px;
+  height:55px;
+  border-radius:18px;
+  background:rgba(255,255,255,.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.final-socials a:hover{
+  background:#fff;
+  color:#ff0000;
+  transform:translateY(-5px);
+}
+
+.final-bottom-bar{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.final-bottom-bar p{
+  color:#8f8f8f;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.final-mini-links{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.final-mini-links a{
+  color:#b5b5b5;
+  text-decoration:none;
+  font-size:13px;
+  transition:.3s;
+}
+
+.final-mini-links a:hover{
+  color:#ff0000;
+}
+
+.creator-powered{
+  margin-top:18px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 18px;
+  border-radius:100px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:12px;
+  font-weight:700;
+  color:#ddd;
+}
+
+.creator-powered i{
+  color:#ff0000;
+}
+
+@media(max-width:768px){
+
+  .final-website-section{
+    padding:70px 18px 30px;
+    border-radius:35px 35px 0 0;
+  }
+
+  .final-brand-title{
+    font-size:34px;
+  }
+
+  .final-newsletter h2{
+    font-size:30px;
+  }
+
+  .final-top-grid{
+    gap:24px;
+  }
+
+  .final-stats-wrap{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+</style>
+
+<section class="final-website-section">
+
+  <div class="final-inner">
+
+    <div class="final-top-grid">
+
+      <!-- LEFT BRAND -->
+      <div class="final-brand-box">
+
+        <img 
+        src="https://i.ibb.co/nsg7hnfZ/In-Shot-20250621-220352979.png" 
+        class="final-brand-logo">
+
+        <h1 class="final-brand-title">
+          BINTUNET.CO.KE
+        </h1>
+
+        <p class="final-brand-text">
+          Professional creator platform built for digital storytelling,
+          audience growth, premium content experiences and creator monetization.
+          Designed for creators who want modern branding and cinematic experiences.
+        </p>
+
+        <div class="creator-powered">
+          <i class="fa-solid fa-bolt"></i>
+          POWERED BY CREATOR INNOVATION
+        </div>
+
+        <div class="final-stats-wrap">
+
+          <div class="final-stat-card">
+            <h2>24/7</h2>
+            <span>Creator Support</span>
+          </div>
+
+          <div class="final-stat-card">
+            <h2>HD</h2>
+            <span>Streaming Experience</span>
+          </div>
+
+          <div class="final-stat-card">
+            <h2>100%</h2>
+            <span>Secure Platform</span>
+          </div>
+
+          <div class="final-stat-card">
+            <h2>PRO</h2>
+            <span>Creator Tools</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CENTER LINKS -->
+      <div class="footer-links-box">
+
+        <h3>Platform Navigation</h3>
+
+        <div class="footer-links">
+
+          <a href="#">
+
+            <span>
+              <i class="fa-solid fa-house"></i>
+              Home
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+          <a href="#">
+
+            <span>
+              <i class="fa-solid fa-video"></i>
+              Creator Videos
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+          <a href="#">
+
+            <span>
+              <i class="fa-solid fa-crown"></i>
+              Premium Content
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+          <a href="#">
+
+            <span>
+              <i class="fa-solid fa-chart-line"></i>
+              Monetization
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+          <a href="#">
+
+            <span>
+              <i class="fa-solid fa-headset"></i>
+              Creator Support
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT NEWSLETTER -->
+      <div class="final-newsletter">
+
+        <h2>
+          Stay Connected
+        </h2>
+
+        <p>
+          Subscribe for creator updates, exclusive releases,
+          livestream alerts and premium creator stories.
+        </p>
+
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+
+          <input 
+          type="email" 
+          id="newsletterEmail"
+          placeholder="Enter your email address"
+          required>
+
+          <button type="submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            SUBSCRIBE NOW
+          </button>
+
+        </form>
+
+        <div class="final-socials">
+
+          <a href="https://facebook.com/bintunet" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="https://instagram.com/bintunet" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="https://youtube.com/@talesofbintu" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+
+          <a href="https://tiktok.com/@bintunet" target="_blank">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+
+          <a href="https://x.com/bintunet" target="_blank">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="final-bottom-bar">
+
+      <p>
+        © 2026 BINTUNET.CO.KE — Professional Creator Platform.
+        Designed for creators, storytellers and premium digital experiences.
+      </p>
+
+      <div class="final-mini-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Creator Policy</a>
+        <a href="#">Support</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+/* ======================================================
+NEWSLETTER SUBSCRIBE
+====================================================== */
+function subscribeNewsletter(event){
+
+  event.preventDefault();
+
+  const email = document.getElementById('newsletterEmail').value;
+
+  showToast(
+    'success',
+    'Subscription Successful',
+    'Welcome to the BINTUNET creator community.'
+  );
+
+  document.getElementById('newsletterEmail').value = '';
+
+}
+</script>
+
+
+
 
 
 

@@ -931,7 +931,7 @@ ADVANCED VIDEO VIEWER STYLING
 BINTU TERMINAL RUNTIME STYLING
 ====================================================== */
 .vps-entry-card { 
-  max-width: 360px; padding: 12px 18px; background: #fff; 
+  max-width: 360px; padding: 10px 18px; background: #fff; 
   border: 1px solid #eee; border-radius: 35px; cursor: pointer; 
   margin: 20px auto; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
@@ -942,13 +942,39 @@ BINTU TERMINAL RUNTIME STYLING
 .vps-status-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; background: #e7f5ff; border-radius: 100px; font-size: 10px; color: #228be6; font-weight: 600; }
 .status-dot { width: 5px; height: 5px; background: #228be6; border-radius: 50%; }
 
-.vps-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.15); backdrop-filter: blur(8px); z-index: 9999; display: none; align-items: flex-end; }
+/* ======================================================
+BINTU TERMINAL (VPS DRAWER) - SMALLER SIZE
+====================================================== */
+.vps-drawer-overlay { 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0,0,0,0.15); 
+  backdrop-filter: blur(8px); 
+  z-index: 9999; 
+  display: none; 
+  align-items: flex-end; 
+}
+
+.vps-drawer-panel { 
+  width: 100%; 
+  max-width: 560px;           /* Optional: limit max width on large screens */
+  height: 78vh;               /* ← Reduced from 94vh */
+  max-height: 85vh;           /* Safety limit */
+  background: var(--drawer-bg); 
+  border-radius: 28px 28px 0 0; 
+  display: flex; 
+  flex-direction: column; 
+  overflow: hidden; 
+  animation: slideUp 0.4s ease; 
+  margin: 0 auto;             /* Center on wide screens */
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+}
 .vps-drawer-panel { width: 100%; height: 94vh; background: var(--drawer-bg); border-radius: 28px 28px 0 0; display: flex; flex-direction: column; overflow: hidden; animation: slideUp 0.4s ease; transition: background-color 0.4s ease; }
 
 .vps-notice-container { margin: 8px 15px; border: 1.2px solid var(--ring-red); border-radius: 14px; padding: 10px; cursor: pointer; }
 .vps-section-title { display: block; font-size: 9px; font-weight: 800; color: var(--ring-red); margin-bottom: 5px; letter-spacing: 0.5px; }
 .vps-notice-body { position: relative; overflow: hidden; }
-.vps-notice-body.collapsed { max-height: 32px; }
+.vps-notice-body.collapsed { max-height: 30px; }
 .vps-notice-body.expanded { max-height: 300px; }
 .fade-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 20px; background: linear-gradient(transparent, var(--drawer-bg)); pointer-events: none; }
 .expanded .fade-overlay { opacity: 0; }

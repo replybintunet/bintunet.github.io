@@ -698,7 +698,7 @@ CINEMATIC VLOG CONTAINER STYLES
 }
 
 /* ======================================================
-PREMIUM PAYMENT POPUP DIALOGS
+PREMIUM PAYMENT POPUP DIALOGS - STABLE VERSION
 ====================================================== */
 .paypal-popup-overlay,
 .viewer-overlay {
@@ -709,7 +709,10 @@ PREMIUM PAYMENT POPUP DIALOGS
   display: none;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 20px 15px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100vh;
 }
 
 .paypal-popup-card {
@@ -719,12 +722,33 @@ PREMIUM PAYMENT POPUP DIALOGS
   border-radius: 35px;
   padding: 45px 35px;
   position: relative;
-  animation: popupUp .4s ease;
+  animation: popupUp .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+  margin: auto;
+  flex-shrink: 0;
+}
+
+.paypal-popup-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.paypal-popup-card::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 20px;
 }
 
 @keyframes popupUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { 
+    transform: scale(0.94) translateY(50px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1) translateY(0); 
+    opacity: 1; 
+  }
 }
 
 .popup-close {
@@ -737,6 +761,7 @@ PREMIUM PAYMENT POPUP DIALOGS
   border-radius: 50%;
   background: #f3f3f3;
   cursor: pointer;
+  z-index: 10;
 }
 
 .premium-lock-icon {
@@ -745,7 +770,7 @@ PREMIUM PAYMENT POPUP DIALOGS
   background: #000;
   color: #fff;
   border-radius: 50%;
-  margin: auto;
+  margin: 0 auto 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -754,7 +779,7 @@ PREMIUM PAYMENT POPUP DIALOGS
 
 .paypal-popup-card h2 {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   font-size: 38px;
 }
 
@@ -776,7 +801,6 @@ PREMIUM PAYMENT POPUP DIALOGS
   border-radius: 18px;
   font-weight: 600;
 }
-
 /* ======================================================
 ADVANCED VIDEO VIEWER STYLING
 ====================================================== */
@@ -1490,16 +1514,36 @@ const vlogs = [
 ];
 
 /* ===============================
-   DRAWER WINDOW INTERACTIONS
+   SCROLL LOCK HELPER
+================================*/
+let previousOverflow = '';
+
+function lockScroll() {
+  previousOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+}
+
+function unlockScroll() {
+  document.body.style.overflow = previousOverflow || '';
+  document.documentElement.style.overflow = previousOverflow || '';
+}
+
+/* ===============================
+   DRAWER WINDOW INTERACTIONS (FIXED)
 ================================*/
 function toggleDrawer(){
+  lockScroll();
   document.getElementById('creatorDrawer').classList.add('active');
   document.getElementById('overlay').classList.add('active');
 }
+
 function closeDrawer(){
   document.getElementById('creatorDrawer').classList.remove('active');
   document.getElementById('overlay').classList.remove('active');
+  unlockScroll();
 }
+
 function showScreen(id){
   document.querySelectorAll('.view-screen').forEach(screen => screen.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1508,8 +1552,15 @@ function showScreen(id){
 /* ===============================
    MODAL WINDOW STRUCT LOGIC
 ================================*/
-function openInstructionModal(){ document.getElementById('instructionModal').classList.add('active'); }
-function closeInstructionModal(){ document.getElementById('instructionModal').classList.remove('active'); }
+function openInstructionModal(){ 
+  lockScroll();
+  document.getElementById('instructionModal').classList.add('active'); 
+}
+
+function closeInstructionModal(){ 
+  document.getElementById('instructionModal').classList.remove('active'); 
+  unlockScroll();
+}
 
 /* ===============================
    TOAST SYSTEM CONTROLLER
@@ -1578,16 +1629,27 @@ function renderVlogs(){
   });
 }
 
-/* ===============================
-   PAYPAL BUTTON HANDLER
-================================*/
+/* Replace these two functions */
+/* Replace these two functions */
 function openPaypalDrawer(){
-  document.getElementById('paypalPopup').style.display = 'flex';
-}
-function closePaypalDrawer(){
-  document.getElementById('paypalPopup').style.display = 'none';
+  lockScroll();
+  const popup = document.getElementById('paypalPopup');
+  
+  // Reset scroll position first to prevent jump
+  popup.scrollTop = 0;
+  popup.style.display = 'flex';
+  
+  // Extra stability
+  setTimeout(() => {
+    popup.scrollTop = 0;
+  }, 50);
 }
 
+function closePaypalDrawer(){
+  const popup = document.getElementById('paypalPopup');
+  popup.style.display = 'none';
+  unlockScroll();
+}
 function initPaypalButtons() {
   // 1. Setup Form Monetize Screen Payment Buttons ($20.00)
   if(document.getElementById('paypal-monetize-btn-container')) {
@@ -1715,14 +1777,15 @@ function copyPass() {
   });
 }
 function openVpsDrawer() { 
+  lockScroll();
   document.getElementById('vpsDrawer').style.display = 'flex'; 
-  document.body.style.overflow = 'hidden'; 
   startClock(); 
 }
+
 function closeVpsDrawer(event) { 
   if(event) event.stopPropagation();
   document.getElementById('vpsDrawer').style.display = 'none'; 
-  document.body.style.overflow = ''; 
+  unlockScroll();
 }
 function handleOutsideClick(e) { if (e.target.id === 'vpsDrawer') closeVpsDrawer(e); }
 function hideVpsLoader() { setTimeout(() => { document.getElementById('vps-loader').style.display = 'none'; }, 1000); }
